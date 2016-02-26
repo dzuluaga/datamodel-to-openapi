@@ -1,0 +1,196 @@
+{
+  "title": "Apigee Nucleus API",
+  "name": "Apigee Nucleus API",
+  "description": "Maps components of Apigee Customer Environments to an API",
+  "x-db-models-var-name": "edge_models",
+  "contact": {
+    "name": "Diego Zuluaga",
+    "url": "https://nucleus-api-test.apigee.com",
+    "email": "dzuluaga@apigee.com"
+  },
+  "license": "MIT",
+  "version": "1.0.0",
+  "host": "localhost:3000",
+  "basePath": "/sfdc/edge",
+  "models": [
+    {
+      "model": "Org",
+      "path": "/orgs",
+      "parameters":
+        { "$ref": "./refs/parameters.json#/Orgs" },
+      "responses": { "$ref": "./refs/responses.json#/responses/Orgs" },
+      "name": "Apigee Org",
+      "includeAlias": "ORGS",
+      "description": "A collection of Apigee Organizations. An organization is the base container for all objects in an API provider's account on Apigee Edge.",
+      "listAttributes": [
+        "id",
+        "org_name",
+        "account_id",
+        "account_name",
+        "org_type",
+        "paid"
+      ],
+      "associations": [
+        {
+          "rel": "apis",
+          "foreignKey": "org_name",
+          "modelName": "OrgApi",
+          "type": "hasMany"
+        }
+      ],
+      "schema": "edge",
+      "table": "mt_org"
+    },
+    {
+      "model": "OrgApi",
+      "name": "Apigee Org",
+      "path": "/apis",
+      "includeAlias": "APIS",
+      "listAttributes": [
+        "id",
+        "org_name",
+        "api_name",
+        "created_date",
+        "last_modified_date",
+        "created_by",
+        "last_modified_by"
+      ],
+      "associations": [
+        {
+          "rel": "org",
+          "foreignKey": "org_name",
+          "modelName": "Org",
+          "type": "belongsTo"
+        },
+        {
+          "rel": "revision_versions",
+          "foreignKey": "id",
+          "modelName": "OrgApiRevisionVersion",
+          "type": "hasMany",
+          "operator": "$like"
+        }
+      ],
+      "schema": "edge",
+      "table": "v_mt_org_api"
+    },
+    {
+      "model": "OrgApiRevisionVersion",
+      "name": "OrgApiRevisionVersion",
+      "path": "/revisionversions",
+      "includeAlias": "REVISIONVERSIONS",
+      "listAttributes": [
+        "id",
+        "org_name",
+        "api_name",
+        "revision",
+        "version",
+        "created_date",
+        "last_modified_date",
+        "created_by",
+        "last_modified_by"
+      ],
+      "schema": "edge",
+      "table": "v_mt_org_api_revision_version",
+      "associations": [
+        {
+          "rel": "policies",
+          "foreignKey": "id",
+          "modelName": "OrgApiRevisionVersionPolicy",
+          "type": "hasMany",
+          "operator": "$like"
+        },
+        {
+          "rel": "proxies",
+          "foreignKey": "id",
+          "modelName": "OrgApiRevisionVersionProxy",
+          "type": "hasMany",
+          "operator": "$like"
+        },
+        {
+          "rel": "resourcefiles",
+          "foreignKey": "id",
+          "modelName": "OrgApiRevisionVersionResourceFile",
+          "type": "hasMany",
+          "operator": "$like"
+        }
+      ]
+    },
+    {
+      "model": "OrgApiRevisionVersionPolicy",
+      "name": "OrgApiRevisionVersionPolicy",
+      "path": "/policies",
+      "includeAlias": "POLICIES",
+      "listAttributes": [
+        "id",
+        "org_name",
+        "api_name",
+        "revision",
+        "revision",
+        "version",
+        "policy",
+        "created_date",
+        "last_modified_date",
+        "created_by",
+        "last_modified_by"
+      ],
+      "schema": "edge",
+      "table": "v_mt_org_api_revision_version_policy"
+    },
+    {
+      "model": "OrgApiRevisionVersionProxy",
+      "name": "OrgApiRevisionVersionProxy",
+      "path": "/proxies",
+      "includeAlias": "PROXIES",
+      "listAttributes": [
+        "id",
+        "org_name",
+        "api_name",
+        "revision",
+        "revision",
+        "version",
+        "proxy",
+        "created_date",
+        "last_modified_date",
+        "created_by",
+        "last_modified_by"
+      ],
+      "schema": "edge",
+      "table": "v_mt_org_api_revision_version_proxy"
+    },
+    {
+      "model": "OrgApiRevisionVersionResourceFile",
+      "name": "OrgApiRevisionVersionResourceFile",
+      "path": "/resources",
+      "includeAlias": "RESOURCES",
+      "listAttributes": [
+        "id",
+        "org_name",
+        "api_name",
+        "revision",
+        "revision",
+        "version",
+        "resourcefile",
+        "created_date",
+        "last_modified_date",
+        "created_by",
+        "last_modified_by"
+      ],
+      "schema": "edge",
+      "table": "v_mt_org_api_revision_version_resourcefile"
+    },
+    {
+      "model": "AccountUserMap",
+      "isPublic": false,
+      "name": "Apigee AccountUserMap",
+      "includeAlias": "accountusermaps",
+      "listAttributes": [
+        "email",
+        "account_id",
+        "roles"
+      ],
+      "schema": "secure",
+      "table": "v_account_user_map",
+      "dbConnection": "sequelize_security"
+    }
+  ]
+}

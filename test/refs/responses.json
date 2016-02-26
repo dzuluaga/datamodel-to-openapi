@@ -1,0 +1,88 @@
+{
+  "responses": {
+    "Orgs": {
+      "200": {
+        "description": "Successful request.",
+        "schema": {
+          "$ref": "./RES_200_GET_Orgs.json"
+        }
+      },
+      "default": {
+        "description": "Invalid request.",
+        "schema": {
+          "$ref": "./common.json#/Common/Error"
+        }
+      }
+    },
+    "OrgApis": {
+      "200": {
+        "description": "Successful request.",
+        "schema": {
+          "$ref": "./RES_200_GET_Apis.yaml"
+        }
+      },
+      "default": {
+        "description": "Invalid request.",
+        "schema": {
+          "$ref": "./definitions.yaml#/definitions/Error"
+        }
+      }
+    },
+    "OrgApiRevisionVersions": {
+      "200": {
+        "description": "Successful request.",
+        "schema": {
+          "$ref": "./definitions.yaml#/definitions/Weather"
+        }
+      },
+      "default": {
+        "description": "Invalid request.",
+        "schema": {
+          "$ref": "./definitions.yaml#/definitions/Error"
+        }
+      }
+    },
+    "OrgApiRevisionVersionProxies": {
+      "200": {
+        "description": "Successful request.",
+        "schema": {
+          "$ref": "./definitions.yaml#/definitions/Weather"
+        }
+      },
+      "default": {
+        "description": "Invalid request.",
+        "schema": {
+          "$ref": "./definitions.yaml#/definitions/Error"
+        }
+      }
+    },
+    "OrgApiRevisionVersionPolicies": {
+      "200": {
+        "description": "Successful request.",
+        "schema": {
+          "$ref": "./definitions.yaml#/definitions/Weather"
+        }
+      },
+      "default": {
+        "description": "Invalid request.",
+        "schema": {
+          "$ref": "./definitions.yaml#/definitions/Error"
+        }
+      }
+    },
+    "OrgApiRevisionVersionResourceFiles": {
+      "200": {
+        "description": "Successful request.",
+        "schema": {
+          "$ref": "./definitions.yaml#/definitions/Weather"
+        }
+      },
+      "default": {
+        "description": "Invalid request.",
+        "schema": {
+          "$ref": "./definitions.yaml#/definitions/Error"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,88 @@
+{ "Orgs": {
+    "$ref": "#/Common/Collections"
+  },
+  "Common": {
+    "Collections": [
+      { "$ref": "#/parameters/header" },
+      { "$ref": "#/parameters/limit" },
+      { "$ref": "#/parameters/where" },
+      { "$ref": "#/parameters/stacktrace" },
+      { "$ref": "#/parameters/attributes" },
+      { "$ref": "#/parameters/include" },
+      { "$ref": "#/parameters/offset" }
+    ]
+  },
+  "parameters": {
+    "apikey": {
+      "in": "query",
+      "name": "apikey",
+      "description": "Public key to access Nucleus Edge APIs. It is required to count with a valid Google Access token.",
+      "type": "string",
+      "required": true,
+      "default": "2e6EAUHmp7ZomAAn99MuU0Z3Z0I9gT18"
+    },
+    "header": {
+      "in": "header",
+      "name": "Authorization",
+      "description": "Header Param Description. Obtain a valid access token here. https://apigeesc.atlassian.net/wiki/display/NUCLEUS/API+Security",
+      "required": true,
+      "type": "string",
+      "default": "Bearer ya29.aALvVMURujKEcsaMJMht7pdUVsJ3CAEh9uzSbyyjI6QncPZUBUbZOSns0wDHIK_HTcTeojc"
+    },
+    "limit": {
+      "in": "query",
+      "name": "limit",
+      "description": "Number of items to be returned. Default 100 and Max 100.",
+      "required": false,
+      "type": "number",
+      "default": 10
+    },
+    "where": {
+      "in": "query",
+      "name": "where",
+      "description": "Filter items by more specific criteria. Check <a href='http://docs.sequelizejs.com/en/latest/docs/querying/'>Sequelize.js Querying</a> syntax along with describe parameter in Base64 encoding. Return all orgs containing the word 'net' in it would be represented as '{\"org_name\": {\"$like\":\"%net%\"}}' and in base64 as %7B%22org_name%22%3A%20%7B%22%24like%22%3A%22%25net%25%22%7D%7D.",
+      "required": false,
+      "type": "string"
+    },
+    "stacktrace": {
+      "in": "query",
+      "name": "stacktrace",
+      "description": "Useful for development purposes. Returns more information about the error.",
+      "required": false,
+      "type": "boolean",
+      "allowEmptyValue": true
+    },
+    "attributes": {
+      "in": "query",
+      "name": "attributes",
+      "description": "Include only attributes from this list. See describe parameter to retrieve a list of valid attributes. e.g. [\"org_name\",\"account_id\",\"paid\"]",
+      "required": false,
+      "type": "string",
+      "allowEmptyValue": true
+    },
+    "include": {
+      "in": "query",
+      "name": "include",
+      "description": "Include subresources. e.g. [{\"name\": \"APIS\"}]",
+      "required": false,
+      "type": "string",
+      "allowEmptyValue": true
+    },
+    "offset": {
+      "in": "query",
+      "name": "offset",
+      "description": "Used for paginating records of a collection.",
+      "required": false,
+      "type": "integer",
+      "default": 100
+    },
+    "describe": {
+      "in": "query",
+      "name": "describe",
+      "description": "Returns the description of the resource. Columns ATM.",
+      "required": false,
+      "type": "boolean",
+      "allowEmptyValue": true
+    }
+  }
+}

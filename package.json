@@ -1,0 +1,23 @@
+{
+  "name": "db-model-2-swagger-transformer",
+  "version": "1.0.0",
+  "description": "DB Model to Swagger Tranformer is an NPM module that converts database JSON Model Specs into Swagger Specs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dzuluaga/db-model-2-swagger-transformer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dzuluaga/db-model-2-swagger-transformer/issues"
+  },
+  "homepage": "https://github.com/dzuluaga/db-model-2-swagger-transformer#readme",
+  "dependencies": {
+    "json-refs": "^2.1.5"
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "type": "object",
+  "properties": {
+    "entities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "links": {
+            "type": "array",
+            "items": [
+              {
+                "type": "object",
+                "properties": {
+                  "rel": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "href": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "rel",
+                  "href"
+                ]
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "rel": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "href": {
+                    "type": "string"
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "rel": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "href": {
+                    "type": "string"
+                  }
+                }
+              }
+            ]
+          },
+          "id": {
+            "type": "string"
+          },
+          "org_name": {
+            "type": "string"
+          },
+          "account_id": {
+            "type": "string"
+          },
+          "account_name": {
+            "type": "string"
+          },
+          "org_type": {
+            "type": "string"
+          },
+          "paid": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "links",
+          "id",
+          "org_name",
+          "account_id",
+          "account_name",
+          "org_type",
+          "paid"
+        ]
+      }
+    }
+  },
+  "required": [
+    "entities"
+  ]
+}
