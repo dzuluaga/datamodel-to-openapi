@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/dzuluaga/db-model-2-swagger-transformer#readme",
   "dependencies": {
-    "json-refs": "^2.1.5"
+    "debug": "^2.2.0",
+    "json-refs": "^2.1.5",
+    "url-join": "0.0.1"
   }
 }

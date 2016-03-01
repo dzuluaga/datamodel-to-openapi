@@ -8,34 +8,48 @@
     "url": "https://nucleus-api-test.apigee.com",
     "email": "dzuluaga@apigee.com"
   },
-  "license": "MIT",
+  "license": { "name": "Apache 2.0", "url": "http://www.apache.org/licenses/LICENSE-2.0.html" },
   "version": "1.0.0",
   "host": "localhost:3000",
   "basePath": "/sfdc/edge",
   "models": [
     {
       "model": "Org",
+      "isPublic": true,
       "path": "/orgs",
-      "parameters":
-        { "$ref": "./refs/parameters.json#/Orgs" },
-      "responses": { "$ref": "./refs/responses.json#/responses/Orgs" },
+      "resources": {
+        "collection": {
+          "description": "A collection of Apigee Organizations. An organization is the base container for all objects in an API provider's account on Apigee Edge.",
+          "parameters": { "$ref": "./refs/parameters.json#/Orgs/Collection" },
+          "responses": { "$ref": "./refs/responses.json#/responses/Orgs" }
+        },
+        "entity": {
+          "description": "A single entity of an Apigee Organization.",
+          "parameters": { "$ref": "./refs/parameters.json#/Orgs/Entity" },
+          "responses": { "$ref": "./refs/responses.json#/responses/Orgs" }
+        }
+      },
       "name": "Apigee Org",
       "includeAlias": "ORGS",
-      "description": "A collection of Apigee Organizations. An organization is the base container for all objects in an API provider's account on Apigee Edge.",
-      "listAttributes": [
-        "id",
-        "org_name",
-        "account_id",
-        "account_name",
-        "org_type",
-        "paid"
-      ],
+      "listAttributes": {
+        "id": { "primaryKey": true },
+        "org_name": { "resource": { "description": "The org id.", "alias": "org_id" }, "type": "string" },
+        "account_id": {},
+        "account_name": {},
+        "org_type": {},
+        "paid": {}
+      },
       "associations": [
         {
           "rel": "apis",
           "foreignKey": "org_name",
           "modelName": "OrgApi",
-          "type": "hasMany"
+          "type": "hasMany",
+          "resources": {
+            "collection": {
+                "parameters": { "$ref": "./refs/parameters.json#/Orgs/Subresources/Apis/Collection" }
+            }
+          }
         }
       ],
       "schema": "edge",
@@ -43,18 +57,31 @@
     },
     {
       "model": "OrgApi",
+      "resources": {
+        "collection": {
+          "description": "A collection of Apigee APIs. TODO API Proxy definition.",
+          "parameters": { "$ref": "./refs/parameters.json#/Apis/Collection" },
+          "responses": { "$ref": "./refs/responses.json#/responses/Apis" }
+        },
+        "entity": {
+          "description": "A single entity of an API Proxy.",
+          "parameters": { "$ref": "./refs/parameters.json#/Apis/Entity" },
+          "responses": { "$ref": "./refs/responses.json#/responses/Apis" }
+        }
+      },
+      "isPublic": false,
       "name": "Apigee Org",
       "path": "/apis",
       "includeAlias": "APIS",
-      "listAttributes": [
-        "id",
-        "org_name",
-        "api_name",
-        "created_date",
-        "last_modified_date",
-        "created_by",
-        "last_modified_by"
-      ],
+      "listAttributes": {
+        "id": {},
+        "org_name": {},
+        "api_name": { "resource": { "description": "The api name.", "alias": "api_id" }, "type": "string" },
+        "created_date": {},
+        "last_modified_date": {},
+        "created_by": {},
+        "last_modified_by": {}
+      },
       "associations": [
         {
           "rel": "org",
@@ -75,23 +102,47 @@
     },
     {
       "model": "OrgApiRevisionVersion",
+      "isPublic": false,
       "name": "OrgApiRevisionVersion",
       "path": "/revisionversions",
       "includeAlias": "REVISIONVERSIONS",
-      "listAttributes": [
-        "id",
-        "org_name",
-        "api_name",
-        "revision",
-        "version",
-        "created_date",
-        "last_modified_date",
-        "created_by",
-        "last_modified_by"
-      ],
+      "resources": {
+        "collection": {
+          "description": "TODO A collection of Apigee Organizations. An organization is the base container for all objects in an API provider's account on Apigee Edge.",
+          "parameters": { "$ref": "./refs/parameters.json#/Orgs/Collection" },
+          "responses": { "$ref": "./refs/responses.json#/responses/Orgs" }
+        },
+        "entity": {
+          "description": "TODO A single entity of an Apigee Organization.",
+          "parameters": { "$ref": "./refs/parameters.json#/Orgs/Entity" },
+          "responses": { "$ref": "./refs/responses.json#/responses/Orgs" }
+        }
+      },
+      "listAttributes": {
+        "id": {
+          "resource": {
+            "description": "API Revision Version id.", "alias": "api_revision_id"
+          },
+          "type": "string"
+        },
+        "org_name" : {},
+        "api_name": {},
+        "revision": {},
+        "version": {},
+        "created_date": {},
+        "last_modified_date": {},
+        "created_by": {},
+        "last_modified_by": {}
+      },
       "schema": "edge",
       "table": "v_mt_org_api_revision_version",
       "associations": [
+        {
+          "rel": "orgapi",
+          "foreignKey": "org_api_id",
+          "modelName": "OrgApi",
+          "type": "belongsTo"
+        },
         {
           "rel": "policies",
           "foreignKey": "id",
@@ -117,66 +168,139 @@
     },
     {
       "model": "OrgApiRevisionVersionPolicy",
+      "isPublic": false,
       "name": "OrgApiRevisionVersionPolicy",
       "path": "/policies",
       "includeAlias": "POLICIES",
-      "listAttributes": [
-        "id",
-        "org_name",
-        "api_name",
-        "revision",
-        "revision",
-        "version",
-        "policy",
-        "created_date",
-        "last_modified_date",
-        "created_by",
-        "last_modified_by"
-      ],
+      "resources": {
+        "collection": {
+          "description": "TODO A collection of Apigee Organizations. An organization is the base container for all objects in an API provider's account on Apigee Edge.",
+          "parameters": { "$ref": "./refs/parameters.json#/Orgs/Collection" },
+          "responses": { "$ref": "./refs/responses.json#/responses/Orgs" }
+        },
+        "entity": {
+          "description": "TODO A single entity of an Apigee Organization.",
+          "parameters": { "$ref": "./refs/parameters.json#/Orgs/Entity" },
+          "responses": { "$ref": "./refs/responses.json#/responses/Orgs" }
+        }
+      },
+      "listAttributes": {
+        "id": { "resource": { "description": "The policy id.", "alias": "policy_id" }, "type": "string" },
+        "org_name": {},
+        "api_name": {},
+        "revision": {},
+        "revision": {},
+        "version": {},
+        "policy": {},
+        "created_date": {},
+        "last_modified_date": {},
+        "created_by": {},
+        "last_modified_by":{}
+      },
       "schema": "edge",
-      "table": "v_mt_org_api_revision_version_policy"
+      "table": "v_mt_org_api_revision_version_policy",
+      "associations": [
+        {
+          "rel": "orgapirevisionversion",
+          "foreignKey": "org_api_revision_version_id",
+          "modelName": "OrgApiRevisionVersion",
+          "type": "belongsTo"
+        }
+      ]
     },
     {
       "model": "OrgApiRevisionVersionProxy",
+      "isPublic": false,
       "name": "OrgApiRevisionVersionProxy",
       "path": "/proxies",
       "includeAlias": "PROXIES",
-      "listAttributes": [
-        "id",
-        "org_name",
-        "api_name",
-        "revision",
-        "revision",
-        "version",
-        "proxy",
-        "created_date",
-        "last_modified_date",
-        "created_by",
-        "last_modified_by"
-      ],
+      "resources": {
+        "collection": {
+          "description": "TODO A collection of Apigee Organizations. An organization is the base container for all objects in an API provider's account on Apigee Edge.",
+          "parameters": { "$ref": "./refs/parameters.json#/Orgs/Collection" },
+          "responses": { "$ref": "./refs/responses.json#/responses/Orgs" }
+        },
+        "entity": {
+          "description": "TODO A single entity of an Apigee Organization.",
+          "parameters": { "$ref": "./refs/parameters.json#/Orgs/Entity" },
+          "responses": { "$ref": "./refs/responses.json#/responses/Orgs" }
+        }
+      },
+      "listAttributes": {
+        "id": {
+          "resource": {
+            "description": "The proxy id.", "alias": "proxy_id"
+          },
+          "type": "string"
+        },
+        "org_name": {},
+        "api_name": {},
+        "revision": {},
+        "revision": {},
+        "version": {},
+        "proxy": {},
+        "created_date": {},
+        "last_modified_date": {},
+        "created_by": {},
+        "last_modified_by": {}
+      },
       "schema": "edge",
-      "table": "v_mt_org_api_revision_version_proxy"
+      "table": "v_mt_org_api_revision_version_proxy",
+      "associations": [
+        {
+          "rel": "orgapirevisionversion",
+          "foreignKey": "org_api_revision_version_id",
+          "modelName": "OrgApiRevisionVersion",
+          "type": "belongsTo"
+        }
+      ]
     },
     {
       "model": "OrgApiRevisionVersionResourceFile",
+      "isPublic": true,
       "name": "OrgApiRevisionVersionResourceFile",
       "path": "/resources",
       "includeAlias": "RESOURCES",
-      "listAttributes": [
-        "id",
-        "org_name",
-        "api_name",
-        "revision",
-        "revision",
-        "version",
-        "resourcefile",
-        "created_date",
-        "last_modified_date",
-        "created_by",
-        "last_modified_by"
-      ],
+      "resources": {
+        "collection": {
+          "description": "TODO A collection of Apigee Organizations. An organization is the base container for all objects in an API provider's account on Apigee Edge.",
+          "parameters": { "$ref": "./refs/parameters.json#/Orgs/Collection" },
+          "responses": { "$ref": "./refs/responses.json#/responses/Orgs" }
+        },
+        "entity": {
+          "description": "TODO A single entity of an Apigee Organization.",
+          "parameters": { "$ref": "./refs/parameters.json#/Orgs/Entity" },
+          "responses": { "$ref": "./refs/responses.json#/responses/Orgs" }
+        }
+      },
+      "listAttributes": {
+        "id": {
+          "resource": {
+            "description": "The resource file id.", "alias": "resource_file_id"
+          },
+          "type": "string"
+        },
+        "org_name": {},
+        "api_name": {},
+        "revision": {},
+        "revision":{},
+        "version":{},
+        "resourcefile": {},
+        "created_date": {},
+        "last_modified_date": {},
+        "created_by": {},
+        "last_modified_by": {}
+      },
       "schema": "edge",
-      "table": "v_mt_org_api_revision_version_resourcefile"
+      "table": "v_mt_org_api_revision_version_resourcefile",
+      "associations": [
+        {
+          "rel": "orgapirevisionversion",
+          "foreignKey": "org_api_revision_version_id",
+          "modelName": "OrgApiRevisionVersion",
+          "type": "belongsTo"
+        }
+      ]
     },
     {
       "model": "AccountUserMap",

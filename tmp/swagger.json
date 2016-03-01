@@ -1,0 +1,265 @@
+{
+  "swagger": "2.0",
+  "x-db-models-var-name": "edge_models",
+  "produces": [
+    "application/json"
+  ],
+  "host": "localhost:3000",
+  "basePath": "/sfdc/edge",
+  "info": {
+    "title": "Apigee Nucleus API",
+    "description": "Maps components of Apigee Customer Environments to an API",
+    "contact": {
+      "name": "Diego Zuluaga",
+      "url": "https://nucleus-api-test.apigee.com",
+      "email": "dzuluaga@apigee.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/orgs": {
+      "get": {
+        "x-swagger-router-controller": "GenericRoute",
+        "operationId": "getResource",
+        "x-model": {
+          "model": "Org",
+          "cardinality": "findAll"
+        },
+        "tags": [
+          "/orgs"
+        ],
+        "description": "A collection of Apigee Organizations. An organization is the base container for all objects in an API provider's account on Apigee Edge.",
+        "parameters": {
+          "$ref": "./refs/parameters.json#/Orgs/Collection"
+        },
+        "responses": {
+          "$ref": "./refs/responses.json#/responses/Orgs"
+        }
+      }
+    },
+    "/orgs/{org_id}": {
+      "get": {
+        "x-swagger-router-controller": "GenericRoute",
+        "operationId": "getResource",
+        "x-model": {
+          "model": "Org",
+          "cardinality": "findOne"
+        },
+        "tags": [
+          "/orgs"
+        ],
+        "description": "A single entity of an Apigee Organization.",
+        "parameters": {
+          "$ref": "./refs/parameters.json#/Orgs/Entity"
+        },
+        "responses": {
+          "$ref": "./refs/responses.json#/responses/Orgs"
+        }
+      }
+    },
+    "/orgs/{org_id}/apis": {
+      "get": {
+        "x-swagger-router-controller": "GenericRoute",
+        "operationId": "getResource",
+        "x-model": {
+          "model": "OrgApi",
+          "cardinality": "findAll"
+        },
+        "tags": [
+          "/apis"
+        ],
+        "description": "A collection of Apigee APIs. TODO API Proxy definition.",
+        "parameters": {
+          "$ref": "./refs/parameters.json#/Apis/Collection"
+        },
+        "responses": {
+          "$ref": "./refs/responses.json#/responses/Apis"
+        }
+      }
+    },
+    "/orgs/{org_id}/apis/{api_id}": {
+      "get": {
+        "x-swagger-router-controller": "GenericRoute",
+        "operationId": "getResource",
+        "x-model": {
+          "model": "OrgApi",
+          "cardinality": "findOne"
+        },
+        "tags": [
+          "/apis"
+        ],
+        "description": "A single entity of an API Proxy.",
+        "parameters": {
+          "$ref": "./refs/parameters.json#/Apis/Entity"
+        },
+        "responses": {
+          "$ref": "./refs/responses.json#/responses/Apis"
+        }
+      }
+    },
+    "/orgs/{org_id}/apis/{api_id}/revisionversions": {
+      "get": {
+        "x-swagger-router-controller": "GenericRoute",
+        "operationId": "getResource",
+        "x-model": {
+          "model": "OrgApiRevisionVersion",
+          "cardinality": "findAll"
+        },
+        "tags": [
+          "/revisionversions"
+        ],
+        "description": "TODO A collection of Apigee Organizations. An organization is the base container for all objects in an API provider's account on Apigee Edge.",
+        "parameters": {
+          "$ref": "./refs/parameters.json#/Orgs/Collection"
+        },
+        "responses": {
+          "$ref": "./refs/responses.json#/responses/Orgs"
+        }
+      }
+    },
+    "/orgs/{org_id}/apis/{api_id}/revisionversions/{api_revision_id}": {
+      "get": {
+        "x-swagger-router-controller": "GenericRoute",
+        "operationId": "getResource",
+        "x-model": {
+          "model": "OrgApiRevisionVersion",
+          "cardinality": "findOne"
+        },
+        "tags": [
+          "/revisionversions"
+        ],
+        "description": "TODO A single entity of an Apigee Organization.",
+        "parameters": {
+          "$ref": "./refs/parameters.json#/Orgs/Entity"
+        },
+        "responses": {
+          "$ref": "./refs/responses.json#/responses/Orgs"
+        }
+      }
+    },
+    "/orgs/{org_id}/apis/{api_id}/revisionversions/{api_revision_id}/policies": {
+      "get": {
+        "x-swagger-router-controller": "GenericRoute",
+        "operationId": "getResource",
+        "x-model": {
+          "model": "OrgApiRevisionVersionPolicy",
+          "cardinality": "findAll"
+        },
+        "tags": [
+          "/policies"
+        ],
+        "description": "TODO A collection of Apigee Organizations. An organization is the base container for all objects in an API provider's account on Apigee Edge.",
+        "parameters": {
+          "$ref": "./refs/parameters.json#/Orgs/Collection"
+        },
+        "responses": {
+          "$ref": "./refs/responses.json#/responses/Orgs"
+        }
+      }
+    },
+    "/orgs/{org_id}/apis/{api_id}/revisionversions/{api_revision_id}/policies/{policy_id}": {
+      "get": {
+        "x-swagger-router-controller": "GenericRoute",
+        "operationId": "getResource",
+        "x-model": {
+          "model": "OrgApiRevisionVersionPolicy",
+          "cardinality": "findOne"
+        },
+        "tags": [
+          "/policies"
+        ],
+        "description": "TODO A single entity of an Apigee Organization.",
+        "parameters": {
+          "$ref": "./refs/parameters.json#/Orgs/Entity"
+        },
+        "responses": {
+          "$ref": "./refs/responses.json#/responses/Orgs"
+        }
+      }
+    },
+    "/orgs/{org_id}/apis/{api_id}/revisionversions/{api_revision_id}/proxies": {
+      "get": {
+        "x-swagger-router-controller": "GenericRoute",
+        "operationId": "getResource",
+        "x-model": {
+          "model": "OrgApiRevisionVersionProxy",
+          "cardinality": "findAll"
+        },
+        "tags": [
+          "/proxies"
+        ],
+        "description": "TODO A collection of Apigee Organizations. An organization is the base container for all objects in an API provider's account on Apigee Edge.",
+        "parameters": {
+          "$ref": "./refs/parameters.json#/Orgs/Collection"
+        },
+        "responses": {
+          "$ref": "./refs/responses.json#/responses/Orgs"
+        }
+      }
+    },
+    "/orgs/{org_id}/apis/{api_id}/revisionversions/{api_revision_id}/proxies/{proxy_id}": {
+      "get": {
+        "x-swagger-router-controller": "GenericRoute",
+        "operationId": "getResource",
+        "x-model": {
+          "model": "OrgApiRevisionVersionProxy",
+          "cardinality": "findOne"
+        },
+        "tags": [
+          "/proxies"
+        ],
+        "description": "TODO A single entity of an Apigee Organization.",
+        "parameters": {
+          "$ref": "./refs/parameters.json#/Orgs/Entity"
+        },
+        "responses": {
+          "$ref": "./refs/responses.json#/responses/Orgs"
+        }
+      }
+    },
+    "/orgs/{org_id}/apis/{api_id}/revisionversions/{api_revision_id}/resources": {
+      "get": {
+        "x-swagger-router-controller": "GenericRoute",
+        "operationId": "getResource",
+        "x-model": {
+          "model": "OrgApiRevisionVersionResourceFile",
+          "cardinality": "findAll"
+        },
+        "tags": [
+          "/resources"
+        ],
+        "description": "TODO A collection of Apigee Organizations. An organization is the base container for all objects in an API provider's account on Apigee Edge.",
+        "parameters": {
+          "$ref": "./refs/parameters.json#/Orgs/Collection"
+        },
+        "responses": {
+          "$ref": "./refs/responses.json#/responses/Orgs"
+        }
+      }
+    },
+    "/orgs/{org_id}/apis/{api_id}/revisionversions/{api_revision_id}/resources/{resource_file_id}": {
+      "get": {
+        "x-swagger-router-controller": "GenericRoute",
+        "operationId": "getResource",
+        "x-model": {
+          "model": "OrgApiRevisionVersionResourceFile",
+          "cardinality": "findOne"
+        },
+        "tags": [
+          "/resources"
+        ],
+        "description": "TODO A single entity of an Apigee Organization.",
+        "parameters": {
+          "$ref": "./refs/parameters.json#/Orgs/Entity"
+        },
+        "responses": {
+          "$ref": "./refs/responses.json#/responses/Orgs"
+        }
+      }
+    }
+  }
+}

@@ -1,5 +1,43 @@
 { "Orgs": {
-    "$ref": "#/Common/Collections"
+    "Collection": { "$ref": "#/Common/Collections" },
+    "Entity": [
+      {
+        "name": "org_name",
+        "in": "path",
+        "type": "string",
+        "required": true
+      },
+      { "$ref": "#/parameters/header" },
+      { "$ref": "#/parameters/stacktrace" },
+      { "$ref": "#/parameters/attributes" },
+      { "$ref": "#/parameters/include" }
+    ],
+  "Subresources": {
+    "Apis": {
+      "Collections": [ {
+        "name": "org_name",
+        "in": "path",
+        "type": "string",
+        "required": true
+        }
+      ]
+    }
+  }
+  },
+  "Apis": {
+    "Collection": { "$ref": "#/Common/Collections" },
+    "Entity": [
+      {
+        "name": "org_name",
+        "in": "path",
+        "type": "string",
+        "required": true
+      },
+      { "$ref": "#/parameters/header" },
+      { "$ref": "#/parameters/stacktrace" },
+      { "$ref": "#/parameters/attributes" },
+      { "$ref": "#/parameters/include" }
+    ]
   },
   "Common": {
     "Collections": [
