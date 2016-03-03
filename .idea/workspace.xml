@@ -2,14 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="08147c73-ce3b-47f8-b4f5-a7e96d97def3" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/recursion.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.js" afterPath="$PROJECT_DIR$/index.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/swagger-api/index.js" afterPath="$PROJECT_DIR$/lib/swagger-api/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/model.json" afterPath="$PROJECT_DIR$/test/model.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/refs/parameters.json" afterPath="$PROJECT_DIR$/test/refs/parameters.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/refs/responses.json" afterPath="$PROJECT_DIR$/test/refs/responses.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tmp/swagger.json" afterPath="$PROJECT_DIR$/tmp/swagger.json" />
     </list>
     <ignored path="db-model-2-swagger-transformer.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -29,7 +25,7 @@
     <favorites_list name="db-model-2-swagger-transformer" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="vertical" split-proportion="0.6702619">
+    <splitter split-orientation="vertical" split-proportion="0.8020833">
       <split-first>
         <leaf>
           <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
@@ -45,9 +41,11 @@
           <file leaf-file-name="swagger.json" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/tmp/swagger.json">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-76.17647">
-                  <caret line="259" column="14" selection-start-line="259" selection-start-column="14" selection-end-line="259" selection-end-column="14" />
-                  <folding />
+                <state vertical-scroll-proportion="4.7058825">
+                  <caret line="333" column="17" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="35" />
+                  <folding>
+                    <marker date="1456991503000" expanded="true" signature="25576:26291" placeholder="{...}" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -55,8 +53,8 @@
           <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/lib/swagger-api/index.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="1.1824324">
-                  <caret line="238" column="3" selection-start-line="238" selection-start-column="3" selection-end-line="238" selection-end-column="3" />
+                <state vertical-scroll-proportion="0.40640393">
+                  <caret line="55" column="21" selection-start-line="55" selection-start-column="6" selection-end-line="55" selection-end-column="21" />
                   <folding />
                 </state>
               </provider>
@@ -69,8 +67,8 @@
           <file leaf-file-name="model.json" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/test/model.json">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.6198347">
-                  <caret line="17" column="22" selection-start-line="17" selection-start-column="22" selection-end-line="17" selection-end-column="22" />
+                <state vertical-scroll-proportion="4.9428573">
+                  <caret line="129" column="86" selection-start-line="129" selection-start-column="86" selection-end-line="129" selection-end-column="86" />
                   <folding />
                 </state>
               </provider>
@@ -92,8 +90,8 @@
         <option value="$PROJECT_DIR$/test/refs/responses.json" />
         <option value="$PROJECT_DIR$/recursion.js" />
         <option value="$PROJECT_DIR$/index.js" />
-        <option value="$PROJECT_DIR$/tmp/swagger.json" />
         <option value="$PROJECT_DIR$/test/refs/parameters.json" />
+        <option value="$PROJECT_DIR$/tmp/swagger.json" />
         <option value="$PROJECT_DIR$/test/model.json" />
         <option value="$PROJECT_DIR$/lib/swagger-api/index.js" />
       </list>
@@ -299,11 +297,11 @@
     <frame x="0" y="23" width="1440" height="839" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22198732" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.061310783" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29718876" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22891566" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32931727" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
@@ -392,26 +390,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/model.json">
+    <entry file="file://$PROJECT_DIR$/tmp/swagger.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6198347">
-          <caret line="17" column="22" selection-start-line="17" selection-start-column="22" selection-end-line="17" selection-end-column="22" />
-          <folding />
+        <state vertical-scroll-proportion="4.7058825">
+          <caret line="333" column="17" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="35" />
+          <folding>
+            <marker date="1456991503000" expanded="true" signature="25576:26291" placeholder="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tmp/swagger.json">
+    <entry file="file://$PROJECT_DIR$/test/model.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-76.17647">
-          <caret line="259" column="14" selection-start-line="259" selection-start-column="14" selection-end-line="259" selection-end-column="14" />
+        <state vertical-scroll-proportion="4.9428573">
+          <caret line="129" column="86" selection-start-line="129" selection-start-column="86" selection-end-line="129" selection-end-column="86" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/swagger-api/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.1824324">
-          <caret line="238" column="3" selection-start-line="238" selection-start-column="3" selection-end-line="238" selection-end-column="3" />
+        <state vertical-scroll-proportion="0.40640393">
+          <caret line="55" column="21" selection-start-line="55" selection-start-column="6" selection-end-line="55" selection-end-column="21" />
           <folding />
         </state>
       </provider>

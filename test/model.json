@@ -32,8 +32,8 @@
       "name": "Apigee Org",
       "includeAlias": "ORGS",
       "listAttributes": {
-        "id": { "primaryKey": true },
-        "org_name": { "resource": { "description": "The org id.", "alias": "org_id" }, "type": "string" },
+        "id": { "resource": { "description": "The org id.", "alias": "org_id" }, "type": "string", "is_primary_key": true },
+        "org_name": { "resource": { "description": "The org name.", "alias": "org_name" }, "type": "string", "is_primary_key": false, "is_secondary_key": true },
         "account_id": {},
         "account_name": {},
         "org_type": {},
@@ -47,7 +47,7 @@
           "type": "hasMany",
           "resources": {
             "collection": {
-                "parameters": { "$ref": "./refs/parameters.json#/Orgs/Subresources/Apis/Collection" }
+              "parameters": { "$ref": "./refs/parameters.json#/Orgs/Subresources/Apis/Collection" }
             }
           }
         }
@@ -57,6 +57,7 @@
     },
     {
       "model": "OrgApi",
+      "isPublic": true,
       "resources": {
         "collection": {
           "description": "A collection of Apigee APIs. TODO API Proxy definition.",
@@ -69,14 +70,13 @@
           "responses": { "$ref": "./refs/responses.json#/responses/Apis" }
         }
       },
-      "isPublic": false,
-      "name": "Apigee Org",
+      "name": "Apigee Org APIs",
       "path": "/apis",
       "includeAlias": "APIS",
       "listAttributes": {
-        "id": {},
-        "org_name": {},
-        "api_name": { "resource": { "description": "The api name.", "alias": "api_id" }, "type": "string" },
+        "id": { "resource": { "description": "The api id.", "alias": "api_id" }, "type": "string", "is_primary_key": true },
+        "org_name": { "resource": { "description": "The org name.", "alias": "org_name" }, "type": "string", "is_foreign_key": true, "model": "Org", "is_secondary_key": true},
+        "api_name": { "resource": { "description": "The api name.", "alias": "api_name" }, "type": "string", "is_secondary_key": true },
         "created_date": {},
         "last_modified_date": {},
         "created_by": {},
@@ -102,7 +102,7 @@
     },
     {
       "model": "OrgApiRevisionVersion",
-      "isPublic": false,
+      "isPublic": true,
       "name": "OrgApiRevisionVersion",
       "path": "/revisionversions",
       "includeAlias": "REVISIONVERSIONS",
@@ -121,14 +121,14 @@
       "listAttributes": {
         "id": {
           "resource": {
-            "description": "API Revision Version id.", "alias": "api_revision_id"
+            "description": "API Revision Version id.", "alias": "api_revision_version_id"
           },
-          "type": "string"
+          "type": "string", "is_primary_key": true
         },
-        "org_name" : {},
-        "api_name": {},
-        "revision": {},
-        "version": {},
+        "org_name" : { "resource": { "description": "Org Name.", "alias": "org_name" }, "type": "string", "is_foreign_key": true, "model": "Org", "is_secondary_key": true},
+        "api_name": { "resource": { "description": "API Name.", "alias": "api_name" }, "type": "string", "is_foreign_key": true, "model": "OrgApi", "is_secondary_key": true},
+        "revision": { "resource": { "description": "API Revision.", "alias": "revision" }, "type": "string", "is_foreign_key": true, "model": "OrgApiRevisionVersion", "is_secondary_key": true},
+        "version": { "resource": { "description": "API version.", "alias": "version" }, "type": "string", "is_foreign_key": false, "model": "OrgApiRevisionVersion", "is_secondary_key": true},
         "created_date": {},
         "last_modified_date": {},
         "created_by": {},
@@ -168,7 +168,7 @@
     },
     {
       "model": "OrgApiRevisionVersionPolicy",
-      "isPublic": false,
+      "isPublic": true,
       "name": "OrgApiRevisionVersionPolicy",
       "path": "/policies",
       "includeAlias": "POLICIES",
@@ -185,13 +185,12 @@
         }
       },
       "listAttributes": {
-        "id": { "resource": { "description": "The policy id.", "alias": "policy_id" }, "type": "string" },
-        "org_name": {},
-        "api_name": {},
-        "revision": {},
-        "revision": {},
-        "version": {},
-        "policy": {},
+        "id": { "resource": { "description": "The policy id.", "alias": "policy_id" }, "type": "string", "is_primary_key": true },
+        "org_name": { "resource": { "description": "Org name.", "alias": "org_name" }, "type": "string", "is_foreign_key": true, "model": "Org", "is_secondary_key": true},
+        "api_name": { "resource": { "description": "API name.", "alias": "api_name" }, "type": "string", "is_foreign_key": true, "model": "OrgApi", "is_secondary_key": true},
+        "revision": { "resource": { "description": "Revision.", "alias": "revision" }, "type": "string", "is_foreign_key": true, "model": "OrgApiRevision", "is_secondary_key": true},
+        "version": { "resource": { "description": "Version.", "alias": "version" }, "type": "string", "is_foreign_key": true, "model": "OrgApiRevisionVersion", "is_secondary_key": true},
+        "policy": { "resource": { "description": "Policy name.", "alias": "policy" }, "type": "string", "is_foreign_key": false, "is_secondary_key": true},
         "created_date": {},
         "last_modified_date": {},
         "created_by": {},
@@ -210,7 +209,7 @@
     },
     {
       "model": "OrgApiRevisionVersionProxy",
-      "isPublic": false,
+      "isPublic": true,
       "name": "OrgApiRevisionVersionProxy",
       "path": "/proxies",
       "includeAlias": "PROXIES",
@@ -231,14 +230,13 @@
           "resource": {
             "description": "The proxy id.", "alias": "proxy_id"
           },
-          "type": "string"
+          "type": "string", "is_primary_key": true
         },
-        "org_name": {},
-        "api_name": {},
-        "revision": {},
-        "revision": {},
-        "version": {},
-        "proxy": {},
+        "org_name": { "resource": { "description": "Org name.", "alias": "org_name" }, "type": "string", "is_foreign_key": true, "model": "Org", "is_secondary_key": true},
+        "api_name": { "resource": { "description": "API name.", "alias": "api_name" }, "type": "string", "is_foreign_key": true, "model": "OrgApi", "is_secondary_key": true},
+        "revision": { "resource": { "description": "Revision.", "alias": "revision" }, "type": "string", "is_foreign_key": true, "model": "OrgApiRevision", "is_secondary_key": true},
+        "version": { "resource": { "description": "Version.", "alias": "version" }, "type": "string", "is_foreign_key": true, "model": "OrgApiRevisionVersion", "is_secondary_key": true},
+        "proxy": { "resource": { "description": "Proxy.", "alias": "proxy" }, "type": "string", "is_foreign_key": false, "is_secondary_key": true},
         "created_date": {},
         "last_modified_date": {},
         "created_by": {},
@@ -278,14 +276,13 @@
           "resource": {
             "description": "The resource file id.", "alias": "resource_file_id"
           },
-          "type": "string"
+          "type": "string", "is_primary_key": true
         },
-        "org_name": {},
-        "api_name": {},
-        "revision": {},
-        "revision":{},
-        "version":{},
-        "resourcefile": {},
+        "org_name": { "resource": { "description": "Org name.", "alias": "org_name" }, "type": "string", "is_foreign_key": true, "model": "Org", "is_secondary_key": true},
+        "api_name": { "resource": { "description": "API name.", "alias": "api_name" }, "type": "string", "is_foreign_key": true, "model": "OrgApi", "is_secondary_key": true},
+        "revision": { "resource": { "description": "Revision.", "alias": "revision" }, "type": "string", "is_foreign_key": true, "model": "OrgApiRevision", "is_secondary_key": true},
+        "version": { "resource": { "description": "Version.", "alias": "version" }, "type": "string", "is_foreign_key": true, "model": "OrgApiRevisionVersion", "is_secondary_key": true},
+        "resourcefile": { "resource": { "description": "Resourcefile.", "alias": "resourcefile" }, "type": "string", "is_foreign_key": false, "is_secondary_key": true},
         "created_date": {},
         "last_modified_date": {},
         "created_by": {},
