@@ -1,13 +1,16 @@
 'use strict'
 
-var dbModel = require('./test/model.json');
-var SwaggerModel = require('./lib/swagger-api');
-var jsonRefs = require('json-refs');
-var fs = require('fs'), debug = require('debug')('model2swagger');
+var dbModelFile = './test/model.json';
+var dbModel = require( dbModelFile ),
+    SwaggerModel = require('./lib/swagger-api'),
+    jsonRefs = require('json-refs'),
+    fs = require('fs'), debug = require('debug')('model2swagger'),
+    path = require('path');
 
-//var swaggerModel = new SwaggerModel( dbModel );//Object.create( SwaggerModel.prototype, { dbModel: { value: dbModel } } );
-var swaggerModel = Object.create( SwaggerModel.prototype );
-SwaggerModel.call( swaggerModel, dbModel );
+dbModel.dir = path.parse( dbModelFile).dir;
+
+/*var swaggerModel = Object.create( SwaggerModel.prototype );
+SwaggerModel.call( swaggerModel, dbModel );*/
 
 var sm = SwaggerModel( dbModel);
 
@@ -16,7 +19,7 @@ for (var attrname in sm.getInfo) { sm.getBase[attrname] = sm.getInfo[attrname] }
 
 
 jsonRefs.resolveRefs( sm.getBase , {
-  filter: [/*'relative', 'remote', 'local'*/],
+  filter: ['relative', 'remote', 'local'],
   relativeBase: './test/'
 })
     .then( function( swaggerDoc ) {
@@ -27,8 +30,3 @@ jsonRefs.resolveRefs( sm.getBase , {
         console.log("The file was saved!");
       });
     } );
-
-//console.log( JSON.stringify( sm, null, 2) );
-
-//console.log( SwaggerModel( dbModel) );
-//console.log( JSON.stringify( swaggerDoc.resolved, null, 2 ) );

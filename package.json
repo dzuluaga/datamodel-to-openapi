@@ -20,6 +20,7 @@
   "dependencies": {
     "debug": "^2.2.0",
     "json-refs": "^2.1.5",
+    "synchronize": "^0.9.15",
     "url-join": "0.0.1"
   }
 }

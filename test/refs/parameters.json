@@ -1,5 +1,5 @@
-{ "Orgs": {
-    "Collection": { "$ref": "#/Common/Collections" },
+{ "orgs": {
+    "collection": { "$ref": "#/Common/Collections" },
     "Entity": [
       {
         "name": "org_name",

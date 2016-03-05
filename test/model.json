@@ -20,19 +20,18 @@
       "resources": {
         "collection": {
           "description": "A collection of Apigee Organizations. An organization is the base container for all objects in an API provider's account on Apigee Edge.",
-          "parameters": { "$ref": "./refs/parameters.json#/Orgs/Collection" },
-          "responses": { "$ref": "./refs/responses.json#/responses/Orgs" }
+          "responses": { "$ref": "./refs/responses.json#/orgs/collection" },
+          "parameters": { "$ref": "./refs/parameters.json#/orgs/collection" }
         },
         "entity": {
           "description": "A single entity of an Apigee Organization.",
-          "parameters": { "$ref": "./refs/parameters.json#/Orgs/Entity" },
-          "responses": { "$ref": "./refs/responses.json#/responses/Orgs" }
+          "responses": { "$ref": "./refs/responses.json#/orgs/entity" }
         }
       },
       "name": "Apigee Org",
       "includeAlias": "ORGS",
       "listAttributes": {
-        "id": { "resource": { "description": "The org id.", "alias": "org_id" }, "type": "string", "is_primary_key": true },
+        "id": { "resource": { "description": "The org id.", "alias": "org_name" }, "type": "string", "is_primary_key": true },
         "org_name": { "resource": { "description": "The org name.", "alias": "org_name" }, "type": "string", "is_primary_key": false, "is_secondary_key": true },
         "account_id": {},
         "account_name": {},
@@ -44,12 +43,7 @@
           "rel": "apis",
           "foreignKey": "org_name",
           "modelName": "OrgApi",
-          "type": "hasMany",
-          "resources": {
-            "collection": {
-              "parameters": { "$ref": "./refs/parameters.json#/Orgs/Subresources/Apis/Collection" }
-            }
-          }
+          "type": "hasMany"
         }
       ],
       "schema": "edge",
@@ -61,13 +55,11 @@
       "resources": {
         "collection": {
           "description": "A collection of Apigee APIs. TODO API Proxy definition.",
-          "parameters": { "$ref": "./refs/parameters.json#/Apis/Collection" },
-          "responses": { "$ref": "./refs/responses.json#/responses/Apis" }
+          "responses": { "$ref": "./refs/responses.json#/apis/collection" }
         },
         "entity": {
           "description": "A single entity of an API Proxy.",
-          "parameters": { "$ref": "./refs/parameters.json#/Apis/Entity" },
-          "responses": { "$ref": "./refs/responses.json#/responses/Apis" }
+          "responses": { "$ref": "./refs/responses.json#/apis/entity" }
         }
       },
       "name": "Apigee Org APIs",
@@ -109,13 +101,11 @@
       "resources": {
         "collection": {
           "description": "TODO A collection of Apigee Organizations. An organization is the base container for all objects in an API provider's account on Apigee Edge.",
-          "parameters": { "$ref": "./refs/parameters.json#/Orgs/Collection" },
-          "responses": { "$ref": "./refs/responses.json#/responses/Orgs" }
+          "responses": { "$ref": "./refs/responses.json#/revisionversions/collection" }
         },
         "entity": {
           "description": "TODO A single entity of an Apigee Organization.",
-          "parameters": { "$ref": "./refs/parameters.json#/Orgs/Entity" },
-          "responses": { "$ref": "./refs/responses.json#/responses/Orgs" }
+          "responses": { "$ref": "./refs/responses.json#/revisionversions/entity" }
         }
       },
       "listAttributes": {
@@ -127,7 +117,7 @@
         },
         "org_name" : { "resource": { "description": "Org Name.", "alias": "org_name" }, "type": "string", "is_foreign_key": true, "model": "Org", "is_secondary_key": true},
         "api_name": { "resource": { "description": "API Name.", "alias": "api_name" }, "type": "string", "is_foreign_key": true, "model": "OrgApi", "is_secondary_key": true},
-        "revision": { "resource": { "description": "API Revision.", "alias": "revision" }, "type": "string", "is_foreign_key": true, "model": "OrgApiRevisionVersion", "is_secondary_key": true},
+        "revision": { "resource": { "description": "API Revision.", "alias": "revision" }, "type": "string", "is_foreign_key": false, "model": "OrgApiRevisionVersion", "is_secondary_key": true},
         "version": { "resource": { "description": "API version.", "alias": "version" }, "type": "string", "is_foreign_key": false, "model": "OrgApiRevisionVersion", "is_secondary_key": true},
         "created_date": {},
         "last_modified_date": {},
@@ -175,13 +165,11 @@
       "resources": {
         "collection": {
           "description": "TODO A collection of Apigee Organizations. An organization is the base container for all objects in an API provider's account on Apigee Edge.",
-          "parameters": { "$ref": "./refs/parameters.json#/Orgs/Collection" },
-          "responses": { "$ref": "./refs/responses.json#/responses/Orgs" }
+          "responses": { "$ref": "./refs/responses.json#/policies/collection" }
         },
         "entity": {
           "description": "TODO A single entity of an Apigee Organization.",
-          "parameters": { "$ref": "./refs/parameters.json#/Orgs/Entity" },
-          "responses": { "$ref": "./refs/responses.json#/responses/Orgs" }
+          "responses": { "$ref": "./refs/responses.json#/policies/entity" }
         }
       },
       "listAttributes": {
@@ -216,13 +204,11 @@
       "resources": {
         "collection": {
           "description": "TODO A collection of Apigee Organizations. An organization is the base container for all objects in an API provider's account on Apigee Edge.",
-          "parameters": { "$ref": "./refs/parameters.json#/Orgs/Collection" },
-          "responses": { "$ref": "./refs/responses.json#/responses/Orgs" }
+          "responses": { "$ref": "./refs/responses.json#/proxies/collection" }
         },
         "entity": {
           "description": "TODO A single entity of an Apigee Organization.",
-          "parameters": { "$ref": "./refs/parameters.json#/Orgs/Entity" },
-          "responses": { "$ref": "./refs/responses.json#/responses/Orgs" }
+          "responses": { "$ref": "./refs/responses.json#/proxies/entity" }
         }
       },
       "listAttributes": {
@@ -262,13 +248,11 @@
       "resources": {
         "collection": {
           "description": "TODO A collection of Apigee Organizations. An organization is the base container for all objects in an API provider's account on Apigee Edge.",
-          "parameters": { "$ref": "./refs/parameters.json#/Orgs/Collection" },
-          "responses": { "$ref": "./refs/responses.json#/responses/Orgs" }
+          "responses": { "$ref": "./refs/responses.json#/resources/collection" }
         },
         "entity": {
           "description": "TODO A single entity of an Apigee Organization.",
-          "parameters": { "$ref": "./refs/parameters.json#/Orgs/Entity" },
-          "responses": { "$ref": "./refs/responses.json#/responses/Orgs" }
+          "responses": { "$ref": "./refs/responses.json#/resources/entity" }
         }
       },
       "listAttributes": {
@@ -278,6 +262,7 @@
           },
           "type": "string", "is_primary_key": true
         },
+        "org_name": { "resource": { "description": "Org name.", "alias": "org_name" }, "type": "string", "is_foreign_key": true, "model": "Org", "is_secondary_key": true},
         "org_name": { "resource": { "description": "Org name.", "alias": "org_name" }, "type": "string", "is_foreign_key": true, "model": "Org", "is_secondary_key": true},
         "api_name": { "resource": { "description": "API name.", "alias": "api_name" }, "type": "string", "is_foreign_key": true, "model": "OrgApi", "is_secondary_key": true},
         "revision": { "resource": { "description": "Revision.", "alias": "revision" }, "type": "string", "is_foreign_key": true, "model": "OrgApiRevision", "is_secondary_key": true},
