@@ -1,10 +1,11 @@
 {
-  "responses": {
-    "Orgs": {
-      "200": {
-        "description": "Successful request.",
-        "schema": {
-          "$ref": "./RES_200_GET_Orgs.json"
+    "orgs": {
+      "collection": {
+        "200": {
+          "description": "Successful request.",
+          "schema": {
+            "$ref": "./RES_200_GET_Orgs.json"
+          }
         }
       },
       "default": {
@@ -98,5 +99,4 @@
         }
       }
     }
-  }
 }

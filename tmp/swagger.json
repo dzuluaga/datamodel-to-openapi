@@ -34,11 +34,161 @@
           "/orgs"
         ],
         "description": "A collection of Apigee Organizations. An organization is the base container for all objects in an API provider's account on Apigee Edge.",
-        "parameters": {
-          "TODO": "TODO"
-        },
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Header Param Description. Obtain a valid access token here. https://apigeesc.atlassian.net/wiki/display/NUCLEUS/API+Security",
+            "required": true,
+            "type": "string",
+            "default": "Bearer ya29.aALvVMURujKEcsaMJMht7pdUVsJ3CAEh9uzSbyyjI6QncPZUBUbZOSns0wDHIK_HTcTeojc"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "description": "Number of items to be returned. Default 100 and Max 100.",
+            "required": false,
+            "type": "number",
+            "default": 10
+          },
+          {
+            "in": "query",
+            "name": "where",
+            "description": "Filter items by more specific criteria. Check <a href='http://docs.sequelizejs.com/en/latest/docs/querying/'>Sequelize.js Querying</a> syntax along with describe parameter in Base64 encoding. Return all orgs containing the word 'net' in it would be represented as '{\"org_name\": {\"$like\":\"%net%\"}}' and in base64 as %7B%22org_name%22%3A%20%7B%22%24like%22%3A%22%25net%25%22%7D%7D.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "stacktrace",
+            "description": "Useful for development purposes. Returns more information about the error.",
+            "required": false,
+            "type": "boolean",
+            "allowEmptyValue": true
+          },
+          {
+            "in": "query",
+            "name": "attributes",
+            "description": "Include only attributes from this list. See describe parameter to retrieve a list of valid attributes. e.g. [\"org_name\",\"account_id\",\"paid\"]",
+            "required": false,
+            "type": "string",
+            "allowEmptyValue": true
+          },
+          {
+            "in": "query",
+            "name": "include",
+            "description": "Include subresources. e.g. [{\"name\": \"APIS\"}]",
+            "required": false,
+            "type": "string",
+            "allowEmptyValue": true
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "description": "Used for paginating records of a collection.",
+            "required": false,
+            "type": "integer",
+            "default": 100
+          }
+        ],
         "responses": {
-          "$ref": "./refs/responses.json#/orgs/collection"
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "entities": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "links": {
+                        "type": "array",
+                        "items": [
+                          {
+                            "type": "object",
+                            "properties": {
+                              "rel": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              },
+                              "href": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "rel",
+                              "href"
+                            ]
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "rel": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              },
+                              "href": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "rel": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              },
+                              "href": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        ]
+                      },
+                      "id": {
+                        "type": "string"
+                      },
+                      "org_name": {
+                        "type": "string"
+                      },
+                      "account_id": {
+                        "type": "string"
+                      },
+                      "account_name": {
+                        "type": "string"
+                      },
+                      "org_type": {
+                        "type": "string"
+                      },
+                      "paid": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "links",
+                      "id",
+                      "org_name",
+                      "account_id",
+                      "account_name",
+                      "org_type",
+                      "paid"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "entities"
+              ]
+            }
+          }
         }
       }
     },
@@ -60,9 +210,47 @@
           "/orgs"
         ],
         "description": "A single entity of an Apigee Organization.",
-        "parameters": {
-          "TODO": "TODO"
-        },
+        "parameters": [
+          {
+            "in": "query",
+            "name": "org_name",
+            "required": true,
+            "description": "The org id.",
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Header Param Description. Obtain a valid access token here. https://apigeesc.atlassian.net/wiki/display/NUCLEUS/API+Security",
+            "required": true,
+            "type": "string",
+            "default": "Bearer ya29.aALvVMURujKEcsaMJMht7pdUVsJ3CAEh9uzSbyyjI6QncPZUBUbZOSns0wDHIK_HTcTeojc"
+          },
+          {
+            "in": "query",
+            "name": "stacktrace",
+            "description": "Useful for development purposes. Returns more information about the error.",
+            "required": false,
+            "type": "boolean",
+            "allowEmptyValue": true
+          },
+          {
+            "in": "query",
+            "name": "attributes",
+            "description": "Include only attributes from this list. See describe parameter to retrieve a list of valid attributes. e.g. [\"org_name\",\"account_id\",\"paid\"]",
+            "required": false,
+            "type": "string",
+            "allowEmptyValue": true
+          },
+          {
+            "in": "query",
+            "name": "include",
+            "description": "Include subresources. e.g. [{\"name\": \"APIS\"}]",
+            "required": false,
+            "type": "string",
+            "allowEmptyValue": true
+          }
+        ],
         "responses": {
           "$ref": "./refs/responses.json#/orgs/entity"
         }
@@ -86,9 +274,15 @@
           "/apis"
         ],
         "description": "A collection of Apigee APIs. TODO API Proxy definition.",
-        "parameters": {
-          "TODO": "TODO"
-        },
+        "parameters": [
+          {
+            "in": "query",
+            "name": "org_name",
+            "required": true,
+            "description": "The org name.",
+            "type": "string"
+          }
+        ],
         "responses": {
           "$ref": "./refs/responses.json#/apis/collection"
         }
@@ -116,9 +310,22 @@
           "/apis"
         ],
         "description": "A single entity of an API Proxy.",
-        "parameters": {
-          "TODO": "TODO"
-        },
+        "parameters": [
+          {
+            "in": "query",
+            "name": "org_name",
+            "required": true,
+            "description": "The org name.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api_name",
+            "required": true,
+            "description": "The api name.",
+            "type": "string"
+          }
+        ],
         "responses": {
           "$ref": "./refs/responses.json#/apis/entity"
         }
@@ -146,9 +353,22 @@
           "/revisionversions"
         ],
         "description": "TODO A collection of Apigee Organizations. An organization is the base container for all objects in an API provider's account on Apigee Edge.",
-        "parameters": {
-          "TODO": "TODO"
-        },
+        "parameters": [
+          {
+            "in": "query",
+            "name": "org_name",
+            "required": true,
+            "description": "TODO",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api_name",
+            "required": true,
+            "description": "TODO",
+            "type": "string"
+          }
+        ],
         "responses": {
           "$ref": "./refs/responses.json#/revisionversions/collection"
         }
@@ -184,9 +404,36 @@
           "/revisionversions"
         ],
         "description": "TODO A single entity of an Apigee Organization.",
-        "parameters": {
-          "TODO": "TODO"
-        },
+        "parameters": [
+          {
+            "in": "query",
+            "name": "org_name",
+            "required": true,
+            "description": "TODO",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api_name",
+            "required": true,
+            "description": "TODO",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "revision",
+            "required": true,
+            "description": "TODO",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "version",
+            "required": true,
+            "description": "TODO",
+            "type": "string"
+          }
+        ],
         "responses": {
           "$ref": "./refs/responses.json#/revisionversions/entity"
         }
@@ -218,9 +465,29 @@
           "/policies"
         ],
         "description": "TODO A collection of Apigee Organizations. An organization is the base container for all objects in an API provider's account on Apigee Edge.",
-        "parameters": {
-          "TODO": "TODO"
-        },
+        "parameters": [
+          {
+            "in": "query",
+            "name": "org_name",
+            "required": true,
+            "description": "TODO",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api_name",
+            "required": true,
+            "description": "TODO",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "version",
+            "required": true,
+            "description": "TODO",
+            "type": "string"
+          }
+        ],
         "responses": {
           "$ref": "./refs/responses.json#/policies/collection"
         }
@@ -256,9 +523,36 @@
           "/policies"
         ],
         "description": "TODO A single entity of an Apigee Organization.",
-        "parameters": {
-          "TODO": "TODO"
-        },
+        "parameters": [
+          {
+            "in": "query",
+            "name": "org_name",
+            "required": true,
+            "description": "TODO",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api_name",
+            "required": true,
+            "description": "TODO",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "version",
+            "required": true,
+            "description": "TODO",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "policy",
+            "required": true,
+            "description": "TODO",
+            "type": "string"
+          }
+        ],
         "responses": {
           "$ref": "./refs/responses.json#/policies/entity"
         }
@@ -290,9 +584,29 @@
           "/proxies"
         ],
         "description": "TODO A collection of Apigee Organizations. An organization is the base container for all objects in an API provider's account on Apigee Edge.",
-        "parameters": {
-          "TODO": "TODO"
-        },
+        "parameters": [
+          {
+            "in": "query",
+            "name": "org_name",
+            "required": true,
+            "description": "TODO",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api_name",
+            "required": true,
+            "description": "TODO",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "version",
+            "required": true,
+            "description": "TODO",
+            "type": "string"
+          }
+        ],
         "responses": {
           "$ref": "./refs/responses.json#/proxies/collection"
         }
@@ -328,9 +642,36 @@
           "/proxies"
         ],
         "description": "TODO A single entity of an Apigee Organization.",
-        "parameters": {
-          "TODO": "TODO"
-        },
+        "parameters": [
+          {
+            "in": "query",
+            "name": "org_name",
+            "required": true,
+            "description": "TODO",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api_name",
+            "required": true,
+            "description": "TODO",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "version",
+            "required": true,
+            "description": "TODO",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "proxy",
+            "required": true,
+            "description": "TODO",
+            "type": "string"
+          }
+        ],
         "responses": {
           "$ref": "./refs/responses.json#/proxies/entity"
         }
@@ -362,9 +703,29 @@
           "/resources"
         ],
         "description": "TODO A collection of Apigee Organizations. An organization is the base container for all objects in an API provider's account on Apigee Edge.",
-        "parameters": {
-          "TODO": "TODO"
-        },
+        "parameters": [
+          {
+            "in": "query",
+            "name": "org_name",
+            "required": true,
+            "description": "TODO",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api_name",
+            "required": true,
+            "description": "TODO",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "version",
+            "required": true,
+            "description": "TODO",
+            "type": "string"
+          }
+        ],
         "responses": {
           "$ref": "./refs/responses.json#/resources/collection"
         }
@@ -400,9 +761,36 @@
           "/resources"
         ],
         "description": "TODO A single entity of an Apigee Organization.",
-        "parameters": {
-          "TODO": "TODO"
-        },
+        "parameters": [
+          {
+            "in": "query",
+            "name": "org_name",
+            "required": true,
+            "description": "TODO",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api_name",
+            "required": true,
+            "description": "TODO",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "version",
+            "required": true,
+            "description": "TODO",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "resourcefile",
+            "required": true,
+            "description": "TODO",
+            "type": "string"
+          }
+        ],
         "responses": {
           "$ref": "./refs/responses.json#/resources/entity"
         }
@@ -421,9 +809,7 @@
           "/apis"
         ],
         "description": "A collection of Apigee APIs. TODO API Proxy definition.",
-        "parameters": {
-          "TODO": "TODO"
-        },
+        "parameters": [],
         "responses": {
           "$ref": "./refs/responses.json#/apis/collection"
         }
@@ -447,9 +833,15 @@
           "/apis"
         ],
         "description": "A single entity of an API Proxy.",
-        "parameters": {
-          "TODO": "TODO"
-        },
+        "parameters": [
+          {
+            "in": "query",
+            "name": "org_name",
+            "required": true,
+            "description": "TODO",
+            "type": "string"
+          }
+        ],
         "responses": {
           "$ref": "./refs/responses.json#/apis/entity"
         }
@@ -468,9 +860,7 @@
           "/revisionversions"
         ],
         "description": "TODO A collection of Apigee Organizations. An organization is the base container for all objects in an API provider's account on Apigee Edge.",
-        "parameters": {
-          "TODO": "TODO"
-        },
+        "parameters": [],
         "responses": {
           "$ref": "./refs/responses.json#/revisionversions/collection"
         }
@@ -494,9 +884,15 @@
           "/revisionversions"
         ],
         "description": "TODO A single entity of an Apigee Organization.",
-        "parameters": {
-          "TODO": "TODO"
-        },
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "required": true,
+            "description": "TODO",
+            "type": "string"
+          }
+        ],
         "responses": {
           "$ref": "./refs/responses.json#/revisionversions/entity"
         }
@@ -515,9 +911,7 @@
           "/policies"
         ],
         "description": "TODO A collection of Apigee Organizations. An organization is the base container for all objects in an API provider's account on Apigee Edge.",
-        "parameters": {
-          "TODO": "TODO"
-        },
+        "parameters": [],
         "responses": {
           "$ref": "./refs/responses.json#/policies/collection"
         }
@@ -541,9 +935,15 @@
           "/policies"
         ],
         "description": "TODO A single entity of an Apigee Organization.",
-        "parameters": {
-          "TODO": "TODO"
-        },
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "required": true,
+            "description": "TODO",
+            "type": "string"
+          }
+        ],
         "responses": {
           "$ref": "./refs/responses.json#/policies/entity"
         }
@@ -562,9 +962,7 @@
           "/proxies"
         ],
         "description": "TODO A collection of Apigee Organizations. An organization is the base container for all objects in an API provider's account on Apigee Edge.",
-        "parameters": {
-          "TODO": "TODO"
-        },
+        "parameters": [],
         "responses": {
           "$ref": "./refs/responses.json#/proxies/collection"
         }
@@ -588,9 +986,15 @@
           "/proxies"
         ],
         "description": "TODO A single entity of an Apigee Organization.",
-        "parameters": {
-          "TODO": "TODO"
-        },
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "required": true,
+            "description": "TODO",
+            "type": "string"
+          }
+        ],
         "responses": {
           "$ref": "./refs/responses.json#/proxies/entity"
         }
@@ -609,9 +1013,7 @@
           "/resources"
         ],
         "description": "TODO A collection of Apigee Organizations. An organization is the base container for all objects in an API provider's account on Apigee Edge.",
-        "parameters": {
-          "TODO": "TODO"
-        },
+        "parameters": [],
         "responses": {
           "$ref": "./refs/responses.json#/resources/collection"
         }
@@ -635,9 +1037,15 @@
           "/resources"
         ],
         "description": "TODO A single entity of an Apigee Organization.",
-        "parameters": {
-          "TODO": "TODO"
-        },
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "required": true,
+            "description": "TODO",
+            "type": "string"
+          }
+        ],
         "responses": {
           "$ref": "./refs/responses.json#/resources/entity"
         }

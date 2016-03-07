@@ -25,13 +25,14 @@
         },
         "entity": {
           "description": "A single entity of an Apigee Organization.",
+          "parameters": { "$ref": "./refs/parameters.json#/orgs/entity" },
           "responses": { "$ref": "./refs/responses.json#/orgs/entity" }
         }
       },
       "name": "Apigee Org",
       "includeAlias": "ORGS",
       "listAttributes": {
-        "id": { "resource": { "description": "The org id.", "alias": "org_name" }, "type": "string", "is_primary_key": true },
+        "id": { "resource": { "description": "The org id.", "alias": "org_name" }, "description": "The org id.", "type": "string", "is_primary_key": true, "alias": "org_name" },
         "org_name": { "resource": { "description": "The org name.", "alias": "org_name" }, "type": "string", "is_primary_key": false, "is_secondary_key": true },
         "account_id": {},
         "account_name": {},
@@ -66,9 +67,9 @@
       "path": "/apis",
       "includeAlias": "APIS",
       "listAttributes": {
-        "id": { "resource": { "description": "The api id.", "alias": "api_id" }, "type": "string", "is_primary_key": true },
-        "org_name": { "resource": { "description": "The org name.", "alias": "org_name" }, "type": "string", "is_foreign_key": true, "model": "Org", "is_secondary_key": true},
-        "api_name": { "resource": { "description": "The api name.", "alias": "api_name" }, "type": "string", "is_secondary_key": true },
+        "id": { "resource": { "description": "The api id.", "alias": "api_id" }, "type": "string", "is_primary_key": true, "alias": "org_name" },
+        "org_name": { "resource": { "description": "The org name.", "alias": "org_name" }, "type": "string", "is_foreign_key": true, "model": "Org", "is_secondary_key": true, "description": "The org name."},
+        "api_name": { "resource": { "alias": "api_name" }, "type": "string", "is_secondary_key": true, "description": "The api name." },
         "created_date": {},
         "last_modified_date": {},
         "created_by": {},

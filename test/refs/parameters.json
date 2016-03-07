@@ -1,12 +1,6 @@
 { "orgs": {
     "collection": { "$ref": "#/Common/Collections" },
-    "Entity": [
-      {
-        "name": "org_name",
-        "in": "path",
-        "type": "string",
-        "required": true
-      },
+    "entity": [
       { "$ref": "#/parameters/header" },
       { "$ref": "#/parameters/stacktrace" },
       { "$ref": "#/parameters/attributes" },

@@ -12,21 +12,23 @@ dbModel.dir = path.parse( dbModelFile).dir;
 /*var swaggerModel = Object.create( SwaggerModel.prototype );
 SwaggerModel.call( swaggerModel, dbModel );*/
 
-var sm = SwaggerModel( dbModel);
-
-for (var attrname in sm.getPaths) { sm.getInfo[attrname] = sm.getPaths[attrname]; }
-for (var attrname in sm.getInfo) { sm.getBase[attrname] = sm.getInfo[attrname] }
-
-
-jsonRefs.resolveRefs( sm.getBase , {
-  filter: ['relative', 'remote', 'local'],
-  relativeBase: './test/'
-})
+SwaggerModel( dbModel)
     .then( function( swaggerDoc ) {
-      fs.writeFile("./tmp/swagger.json", JSON.stringify( swaggerDoc.resolved, null, 2 ), function(err) {
-        if(err) {
-          return console.log(err);
-        }
-        console.log("The file was saved!");
-      });
-    } );
+      for (var attrname in swaggerDoc.getPaths) { swaggerDoc.getInfo[attrname] = swaggerDoc.getPaths[attrname]; }
+      for (var attrname in swaggerDoc.getInfo) { swaggerDoc.getBase[attrname] = swaggerDoc.getInfo[attrname] }
+      jsonRefs.resolveRefs( swaggerDoc.getBase , {
+            filter: ['relative', 'remote', 'local'],
+            relativeBase: './test/'
+          })
+          .then( function( swaggerDoc ) {
+            fs.writeFile("./tmp/swagger.json", JSON.stringify( swaggerDoc.resolved, null, 2 ), function(err) {
+              if(err) {
+                return console.log(err);
+              }
+              console.log("The file was saved!");
+            });
+          } );
+    })
+    .catch( function ( err ) {
+      return console.log( err.stack );
+    });
