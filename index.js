@@ -9,9 +9,6 @@ var dbModel = require( dbModelFile ),
 
 dbModel.dir = path.parse( dbModelFile).dir;
 
-/*var swaggerModel = Object.create( SwaggerModel.prototype );
-SwaggerModel.call( swaggerModel, dbModel );*/
-
 SwaggerModel( dbModel)
     .then( function( swaggerDoc ) {
       for (var attrname in swaggerDoc.getPaths) { swaggerDoc.getInfo[attrname] = swaggerDoc.getPaths[attrname]; }
@@ -30,5 +27,6 @@ SwaggerModel( dbModel)
           } );
     })
     .catch( function ( err ) {
-      return console.log( err.stack );
+      console.log( err.stack );
+      throw err;
     });

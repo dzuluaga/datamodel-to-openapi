@@ -1,0 +1,11 @@
+{
+  "type": "object",
+  "properties": {
+    "200~orgs~entity.json": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "TODO"
+  ]
+}

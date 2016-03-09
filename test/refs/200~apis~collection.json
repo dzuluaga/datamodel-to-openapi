@@ -1,0 +1,11 @@
+{
+  "type": "object",
+  "properties": {
+    "TODO~200~apis~collection.json": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "TODO"
+  ]
+}

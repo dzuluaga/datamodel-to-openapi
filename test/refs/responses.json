@@ -4,7 +4,15 @@
         "200": {
           "description": "Successful request.",
           "schema": {
-            "$ref": "./RES_200_GET_Orgs.json"
+            "$ref": "./200~orgs~collection.json"
+          }
+        }
+      },
+      "entity": {
+        "200": {
+          "description": "Successful request.",
+          "schema": {
+            "$ref": "./200~orgs~entity.json"
           }
         }
       },
@@ -15,11 +23,21 @@
         }
       }
     },
-    "Apis": {
-      "200": {
-        "description": "Successful request.",
-        "schema": {
-          "$ref": "./RES_200_GET_Orgs.json"
+    "apis": {
+      "collection": {
+        "200": {
+          "description": "Successful request.",
+          "schema": {
+            "$ref": "./200~apis~collection.json"
+          }
+        }
+      },
+      "entity": {
+        "200": {
+          "description": "Successful request.",
+          "schema": {
+            "$ref": "./200~apis~entity.json"
+          }
         }
       },
       "default": {
@@ -29,74 +47,100 @@
         }
       }
     },
-    "OrgApis": {
+  "revisionversions": {
+    "collection": {
       "200": {
         "description": "Successful request.",
         "schema": {
-          "$ref": "./RES_200_GET_Apis.yaml"
-        }
-      },
-      "default": {
-        "description": "Invalid request.",
-        "schema": {
-          "$ref": "./definitions.yaml#/definitions/Error"
+          "$ref": "./200~revisionversions~collection.json"
         }
       }
     },
-    "OrgApiRevisionVersions": {
+    "entity": {
       "200": {
         "description": "Successful request.",
         "schema": {
-          "$ref": "./definitions.yaml#/definitions/Weather"
-        }
-      },
-      "default": {
-        "description": "Invalid request.",
-        "schema": {
-          "$ref": "./definitions.yaml#/definitions/Error"
+          "$ref": "./200~revisionversions~entity.json"
         }
       }
     },
-    "OrgApiRevisionVersionProxies": {
-      "200": {
-        "description": "Successful request.",
-        "schema": {
-          "$ref": "./definitions.yaml#/definitions/Weather"
-        }
-      },
-      "default": {
-        "description": "Invalid request.",
-        "schema": {
-          "$ref": "./definitions.yaml#/definitions/Error"
-        }
-      }
-    },
-    "OrgApiRevisionVersionPolicies": {
-      "200": {
-        "description": "Successful request.",
-        "schema": {
-          "$ref": "./definitions.yaml#/definitions/Weather"
-        }
-      },
-      "default": {
-        "description": "Invalid request.",
-        "schema": {
-          "$ref": "./definitions.yaml#/definitions/Error"
-        }
-      }
-    },
-    "OrgApiRevisionVersionResourceFiles": {
-      "200": {
-        "description": "Successful request.",
-        "schema": {
-          "$ref": "./definitions.yaml#/definitions/Weather"
-        }
-      },
-      "default": {
-        "description": "Invalid request.",
-        "schema": {
-          "$ref": "./definitions.yaml#/definitions/Error"
-        }
+    "default": {
+      "description": "Invalid request.",
+      "schema": {
+        "$ref": "./common.json#/Common/Error"
       }
     }
+  },
+  "policies": {
+    "collection": {
+      "200": {
+        "description": "Successful request.",
+        "schema": {
+          "$ref": "./200~policies~collection.json"
+        }
+      }
+    },
+    "entity": {
+      "200": {
+        "description": "Successful request.",
+        "schema": {
+          "$ref": "./200~policies~entity.json"
+        }
+      }
+    },
+    "default": {
+      "description": "Invalid request.",
+      "schema": {
+        "$ref": "./common.json#/Common/Error"
+      }
+    }
+  },
+  "proxies": {
+    "collection": {
+      "200": {
+        "description": "Successful request.",
+        "schema": {
+          "$ref": "./200~proxies~collection.json"
+        }
+      }
+    },
+    "entity": {
+      "200": {
+        "description": "Successful request.",
+        "schema": {
+          "$ref": "./200~proxies~entity.json"
+        }
+      }
+    },
+    "default": {
+      "description": "Invalid request.",
+      "schema": {
+        "$ref": "./common.json#/Common/Error"
+      }
+    }
+  },
+  "resources": {
+    "collection": {
+      "200": {
+        "description": "Successful request.",
+        "schema": {
+          "$ref": "./200~resources~collection.json"
+        }
+      }
+    },
+    "entity": {
+      "200": {
+        "description": "Successful request.",
+        "schema": {
+          "$ref": "./200~resources~entity.json"
+        }
+      }
+    },
+    "default": {
+      "description": "Invalid request.",
+      "schema": {
+        "$ref": "./common.json#/Common/Error"
+      }
+    }
+  }
 }

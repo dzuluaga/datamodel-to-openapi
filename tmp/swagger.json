@@ -5,7 +5,7 @@
     "application/json"
   ],
   "host": "localhost:3000",
-  "basePath": "/sfdc/edge",
+  "basePath": "/edge",
   "info": {
     "title": "Apigee Nucleus API",
     "description": "Maps components of Apigee Customer Environments to an API",
@@ -25,7 +25,7 @@
       "get": {
         "x-swagger-router-controller": "GenericRoute",
         "operationId": "getResource",
-        "x-model": {
+        "x-data-model": {
           "model": "Org",
           "cardinality": "findAll",
           "whereAttributes": []
@@ -196,7 +196,7 @@
       "get": {
         "x-swagger-router-controller": "GenericRoute",
         "operationId": "getResource",
-        "x-model": {
+        "x-data-model": {
           "model": "Org",
           "cardinality": "findOne",
           "whereAttributes": [
@@ -212,7 +212,7 @@
         "description": "A single entity of an Apigee Organization.",
         "parameters": [
           {
-            "in": "query",
+            "in": "path",
             "name": "org_name",
             "required": true,
             "description": "The org id.",
@@ -225,6 +225,13 @@
             "required": true,
             "type": "string",
             "default": "Bearer ya29.aALvVMURujKEcsaMJMht7pdUVsJ3CAEh9uzSbyyjI6QncPZUBUbZOSns0wDHIK_HTcTeojc"
+          },
+          {
+            "in": "query",
+            "name": "where",
+            "description": "Filter items by more specific criteria. Check <a href='http://docs.sequelizejs.com/en/latest/docs/querying/'>Sequelize.js Querying</a> syntax along with describe parameter in Base64 encoding. Return all orgs containing the word 'net' in it would be represented as '{\"org_name\": {\"$like\":\"%net%\"}}' and in base64 as %7B%22org_name%22%3A%20%7B%22%24like%22%3A%22%25net%25%22%7D%7D.",
+            "required": false,
+            "type": "string"
           },
           {
             "in": "query",
@@ -249,10 +256,31 @@
             "required": false,
             "type": "string",
             "allowEmptyValue": true
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "description": "Used for paginating records of a collection.",
+            "required": false,
+            "type": "integer",
+            "default": 100
           }
         ],
         "responses": {
-          "$ref": "./refs/responses.json#/orgs/entity"
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "200~orgs~entity.json": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "TODO"
+              ]
+            }
+          }
         }
       }
     },
@@ -260,7 +288,7 @@
       "get": {
         "x-swagger-router-controller": "GenericRoute",
         "operationId": "getResource",
-        "x-model": {
+        "x-data-model": {
           "model": "OrgApi",
           "cardinality": "findAll",
           "whereAttributes": [
@@ -276,15 +304,83 @@
         "description": "A collection of Apigee APIs. TODO API Proxy definition.",
         "parameters": [
           {
-            "in": "query",
+            "in": "path",
             "name": "org_name",
             "required": true,
             "description": "The org name.",
             "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Header Param Description. Obtain a valid access token here. https://apigeesc.atlassian.net/wiki/display/NUCLEUS/API+Security",
+            "required": true,
+            "type": "string",
+            "default": "Bearer ya29.aALvVMURujKEcsaMJMht7pdUVsJ3CAEh9uzSbyyjI6QncPZUBUbZOSns0wDHIK_HTcTeojc"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "description": "Number of items to be returned. Default 100 and Max 100.",
+            "required": false,
+            "type": "number",
+            "default": 10
+          },
+          {
+            "in": "query",
+            "name": "where",
+            "description": "Filter items by more specific criteria. Check <a href='http://docs.sequelizejs.com/en/latest/docs/querying/'>Sequelize.js Querying</a> syntax along with describe parameter in Base64 encoding. Return all orgs containing the word 'net' in it would be represented as '{\"org_name\": {\"$like\":\"%net%\"}}' and in base64 as %7B%22org_name%22%3A%20%7B%22%24like%22%3A%22%25net%25%22%7D%7D.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "stacktrace",
+            "description": "Useful for development purposes. Returns more information about the error.",
+            "required": false,
+            "type": "boolean",
+            "allowEmptyValue": true
+          },
+          {
+            "in": "query",
+            "name": "attributes",
+            "description": "Include only attributes from this list. See describe parameter to retrieve a list of valid attributes. e.g. [\"org_name\",\"account_id\",\"paid\"]",
+            "required": false,
+            "type": "string",
+            "allowEmptyValue": true
+          },
+          {
+            "in": "query",
+            "name": "include",
+            "description": "Include subresources. e.g. [{\"name\": \"APIS\"}]",
+            "required": false,
+            "type": "string",
+            "allowEmptyValue": true
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "description": "Used for paginating records of a collection.",
+            "required": false,
+            "type": "integer",
+            "default": 100
           }
         ],
         "responses": {
-          "$ref": "./refs/responses.json#/apis/collection"
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "TODO~200~apis~collection.json": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "TODO"
+              ]
+            }
+          }
         }
       }
     },
@@ -292,7 +388,7 @@
       "get": {
         "x-swagger-router-controller": "GenericRoute",
         "operationId": "getResource",
-        "x-model": {
+        "x-data-model": {
           "model": "OrgApi",
           "cardinality": "findOne",
           "whereAttributes": [
@@ -312,30 +408,90 @@
         "description": "A single entity of an API Proxy.",
         "parameters": [
           {
-            "in": "query",
+            "in": "path",
             "name": "org_name",
             "required": true,
             "description": "The org name.",
             "type": "string"
           },
           {
-            "in": "query",
+            "in": "path",
             "name": "api_name",
             "required": true,
             "description": "The api name.",
             "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Header Param Description. Obtain a valid access token here. https://apigeesc.atlassian.net/wiki/display/NUCLEUS/API+Security",
+            "required": true,
+            "type": "string",
+            "default": "Bearer ya29.aALvVMURujKEcsaMJMht7pdUVsJ3CAEh9uzSbyyjI6QncPZUBUbZOSns0wDHIK_HTcTeojc"
+          },
+          {
+            "in": "query",
+            "name": "where",
+            "description": "Filter items by more specific criteria. Check <a href='http://docs.sequelizejs.com/en/latest/docs/querying/'>Sequelize.js Querying</a> syntax along with describe parameter in Base64 encoding. Return all orgs containing the word 'net' in it would be represented as '{\"org_name\": {\"$like\":\"%net%\"}}' and in base64 as %7B%22org_name%22%3A%20%7B%22%24like%22%3A%22%25net%25%22%7D%7D.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "stacktrace",
+            "description": "Useful for development purposes. Returns more information about the error.",
+            "required": false,
+            "type": "boolean",
+            "allowEmptyValue": true
+          },
+          {
+            "in": "query",
+            "name": "attributes",
+            "description": "Include only attributes from this list. See describe parameter to retrieve a list of valid attributes. e.g. [\"org_name\",\"account_id\",\"paid\"]",
+            "required": false,
+            "type": "string",
+            "allowEmptyValue": true
+          },
+          {
+            "in": "query",
+            "name": "include",
+            "description": "Include subresources. e.g. [{\"name\": \"APIS\"}]",
+            "required": false,
+            "type": "string",
+            "allowEmptyValue": true
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "description": "Used for paginating records of a collection.",
+            "required": false,
+            "type": "integer",
+            "default": 100
           }
         ],
         "responses": {
-          "$ref": "./refs/responses.json#/apis/entity"
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "TODO 200~apis~entity.json": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "TODO"
+              ]
+            }
+          }
         }
       }
     },
-    "/orgs/{org_name}/apis/{api_name}/revisionversions": {
+    "/orgs/{org_name}/apis/{api_name}/revisions/{revision_id}/revisionversions": {
       "get": {
         "x-swagger-router-controller": "GenericRoute",
         "operationId": "getResource",
-        "x-model": {
+        "x-data-model": {
           "model": "OrgApiRevisionVersion",
           "cardinality": "findAll",
           "whereAttributes": [
@@ -346,6 +502,10 @@
             {
               "attributeName": "api_name",
               "paramName": "api_name"
+            },
+            {
+              "attributeName": "revision",
+              "paramName": "revision_id"
             }
           ]
         },
@@ -355,32 +515,501 @@
         "description": "TODO A collection of Apigee Organizations. An organization is the base container for all objects in an API provider's account on Apigee Edge.",
         "parameters": [
           {
-            "in": "query",
+            "in": "path",
             "name": "org_name",
             "required": true,
-            "description": "TODO",
+            "description": "Org Name.",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "api_name",
+            "required": true,
+            "description": "API Name.",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "revision_id",
+            "required": true,
+            "description": "API Revision.",
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Header Param Description. Obtain a valid access token here. https://apigeesc.atlassian.net/wiki/display/NUCLEUS/API+Security",
+            "required": true,
+            "type": "string",
+            "default": "Bearer ya29.aALvVMURujKEcsaMJMht7pdUVsJ3CAEh9uzSbyyjI6QncPZUBUbZOSns0wDHIK_HTcTeojc"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "description": "Number of items to be returned. Default 100 and Max 100.",
+            "required": false,
+            "type": "number",
+            "default": 10
+          },
+          {
+            "in": "query",
+            "name": "where",
+            "description": "Filter items by more specific criteria. Check <a href='http://docs.sequelizejs.com/en/latest/docs/querying/'>Sequelize.js Querying</a> syntax along with describe parameter in Base64 encoding. Return all orgs containing the word 'net' in it would be represented as '{\"org_name\": {\"$like\":\"%net%\"}}' and in base64 as %7B%22org_name%22%3A%20%7B%22%24like%22%3A%22%25net%25%22%7D%7D.",
+            "required": false,
             "type": "string"
           },
           {
             "in": "query",
-            "name": "api_name",
-            "required": true,
-            "description": "TODO",
-            "type": "string"
+            "name": "stacktrace",
+            "description": "Useful for development purposes. Returns more information about the error.",
+            "required": false,
+            "type": "boolean",
+            "allowEmptyValue": true
+          },
+          {
+            "in": "query",
+            "name": "attributes",
+            "description": "Include only attributes from this list. See describe parameter to retrieve a list of valid attributes. e.g. [\"org_name\",\"account_id\",\"paid\"]",
+            "required": false,
+            "type": "string",
+            "allowEmptyValue": true
+          },
+          {
+            "in": "query",
+            "name": "include",
+            "description": "Include subresources. e.g. [{\"name\": \"APIS\"}]",
+            "required": false,
+            "type": "string",
+            "allowEmptyValue": true
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "description": "Used for paginating records of a collection.",
+            "required": false,
+            "type": "integer",
+            "default": 100
           }
         ],
         "responses": {
-          "$ref": "./refs/responses.json#/revisionversions/collection"
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "TODO~200~revisionversions~collection.json": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "TODO"
+              ]
+            }
+          }
         }
       }
     },
-    "/orgs/{org_name}/apis/{api_name}/revisionversions/{revision}": {
+    "/orgs/{org_name}/apis/{api_name}/revisions/{revision_id}/revisionversions/{version_id}": {
       "get": {
         "x-swagger-router-controller": "GenericRoute",
         "operationId": "getResource",
-        "x-model": {
+        "x-data-model": {
           "model": "OrgApiRevisionVersion",
           "cardinality": "findOne",
+          "whereAttributes": [
+            {
+              "attributeName": "org_name",
+              "paramName": "org_name"
+            },
+            {
+              "attributeName": "api_name",
+              "paramName": "api_name"
+            },
+            {
+              "attributeName": "revision",
+              "paramName": "revision_id"
+            },
+            {
+              "attributeName": "version",
+              "paramName": "version_id"
+            }
+          ]
+        },
+        "tags": [
+          "/revisionversions"
+        ],
+        "description": "TODO A single entity of an Apigee Organization.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "org_name",
+            "required": true,
+            "description": "Org Name.",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "api_name",
+            "required": true,
+            "description": "API Name.",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "revision_id",
+            "required": true,
+            "description": "API Revision.",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "version_id",
+            "required": true,
+            "description": "API version.",
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Header Param Description. Obtain a valid access token here. https://apigeesc.atlassian.net/wiki/display/NUCLEUS/API+Security",
+            "required": true,
+            "type": "string",
+            "default": "Bearer ya29.aALvVMURujKEcsaMJMht7pdUVsJ3CAEh9uzSbyyjI6QncPZUBUbZOSns0wDHIK_HTcTeojc"
+          },
+          {
+            "in": "query",
+            "name": "where",
+            "description": "Filter items by more specific criteria. Check <a href='http://docs.sequelizejs.com/en/latest/docs/querying/'>Sequelize.js Querying</a> syntax along with describe parameter in Base64 encoding. Return all orgs containing the word 'net' in it would be represented as '{\"org_name\": {\"$like\":\"%net%\"}}' and in base64 as %7B%22org_name%22%3A%20%7B%22%24like%22%3A%22%25net%25%22%7D%7D.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "stacktrace",
+            "description": "Useful for development purposes. Returns more information about the error.",
+            "required": false,
+            "type": "boolean",
+            "allowEmptyValue": true
+          },
+          {
+            "in": "query",
+            "name": "attributes",
+            "description": "Include only attributes from this list. See describe parameter to retrieve a list of valid attributes. e.g. [\"org_name\",\"account_id\",\"paid\"]",
+            "required": false,
+            "type": "string",
+            "allowEmptyValue": true
+          },
+          {
+            "in": "query",
+            "name": "include",
+            "description": "Include subresources. e.g. [{\"name\": \"APIS\"}]",
+            "required": false,
+            "type": "string",
+            "allowEmptyValue": true
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "description": "Used for paginating records of a collection.",
+            "required": false,
+            "type": "integer",
+            "default": 100
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "TODO 200~revisionversions~entity.json": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "TODO"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/orgs/{org_name}/apis/{api_name}/revisions/{revision_id}/revisionversions/{version_id}/policies": {
+      "get": {
+        "x-swagger-router-controller": "GenericRoute",
+        "operationId": "getResource",
+        "x-data-model": {
+          "model": "OrgApiRevisionVersionPolicy",
+          "cardinality": "findAll",
+          "whereAttributes": [
+            {
+              "attributeName": "org_name",
+              "paramName": "org_name"
+            },
+            {
+              "attributeName": "api_name",
+              "paramName": "api_name"
+            },
+            {
+              "attributeName": "revision",
+              "paramName": "revision_id"
+            },
+            {
+              "attributeName": "version",
+              "paramName": "version_id"
+            }
+          ]
+        },
+        "tags": [
+          "/policies"
+        ],
+        "description": "TODO Policies.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "org_name",
+            "required": true,
+            "description": "Org name.",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "api_name",
+            "required": true,
+            "description": "API name.",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "revision_id",
+            "required": true,
+            "description": "Revision.",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "version_id",
+            "required": true,
+            "description": "Version.",
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Header Param Description. Obtain a valid access token here. https://apigeesc.atlassian.net/wiki/display/NUCLEUS/API+Security",
+            "required": true,
+            "type": "string",
+            "default": "Bearer ya29.aALvVMURujKEcsaMJMht7pdUVsJ3CAEh9uzSbyyjI6QncPZUBUbZOSns0wDHIK_HTcTeojc"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "description": "Number of items to be returned. Default 100 and Max 100.",
+            "required": false,
+            "type": "number",
+            "default": 10
+          },
+          {
+            "in": "query",
+            "name": "where",
+            "description": "Filter items by more specific criteria. Check <a href='http://docs.sequelizejs.com/en/latest/docs/querying/'>Sequelize.js Querying</a> syntax along with describe parameter in Base64 encoding. Return all orgs containing the word 'net' in it would be represented as '{\"org_name\": {\"$like\":\"%net%\"}}' and in base64 as %7B%22org_name%22%3A%20%7B%22%24like%22%3A%22%25net%25%22%7D%7D.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "stacktrace",
+            "description": "Useful for development purposes. Returns more information about the error.",
+            "required": false,
+            "type": "boolean",
+            "allowEmptyValue": true
+          },
+          {
+            "in": "query",
+            "name": "attributes",
+            "description": "Include only attributes from this list. See describe parameter to retrieve a list of valid attributes. e.g. [\"org_name\",\"account_id\",\"paid\"]",
+            "required": false,
+            "type": "string",
+            "allowEmptyValue": true
+          },
+          {
+            "in": "query",
+            "name": "include",
+            "description": "Include subresources. e.g. [{\"name\": \"APIS\"}]",
+            "required": false,
+            "type": "string",
+            "allowEmptyValue": true
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "description": "Used for paginating records of a collection.",
+            "required": false,
+            "type": "integer",
+            "default": 100
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "TODO~200~policies~collection.json": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "TODO"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/orgs/{org_name}/apis/{api_name}/revisions/{revision_id}/revisionversions/{version_id}/policies/{policy_name}": {
+      "get": {
+        "x-swagger-router-controller": "GenericRoute",
+        "operationId": "getResource",
+        "x-data-model": {
+          "model": "OrgApiRevisionVersionPolicy",
+          "cardinality": "findOne",
+          "whereAttributes": [
+            {
+              "attributeName": "org_name",
+              "paramName": "org_name"
+            },
+            {
+              "attributeName": "api_name",
+              "paramName": "api_name"
+            },
+            {
+              "attributeName": "revision",
+              "paramName": "revision_id"
+            },
+            {
+              "attributeName": "version",
+              "paramName": "version_id"
+            },
+            {
+              "attributeName": "policy",
+              "paramName": "policy_name"
+            }
+          ]
+        },
+        "tags": [
+          "/policies"
+        ],
+        "description": "TODO A single entity of an Apigee Organization.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "org_name",
+            "required": true,
+            "description": "Org name.",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "api_name",
+            "required": true,
+            "description": "API name.",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "revision_id",
+            "required": true,
+            "description": "Revision.",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "version_id",
+            "required": true,
+            "description": "Version.",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "policy_name",
+            "required": true,
+            "description": "Policy name.",
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Header Param Description. Obtain a valid access token here. https://apigeesc.atlassian.net/wiki/display/NUCLEUS/API+Security",
+            "required": true,
+            "type": "string",
+            "default": "Bearer ya29.aALvVMURujKEcsaMJMht7pdUVsJ3CAEh9uzSbyyjI6QncPZUBUbZOSns0wDHIK_HTcTeojc"
+          },
+          {
+            "in": "query",
+            "name": "where",
+            "description": "Filter items by more specific criteria. Check <a href='http://docs.sequelizejs.com/en/latest/docs/querying/'>Sequelize.js Querying</a> syntax along with describe parameter in Base64 encoding. Return all orgs containing the word 'net' in it would be represented as '{\"org_name\": {\"$like\":\"%net%\"}}' and in base64 as %7B%22org_name%22%3A%20%7B%22%24like%22%3A%22%25net%25%22%7D%7D.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "stacktrace",
+            "description": "Useful for development purposes. Returns more information about the error.",
+            "required": false,
+            "type": "boolean",
+            "allowEmptyValue": true
+          },
+          {
+            "in": "query",
+            "name": "attributes",
+            "description": "Include only attributes from this list. See describe parameter to retrieve a list of valid attributes. e.g. [\"org_name\",\"account_id\",\"paid\"]",
+            "required": false,
+            "type": "string",
+            "allowEmptyValue": true
+          },
+          {
+            "in": "query",
+            "name": "include",
+            "description": "Include subresources. e.g. [{\"name\": \"APIS\"}]",
+            "required": false,
+            "type": "string",
+            "allowEmptyValue": true
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "description": "Used for paginating records of a collection.",
+            "required": false,
+            "type": "integer",
+            "default": 100
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "TODO 200~policies~entity.json": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "TODO"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/orgs/{org_name}/apis/{api_name}/revisions/{revision}/revisionversions/{version}/proxies": {
+      "get": {
+        "x-swagger-router-controller": "GenericRoute",
+        "operationId": "getResource",
+        "x-data-model": {
+          "model": "OrgApiRevisionVersionProxy",
+          "cardinality": "findAll",
           "whereAttributes": [
             {
               "attributeName": "org_name",
@@ -401,222 +1030,117 @@
           ]
         },
         "tags": [
-          "/revisionversions"
-        ],
-        "description": "TODO A single entity of an Apigee Organization.",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "org_name",
-            "required": true,
-            "description": "TODO",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api_name",
-            "required": true,
-            "description": "TODO",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "revision",
-            "required": true,
-            "description": "TODO",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "version",
-            "required": true,
-            "description": "TODO",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "$ref": "./refs/responses.json#/revisionversions/entity"
-        }
-      }
-    },
-    "/orgs/{org_name}/apis/{api_name}/revisionversions/{revision}/policies": {
-      "get": {
-        "x-swagger-router-controller": "GenericRoute",
-        "operationId": "getResource",
-        "x-model": {
-          "model": "OrgApiRevisionVersionPolicy",
-          "cardinality": "findAll",
-          "whereAttributes": [
-            {
-              "attributeName": "org_name",
-              "paramName": "org_name"
-            },
-            {
-              "attributeName": "api_name",
-              "paramName": "api_name"
-            },
-            {
-              "attributeName": "version",
-              "paramName": "version"
-            }
-          ]
-        },
-        "tags": [
-          "/policies"
-        ],
-        "description": "TODO A collection of Apigee Organizations. An organization is the base container for all objects in an API provider's account on Apigee Edge.",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "org_name",
-            "required": true,
-            "description": "TODO",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api_name",
-            "required": true,
-            "description": "TODO",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "version",
-            "required": true,
-            "description": "TODO",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "$ref": "./refs/responses.json#/policies/collection"
-        }
-      }
-    },
-    "/orgs/{org_name}/apis/{api_name}/revisionversions/{revision}/policies/{policy}": {
-      "get": {
-        "x-swagger-router-controller": "GenericRoute",
-        "operationId": "getResource",
-        "x-model": {
-          "model": "OrgApiRevisionVersionPolicy",
-          "cardinality": "findOne",
-          "whereAttributes": [
-            {
-              "attributeName": "org_name",
-              "paramName": "org_name"
-            },
-            {
-              "attributeName": "api_name",
-              "paramName": "api_name"
-            },
-            {
-              "attributeName": "version",
-              "paramName": "version"
-            },
-            {
-              "attributeName": "policy",
-              "paramName": "policy"
-            }
-          ]
-        },
-        "tags": [
-          "/policies"
-        ],
-        "description": "TODO A single entity of an Apigee Organization.",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "org_name",
-            "required": true,
-            "description": "TODO",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api_name",
-            "required": true,
-            "description": "TODO",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "version",
-            "required": true,
-            "description": "TODO",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "policy",
-            "required": true,
-            "description": "TODO",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "$ref": "./refs/responses.json#/policies/entity"
-        }
-      }
-    },
-    "/orgs/{org_name}/apis/{api_name}/revisionversions/{revision}/proxies": {
-      "get": {
-        "x-swagger-router-controller": "GenericRoute",
-        "operationId": "getResource",
-        "x-model": {
-          "model": "OrgApiRevisionVersionProxy",
-          "cardinality": "findAll",
-          "whereAttributes": [
-            {
-              "attributeName": "org_name",
-              "paramName": "org_name"
-            },
-            {
-              "attributeName": "api_name",
-              "paramName": "api_name"
-            },
-            {
-              "attributeName": "version",
-              "paramName": "version"
-            }
-          ]
-        },
-        "tags": [
           "/proxies"
         ],
         "description": "TODO A collection of Apigee Organizations. An organization is the base container for all objects in an API provider's account on Apigee Edge.",
         "parameters": [
           {
-            "in": "query",
+            "in": "path",
             "name": "org_name",
             "required": true,
-            "description": "TODO",
+            "description": "Org name.",
             "type": "string"
           },
           {
-            "in": "query",
+            "in": "path",
             "name": "api_name",
             "required": true,
-            "description": "TODO",
+            "description": "API name.",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "revision",
+            "required": true,
+            "description": "Revision.",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "version",
+            "required": true,
+            "description": "Version.",
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Header Param Description. Obtain a valid access token here. https://apigeesc.atlassian.net/wiki/display/NUCLEUS/API+Security",
+            "required": true,
+            "type": "string",
+            "default": "Bearer ya29.aALvVMURujKEcsaMJMht7pdUVsJ3CAEh9uzSbyyjI6QncPZUBUbZOSns0wDHIK_HTcTeojc"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "description": "Number of items to be returned. Default 100 and Max 100.",
+            "required": false,
+            "type": "number",
+            "default": 10
+          },
+          {
+            "in": "query",
+            "name": "where",
+            "description": "Filter items by more specific criteria. Check <a href='http://docs.sequelizejs.com/en/latest/docs/querying/'>Sequelize.js Querying</a> syntax along with describe parameter in Base64 encoding. Return all orgs containing the word 'net' in it would be represented as '{\"org_name\": {\"$like\":\"%net%\"}}' and in base64 as %7B%22org_name%22%3A%20%7B%22%24like%22%3A%22%25net%25%22%7D%7D.",
+            "required": false,
             "type": "string"
           },
           {
             "in": "query",
-            "name": "version",
-            "required": true,
-            "description": "TODO",
-            "type": "string"
+            "name": "stacktrace",
+            "description": "Useful for development purposes. Returns more information about the error.",
+            "required": false,
+            "type": "boolean",
+            "allowEmptyValue": true
+          },
+          {
+            "in": "query",
+            "name": "attributes",
+            "description": "Include only attributes from this list. See describe parameter to retrieve a list of valid attributes. e.g. [\"org_name\",\"account_id\",\"paid\"]",
+            "required": false,
+            "type": "string",
+            "allowEmptyValue": true
+          },
+          {
+            "in": "query",
+            "name": "include",
+            "description": "Include subresources. e.g. [{\"name\": \"APIS\"}]",
+            "required": false,
+            "type": "string",
+            "allowEmptyValue": true
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "description": "Used for paginating records of a collection.",
+            "required": false,
+            "type": "integer",
+            "default": 100
           }
         ],
         "responses": {
-          "$ref": "./refs/responses.json#/proxies/collection"
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "TODO~200~proxies~collection.json": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "TODO"
+              ]
+            }
+          }
         }
       }
     },
-    "/orgs/{org_name}/apis/{api_name}/revisionversions/{revision}/proxies/{proxy}": {
+    "/orgs/{org_name}/apis/{api_name}/revisions/{revision}/revisionversions/{version}/proxies/{proxy}": {
       "get": {
         "x-swagger-router-controller": "GenericRoute",
         "operationId": "getResource",
-        "x-model": {
+        "x-data-model": {
           "model": "OrgApiRevisionVersionProxy",
           "cardinality": "findOne",
           "whereAttributes": [
@@ -627,6 +1151,10 @@
             {
               "attributeName": "api_name",
               "paramName": "api_name"
+            },
+            {
+              "attributeName": "revision",
+              "paramName": "revision"
             },
             {
               "attributeName": "version",
@@ -644,44 +1172,119 @@
         "description": "TODO A single entity of an Apigee Organization.",
         "parameters": [
           {
-            "in": "query",
+            "in": "path",
             "name": "org_name",
             "required": true,
-            "description": "TODO",
+            "description": "Org name.",
             "type": "string"
           },
           {
-            "in": "query",
+            "in": "path",
             "name": "api_name",
             "required": true,
-            "description": "TODO",
+            "description": "API name.",
             "type": "string"
           },
           {
-            "in": "query",
+            "in": "path",
+            "name": "revision",
+            "required": true,
+            "description": "Revision.",
+            "type": "string"
+          },
+          {
+            "in": "path",
             "name": "version",
             "required": true,
-            "description": "TODO",
+            "description": "Version.",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "proxy",
+            "required": true,
+            "description": "Proxy.",
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Header Param Description. Obtain a valid access token here. https://apigeesc.atlassian.net/wiki/display/NUCLEUS/API+Security",
+            "required": true,
+            "type": "string",
+            "default": "Bearer ya29.aALvVMURujKEcsaMJMht7pdUVsJ3CAEh9uzSbyyjI6QncPZUBUbZOSns0wDHIK_HTcTeojc"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "description": "Number of items to be returned. Default 100 and Max 100.",
+            "required": false,
+            "type": "number",
+            "default": 10
+          },
+          {
+            "in": "query",
+            "name": "where",
+            "description": "Filter items by more specific criteria. Check <a href='http://docs.sequelizejs.com/en/latest/docs/querying/'>Sequelize.js Querying</a> syntax along with describe parameter in Base64 encoding. Return all orgs containing the word 'net' in it would be represented as '{\"org_name\": {\"$like\":\"%net%\"}}' and in base64 as %7B%22org_name%22%3A%20%7B%22%24like%22%3A%22%25net%25%22%7D%7D.",
+            "required": false,
             "type": "string"
           },
           {
             "in": "query",
-            "name": "proxy",
-            "required": true,
-            "description": "TODO",
-            "type": "string"
+            "name": "stacktrace",
+            "description": "Useful for development purposes. Returns more information about the error.",
+            "required": false,
+            "type": "boolean",
+            "allowEmptyValue": true
+          },
+          {
+            "in": "query",
+            "name": "attributes",
+            "description": "Include only attributes from this list. See describe parameter to retrieve a list of valid attributes. e.g. [\"org_name\",\"account_id\",\"paid\"]",
+            "required": false,
+            "type": "string",
+            "allowEmptyValue": true
+          },
+          {
+            "in": "query",
+            "name": "include",
+            "description": "Include subresources. e.g. [{\"name\": \"APIS\"}]",
+            "required": false,
+            "type": "string",
+            "allowEmptyValue": true
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "description": "Used for paginating records of a collection.",
+            "required": false,
+            "type": "integer",
+            "default": 100
           }
         ],
         "responses": {
-          "$ref": "./refs/responses.json#/proxies/entity"
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "TODO~200~proxies~collection.json": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "TODO"
+              ]
+            }
+          }
         }
       }
     },
-    "/orgs/{org_name}/apis/{api_name}/revisionversions/{revision}/resources": {
+    "/orgs/{org_name}/apis/{api_name}/revisions/{revision}/revisionversions/{version}/resources": {
       "get": {
         "x-swagger-router-controller": "GenericRoute",
         "operationId": "getResource",
-        "x-model": {
+        "x-data-model": {
           "model": "OrgApiRevisionVersionResourceFile",
           "cardinality": "findAll",
           "whereAttributes": [
@@ -692,6 +1295,10 @@
             {
               "attributeName": "api_name",
               "paramName": "api_name"
+            },
+            {
+              "attributeName": "revision",
+              "paramName": "revision"
             },
             {
               "attributeName": "version",
@@ -705,37 +1312,57 @@
         "description": "TODO A collection of Apigee Organizations. An organization is the base container for all objects in an API provider's account on Apigee Edge.",
         "parameters": [
           {
-            "in": "query",
+            "in": "path",
             "name": "org_name",
             "required": true,
-            "description": "TODO",
+            "description": "Org name.",
             "type": "string"
           },
           {
-            "in": "query",
+            "in": "path",
             "name": "api_name",
             "required": true,
-            "description": "TODO",
+            "description": "API name.",
             "type": "string"
           },
           {
-            "in": "query",
+            "in": "path",
+            "name": "revision",
+            "required": true,
+            "description": "Revision.",
+            "type": "string"
+          },
+          {
+            "in": "path",
             "name": "version",
             "required": true,
-            "description": "TODO",
+            "description": "Version.",
             "type": "string"
           }
         ],
         "responses": {
-          "$ref": "./refs/responses.json#/resources/collection"
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "TODO~200~resources~collection.json": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "TODO"
+              ]
+            }
+          }
         }
       }
     },
-    "/orgs/{org_name}/apis/{api_name}/revisionversions/{revision}/resources/{resourcefile}": {
+    "/orgs/{org_name}/apis/{api_name}/revisions/{revision}/revisionversions/{version}/resources/{resourcefile}": {
       "get": {
         "x-swagger-router-controller": "GenericRoute",
         "operationId": "getResource",
-        "x-model": {
+        "x-data-model": {
           "model": "OrgApiRevisionVersionResourceFile",
           "cardinality": "findOne",
           "whereAttributes": [
@@ -746,6 +1373,10 @@
             {
               "attributeName": "api_name",
               "paramName": "api_name"
+            },
+            {
+              "attributeName": "revision",
+              "paramName": "revision"
             },
             {
               "attributeName": "version",
@@ -763,36 +1394,56 @@
         "description": "TODO A single entity of an Apigee Organization.",
         "parameters": [
           {
-            "in": "query",
+            "in": "path",
             "name": "org_name",
             "required": true,
-            "description": "TODO",
+            "description": "Org name.",
             "type": "string"
           },
           {
-            "in": "query",
+            "in": "path",
             "name": "api_name",
             "required": true,
-            "description": "TODO",
+            "description": "API name.",
             "type": "string"
           },
           {
-            "in": "query",
+            "in": "path",
+            "name": "revision",
+            "required": true,
+            "description": "Revision.",
+            "type": "string"
+          },
+          {
+            "in": "path",
             "name": "version",
             "required": true,
-            "description": "TODO",
+            "description": "Version.",
             "type": "string"
           },
           {
-            "in": "query",
+            "in": "path",
             "name": "resourcefile",
             "required": true,
-            "description": "TODO",
+            "description": "Resourcefile.",
             "type": "string"
           }
         ],
         "responses": {
-          "$ref": "./refs/responses.json#/resources/entity"
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "TODO 200~resources~entity.json": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "TODO"
+              ]
+            }
+          }
         }
       }
     },
@@ -800,7 +1451,7 @@
       "get": {
         "x-swagger-router-controller": "GenericRoute",
         "operationId": "getResource",
-        "x-model": {
+        "x-data-model": {
           "model": "OrgApi",
           "cardinality": "findAll",
           "whereAttributes": []
@@ -809,23 +1460,92 @@
           "/apis"
         ],
         "description": "A collection of Apigee APIs. TODO API Proxy definition.",
-        "parameters": [],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Header Param Description. Obtain a valid access token here. https://apigeesc.atlassian.net/wiki/display/NUCLEUS/API+Security",
+            "required": true,
+            "type": "string",
+            "default": "Bearer ya29.aALvVMURujKEcsaMJMht7pdUVsJ3CAEh9uzSbyyjI6QncPZUBUbZOSns0wDHIK_HTcTeojc"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "description": "Number of items to be returned. Default 100 and Max 100.",
+            "required": false,
+            "type": "number",
+            "default": 10
+          },
+          {
+            "in": "query",
+            "name": "where",
+            "description": "Filter items by more specific criteria. Check <a href='http://docs.sequelizejs.com/en/latest/docs/querying/'>Sequelize.js Querying</a> syntax along with describe parameter in Base64 encoding. Return all orgs containing the word 'net' in it would be represented as '{\"org_name\": {\"$like\":\"%net%\"}}' and in base64 as %7B%22org_name%22%3A%20%7B%22%24like%22%3A%22%25net%25%22%7D%7D.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "stacktrace",
+            "description": "Useful for development purposes. Returns more information about the error.",
+            "required": false,
+            "type": "boolean",
+            "allowEmptyValue": true
+          },
+          {
+            "in": "query",
+            "name": "attributes",
+            "description": "Include only attributes from this list. See describe parameter to retrieve a list of valid attributes. e.g. [\"org_name\",\"account_id\",\"paid\"]",
+            "required": false,
+            "type": "string",
+            "allowEmptyValue": true
+          },
+          {
+            "in": "query",
+            "name": "include",
+            "description": "Include subresources. e.g. [{\"name\": \"APIS\"}]",
+            "required": false,
+            "type": "string",
+            "allowEmptyValue": true
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "description": "Used for paginating records of a collection.",
+            "required": false,
+            "type": "integer",
+            "default": 100
+          }
+        ],
         "responses": {
-          "$ref": "./refs/responses.json#/apis/collection"
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "TODO~200~apis~collection.json": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "TODO"
+              ]
+            }
+          }
         }
       }
     },
-    "/apis/{api_id}": {
+    "/apis/{org_api_id}": {
       "get": {
         "x-swagger-router-controller": "GenericRoute",
         "operationId": "getResource",
-        "x-model": {
+        "x-data-model": {
           "model": "OrgApi",
           "cardinality": "findOne",
           "whereAttributes": [
             {
               "attributeName": "id",
-              "paramName": "api_id"
+              "paramName": "org_api_id"
             }
           ]
         },
@@ -835,15 +1555,229 @@
         "description": "A single entity of an API Proxy.",
         "parameters": [
           {
-            "in": "query",
-            "name": "org_name",
+            "in": "path",
+            "name": "org_api_id",
             "required": true,
             "description": "TODO",
             "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Header Param Description. Obtain a valid access token here. https://apigeesc.atlassian.net/wiki/display/NUCLEUS/API+Security",
+            "required": true,
+            "type": "string",
+            "default": "Bearer ya29.aALvVMURujKEcsaMJMht7pdUVsJ3CAEh9uzSbyyjI6QncPZUBUbZOSns0wDHIK_HTcTeojc"
+          },
+          {
+            "in": "query",
+            "name": "where",
+            "description": "Filter items by more specific criteria. Check <a href='http://docs.sequelizejs.com/en/latest/docs/querying/'>Sequelize.js Querying</a> syntax along with describe parameter in Base64 encoding. Return all orgs containing the word 'net' in it would be represented as '{\"org_name\": {\"$like\":\"%net%\"}}' and in base64 as %7B%22org_name%22%3A%20%7B%22%24like%22%3A%22%25net%25%22%7D%7D.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "stacktrace",
+            "description": "Useful for development purposes. Returns more information about the error.",
+            "required": false,
+            "type": "boolean",
+            "allowEmptyValue": true
+          },
+          {
+            "in": "query",
+            "name": "attributes",
+            "description": "Include only attributes from this list. See describe parameter to retrieve a list of valid attributes. e.g. [\"org_name\",\"account_id\",\"paid\"]",
+            "required": false,
+            "type": "string",
+            "allowEmptyValue": true
+          },
+          {
+            "in": "query",
+            "name": "include",
+            "description": "Include subresources. e.g. [{\"name\": \"APIS\"}]",
+            "required": false,
+            "type": "string",
+            "allowEmptyValue": true
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "description": "Used for paginating records of a collection.",
+            "required": false,
+            "type": "integer",
+            "default": 100
           }
         ],
         "responses": {
-          "$ref": "./refs/responses.json#/apis/entity"
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "TODO 200~apis~entity.json": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "TODO"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/revisions": {
+      "get": {
+        "x-swagger-router-controller": "GenericRoute",
+        "operationId": "getResource",
+        "x-data-model": {
+          "model": "OrgApiRevision",
+          "cardinality": "findAll",
+          "whereAttributes": []
+        },
+        "tags": [
+          "/revisions"
+        ],
+        "description": "TODO A collection of API Revisions associated to an API. ",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Header Param Description. Obtain a valid access token here. https://apigeesc.atlassian.net/wiki/display/NUCLEUS/API+Security",
+            "required": true,
+            "type": "string",
+            "default": "Bearer ya29.aALvVMURujKEcsaMJMht7pdUVsJ3CAEh9uzSbyyjI6QncPZUBUbZOSns0wDHIK_HTcTeojc"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "description": "Number of items to be returned. Default 100 and Max 100.",
+            "required": false,
+            "type": "number",
+            "default": 10
+          },
+          {
+            "in": "query",
+            "name": "where",
+            "description": "Filter items by more specific criteria. Check <a href='http://docs.sequelizejs.com/en/latest/docs/querying/'>Sequelize.js Querying</a> syntax along with describe parameter in Base64 encoding. Return all orgs containing the word 'net' in it would be represented as '{\"org_name\": {\"$like\":\"%net%\"}}' and in base64 as %7B%22org_name%22%3A%20%7B%22%24like%22%3A%22%25net%25%22%7D%7D.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "stacktrace",
+            "description": "Useful for development purposes. Returns more information about the error.",
+            "required": false,
+            "type": "boolean",
+            "allowEmptyValue": true
+          },
+          {
+            "in": "query",
+            "name": "attributes",
+            "description": "Include only attributes from this list. See describe parameter to retrieve a list of valid attributes. e.g. [\"org_name\",\"account_id\",\"paid\"]",
+            "required": false,
+            "type": "string",
+            "allowEmptyValue": true
+          },
+          {
+            "in": "query",
+            "name": "include",
+            "description": "Include subresources. e.g. [{\"name\": \"APIS\"}]",
+            "required": false,
+            "type": "string",
+            "allowEmptyValue": true
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "description": "Used for paginating records of a collection.",
+            "required": false,
+            "type": "integer",
+            "default": 100
+          }
+        ],
+        "responses": {
+          "$ref": "./refs/responses.json#/revisions/collection"
+        }
+      }
+    },
+    "/revisions/{org_api_revision_id}": {
+      "get": {
+        "x-swagger-router-controller": "GenericRoute",
+        "operationId": "getResource",
+        "x-data-model": {
+          "model": "OrgApiRevision",
+          "cardinality": "findOne",
+          "whereAttributes": [
+            {
+              "attributeName": "id",
+              "paramName": "org_api_revision_id"
+            }
+          ]
+        },
+        "tags": [
+          "/revisions"
+        ],
+        "description": "TODO A single entity of an API Revision.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "org_api_revision_id",
+            "required": true,
+            "description": "API Revision id.",
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Header Param Description. Obtain a valid access token here. https://apigeesc.atlassian.net/wiki/display/NUCLEUS/API+Security",
+            "required": true,
+            "type": "string",
+            "default": "Bearer ya29.aALvVMURujKEcsaMJMht7pdUVsJ3CAEh9uzSbyyjI6QncPZUBUbZOSns0wDHIK_HTcTeojc"
+          },
+          {
+            "in": "query",
+            "name": "where",
+            "description": "Filter items by more specific criteria. Check <a href='http://docs.sequelizejs.com/en/latest/docs/querying/'>Sequelize.js Querying</a> syntax along with describe parameter in Base64 encoding. Return all orgs containing the word 'net' in it would be represented as '{\"org_name\": {\"$like\":\"%net%\"}}' and in base64 as %7B%22org_name%22%3A%20%7B%22%24like%22%3A%22%25net%25%22%7D%7D.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "stacktrace",
+            "description": "Useful for development purposes. Returns more information about the error.",
+            "required": false,
+            "type": "boolean",
+            "allowEmptyValue": true
+          },
+          {
+            "in": "query",
+            "name": "attributes",
+            "description": "Include only attributes from this list. See describe parameter to retrieve a list of valid attributes. e.g. [\"org_name\",\"account_id\",\"paid\"]",
+            "required": false,
+            "type": "string",
+            "allowEmptyValue": true
+          },
+          {
+            "in": "query",
+            "name": "include",
+            "description": "Include subresources. e.g. [{\"name\": \"APIS\"}]",
+            "required": false,
+            "type": "string",
+            "allowEmptyValue": true
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "description": "Used for paginating records of a collection.",
+            "required": false,
+            "type": "integer",
+            "default": 100
+          }
+        ],
+        "responses": {
+          "$ref": "./refs/responses.json#/revisions/entity"
         }
       }
     },
@@ -851,7 +1785,7 @@
       "get": {
         "x-swagger-router-controller": "GenericRoute",
         "operationId": "getResource",
-        "x-model": {
+        "x-data-model": {
           "model": "OrgApiRevisionVersion",
           "cardinality": "findAll",
           "whereAttributes": []
@@ -860,9 +1794,78 @@
           "/revisionversions"
         ],
         "description": "TODO A collection of Apigee Organizations. An organization is the base container for all objects in an API provider's account on Apigee Edge.",
-        "parameters": [],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Header Param Description. Obtain a valid access token here. https://apigeesc.atlassian.net/wiki/display/NUCLEUS/API+Security",
+            "required": true,
+            "type": "string",
+            "default": "Bearer ya29.aALvVMURujKEcsaMJMht7pdUVsJ3CAEh9uzSbyyjI6QncPZUBUbZOSns0wDHIK_HTcTeojc"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "description": "Number of items to be returned. Default 100 and Max 100.",
+            "required": false,
+            "type": "number",
+            "default": 10
+          },
+          {
+            "in": "query",
+            "name": "where",
+            "description": "Filter items by more specific criteria. Check <a href='http://docs.sequelizejs.com/en/latest/docs/querying/'>Sequelize.js Querying</a> syntax along with describe parameter in Base64 encoding. Return all orgs containing the word 'net' in it would be represented as '{\"org_name\": {\"$like\":\"%net%\"}}' and in base64 as %7B%22org_name%22%3A%20%7B%22%24like%22%3A%22%25net%25%22%7D%7D.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "stacktrace",
+            "description": "Useful for development purposes. Returns more information about the error.",
+            "required": false,
+            "type": "boolean",
+            "allowEmptyValue": true
+          },
+          {
+            "in": "query",
+            "name": "attributes",
+            "description": "Include only attributes from this list. See describe parameter to retrieve a list of valid attributes. e.g. [\"org_name\",\"account_id\",\"paid\"]",
+            "required": false,
+            "type": "string",
+            "allowEmptyValue": true
+          },
+          {
+            "in": "query",
+            "name": "include",
+            "description": "Include subresources. e.g. [{\"name\": \"APIS\"}]",
+            "required": false,
+            "type": "string",
+            "allowEmptyValue": true
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "description": "Used for paginating records of a collection.",
+            "required": false,
+            "type": "integer",
+            "default": 100
+          }
+        ],
         "responses": {
-          "$ref": "./refs/responses.json#/revisionversions/collection"
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "TODO~200~revisionversions~collection.json": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "TODO"
+              ]
+            }
+          }
         }
       }
     },
@@ -870,7 +1873,7 @@
       "get": {
         "x-swagger-router-controller": "GenericRoute",
         "operationId": "getResource",
-        "x-model": {
+        "x-data-model": {
           "model": "OrgApiRevisionVersion",
           "cardinality": "findOne",
           "whereAttributes": [
@@ -886,168 +1889,75 @@
         "description": "TODO A single entity of an Apigee Organization.",
         "parameters": [
           {
-            "in": "query",
-            "name": "id",
+            "in": "path",
+            "name": "api_revision_version_id",
             "required": true,
-            "description": "TODO",
+            "description": "API Revision Version id.",
             "type": "string"
-          }
-        ],
-        "responses": {
-          "$ref": "./refs/responses.json#/revisionversions/entity"
-        }
-      }
-    },
-    "/policies": {
-      "get": {
-        "x-swagger-router-controller": "GenericRoute",
-        "operationId": "getResource",
-        "x-model": {
-          "model": "OrgApiRevisionVersionPolicy",
-          "cardinality": "findAll",
-          "whereAttributes": []
-        },
-        "tags": [
-          "/policies"
-        ],
-        "description": "TODO A collection of Apigee Organizations. An organization is the base container for all objects in an API provider's account on Apigee Edge.",
-        "parameters": [],
-        "responses": {
-          "$ref": "./refs/responses.json#/policies/collection"
-        }
-      }
-    },
-    "/policies/{policy_id}": {
-      "get": {
-        "x-swagger-router-controller": "GenericRoute",
-        "operationId": "getResource",
-        "x-model": {
-          "model": "OrgApiRevisionVersionPolicy",
-          "cardinality": "findOne",
-          "whereAttributes": [
-            {
-              "attributeName": "id",
-              "paramName": "policy_id"
-            }
-          ]
-        },
-        "tags": [
-          "/policies"
-        ],
-        "description": "TODO A single entity of an Apigee Organization.",
-        "parameters": [
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Header Param Description. Obtain a valid access token here. https://apigeesc.atlassian.net/wiki/display/NUCLEUS/API+Security",
+            "required": true,
+            "type": "string",
+            "default": "Bearer ya29.aALvVMURujKEcsaMJMht7pdUVsJ3CAEh9uzSbyyjI6QncPZUBUbZOSns0wDHIK_HTcTeojc"
+          },
           {
             "in": "query",
-            "name": "id",
-            "required": true,
-            "description": "TODO",
+            "name": "where",
+            "description": "Filter items by more specific criteria. Check <a href='http://docs.sequelizejs.com/en/latest/docs/querying/'>Sequelize.js Querying</a> syntax along with describe parameter in Base64 encoding. Return all orgs containing the word 'net' in it would be represented as '{\"org_name\": {\"$like\":\"%net%\"}}' and in base64 as %7B%22org_name%22%3A%20%7B%22%24like%22%3A%22%25net%25%22%7D%7D.",
+            "required": false,
             "type": "string"
-          }
-        ],
-        "responses": {
-          "$ref": "./refs/responses.json#/policies/entity"
-        }
-      }
-    },
-    "/proxies": {
-      "get": {
-        "x-swagger-router-controller": "GenericRoute",
-        "operationId": "getResource",
-        "x-model": {
-          "model": "OrgApiRevisionVersionProxy",
-          "cardinality": "findAll",
-          "whereAttributes": []
-        },
-        "tags": [
-          "/proxies"
-        ],
-        "description": "TODO A collection of Apigee Organizations. An organization is the base container for all objects in an API provider's account on Apigee Edge.",
-        "parameters": [],
-        "responses": {
-          "$ref": "./refs/responses.json#/proxies/collection"
-        }
-      }
-    },
-    "/proxies/{proxy_id}": {
-      "get": {
-        "x-swagger-router-controller": "GenericRoute",
-        "operationId": "getResource",
-        "x-model": {
-          "model": "OrgApiRevisionVersionProxy",
-          "cardinality": "findOne",
-          "whereAttributes": [
-            {
-              "attributeName": "id",
-              "paramName": "proxy_id"
-            }
-          ]
-        },
-        "tags": [
-          "/proxies"
-        ],
-        "description": "TODO A single entity of an Apigee Organization.",
-        "parameters": [
+          },
           {
             "in": "query",
-            "name": "id",
-            "required": true,
-            "description": "TODO",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "$ref": "./refs/responses.json#/proxies/entity"
-        }
-      }
-    },
-    "/resources": {
-      "get": {
-        "x-swagger-router-controller": "GenericRoute",
-        "operationId": "getResource",
-        "x-model": {
-          "model": "OrgApiRevisionVersionResourceFile",
-          "cardinality": "findAll",
-          "whereAttributes": []
-        },
-        "tags": [
-          "/resources"
-        ],
-        "description": "TODO A collection of Apigee Organizations. An organization is the base container for all objects in an API provider's account on Apigee Edge.",
-        "parameters": [],
-        "responses": {
-          "$ref": "./refs/responses.json#/resources/collection"
-        }
-      }
-    },
-    "/resources/{resource_file_id}": {
-      "get": {
-        "x-swagger-router-controller": "GenericRoute",
-        "operationId": "getResource",
-        "x-model": {
-          "model": "OrgApiRevisionVersionResourceFile",
-          "cardinality": "findOne",
-          "whereAttributes": [
-            {
-              "attributeName": "id",
-              "paramName": "resource_file_id"
-            }
-          ]
-        },
-        "tags": [
-          "/resources"
-        ],
-        "description": "TODO A single entity of an Apigee Organization.",
-        "parameters": [
+            "name": "stacktrace",
+            "description": "Useful for development purposes. Returns more information about the error.",
+            "required": false,
+            "type": "boolean",
+            "allowEmptyValue": true
+          },
           {
             "in": "query",
-            "name": "id",
-            "required": true,
-            "description": "TODO",
-            "type": "string"
+            "name": "attributes",
+            "description": "Include only attributes from this list. See describe parameter to retrieve a list of valid attributes. e.g. [\"org_name\",\"account_id\",\"paid\"]",
+            "required": false,
+            "type": "string",
+            "allowEmptyValue": true
+          },
+          {
+            "in": "query",
+            "name": "include",
+            "description": "Include subresources. e.g. [{\"name\": \"APIS\"}]",
+            "required": false,
+            "type": "string",
+            "allowEmptyValue": true
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "description": "Used for paginating records of a collection.",
+            "required": false,
+            "type": "integer",
+            "default": 100
           }
         ],
         "responses": {
-          "$ref": "./refs/responses.json#/resources/entity"
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "TODO 200~revisionversions~entity.json": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "TODO"
+              ]
+            }
+          }
         }
       }
     }

@@ -11,7 +11,7 @@
   "license": { "name": "Apache 2.0", "url": "http://www.apache.org/licenses/LICENSE-2.0.html" },
   "version": "1.0.0",
   "host": "localhost:3000",
-  "basePath": "/sfdc/edge",
+  "basePath": "/edge",
   "models": [
     {
       "model": "Org",
@@ -20,20 +20,20 @@
       "resources": {
         "collection": {
           "description": "A collection of Apigee Organizations. An organization is the base container for all objects in an API provider's account on Apigee Edge.",
-          "responses": { "$ref": "./refs/responses.json#/orgs/collection" },
-          "parameters": { "$ref": "./refs/parameters.json#/orgs/collection" }
+          "parameters": { "$ref": "./refs/parameters.json#/common/collection" },
+          "responses": { "$ref": "./refs/responses.json#/orgs/collection" }
         },
         "entity": {
           "description": "A single entity of an Apigee Organization.",
-          "parameters": { "$ref": "./refs/parameters.json#/orgs/entity" },
+          "parameters": { "$ref": "./refs/parameters.json#/common/entity" },
           "responses": { "$ref": "./refs/responses.json#/orgs/entity" }
         }
       },
       "name": "Apigee Org",
       "includeAlias": "ORGS",
       "listAttributes": {
-        "id": { "resource": { "description": "The org id.", "alias": "org_name" }, "description": "The org id.", "type": "string", "is_primary_key": true, "alias": "org_name" },
-        "org_name": { "resource": { "description": "The org name.", "alias": "org_name" }, "type": "string", "is_primary_key": false, "is_secondary_key": true },
+        "id": { "description": "The org id.", "type": "string", "is_primary_key": true, "alias": "org_name" },
+        "org_name": { "type": "string", "is_secondary_key": true },
         "account_id": {},
         "account_name": {},
         "org_type": {},
@@ -56,10 +56,12 @@
       "resources": {
         "collection": {
           "description": "A collection of Apigee APIs. TODO API Proxy definition.",
+          "parameters": { "$ref": "./refs/parameters.json#/common/collection" },
           "responses": { "$ref": "./refs/responses.json#/apis/collection" }
         },
         "entity": {
           "description": "A single entity of an API Proxy.",
+          "parameters": { "$ref": "./refs/parameters.json#/common/entity" },
           "responses": { "$ref": "./refs/responses.json#/apis/entity" }
         }
       },
@@ -67,9 +69,9 @@
       "path": "/apis",
       "includeAlias": "APIS",
       "listAttributes": {
-        "id": { "resource": { "description": "The api id.", "alias": "api_id" }, "type": "string", "is_primary_key": true, "alias": "org_name" },
-        "org_name": { "resource": { "description": "The org name.", "alias": "org_name" }, "type": "string", "is_foreign_key": true, "model": "Org", "is_secondary_key": true, "description": "The org name."},
-        "api_name": { "resource": { "alias": "api_name" }, "type": "string", "is_secondary_key": true, "description": "The api name." },
+        "id": { "type": "string", "is_primary_key": true, "alias": "org_api_id" },
+        "org_name": { "type": "string", "model": "Org", "description": "The org name."},
+        "api_name": { "alias": "api_name", "type": "string", "is_secondary_key": true, "description": "The api name." },
         "created_date": {},
         "last_modified_date": {},
         "created_by": {},
@@ -94,6 +96,49 @@
       "table": "v_mt_org_api"
     },
     {
+      "model": "OrgApiRevision",
+      "isPublic": true,
+      "name": "OrgApiRevision",
+      "path": "/revisions",
+      "includeAlias": "REVISIONS",
+      "resources": {
+        "collection": {
+          "description": "TODO A collection of API Revisions associated to an API. ",
+          "parameters": { "$ref": "./refs/parameters.json#/common/collection" },
+          "responses": { "$ref": "./refs/responses.json#/revisions/collection" }
+
+        },
+        "entity": {
+          "description": "TODO A single entity of an API Revision.",
+          "parameters": { "$ref": "./refs/parameters.json#/common/entity" },
+          "responses": { "$ref": "./refs/responses.json#/revisions/entity" }
+
+        }
+      },
+      "listAttributes": {
+        "id": { "description": "API Revision id.", "alias": "org_api_revision_id", "type": "string", "is_primary_key": true },
+        "org_name" : { "description": "Org Name.", "type": "string", "model": "Org" },
+        "api_name": { "description": "API Name.", "type": "string", "model": "OrgApi" },
+        "revision": { "description": "API Revision.", "type": "string", "alias": "revision_id","is_secondary_key": true}
+      },
+      "schema": "edge",
+      "table": "v_mt_org_api_revision",
+      "associations": [
+        {
+          "rel": "orgapi",
+          "foreignKey": "org_api_id",
+          "modelName": "OrgApi",
+          "type": "belongsTo"
+        },
+        {
+          "rel": "revisionversions",
+          "foreignKey": "org_api_revision_id",
+          "modelName": "OrgApiRevisionVersion",
+          "type": "hasMany"
+        }
+      ]
+    },
+    {
       "model": "OrgApiRevisionVersion",
       "isPublic": true,
       "name": "OrgApiRevisionVersion",
@@ -102,24 +147,23 @@
       "resources": {
         "collection": {
           "description": "TODO A collection of Apigee Organizations. An organization is the base container for all objects in an API provider's account on Apigee Edge.",
+          "parameters": { "$ref": "./refs/parameters.json#/common/collection" },
           "responses": { "$ref": "./refs/responses.json#/revisionversions/collection" }
+
         },
         "entity": {
           "description": "TODO A single entity of an Apigee Organization.",
+          "parameters": { "$ref": "./refs/parameters.json#/common/entity" },
           "responses": { "$ref": "./refs/responses.json#/revisionversions/entity" }
+
         }
       },
       "listAttributes": {
-        "id": {
-          "resource": {
-            "description": "API Revision Version id.", "alias": "api_revision_version_id"
-          },
-          "type": "string", "is_primary_key": true
-        },
-        "org_name" : { "resource": { "description": "Org Name.", "alias": "org_name" }, "type": "string", "is_foreign_key": true, "model": "Org", "is_secondary_key": true},
-        "api_name": { "resource": { "description": "API Name.", "alias": "api_name" }, "type": "string", "is_foreign_key": true, "model": "OrgApi", "is_secondary_key": true},
-        "revision": { "resource": { "description": "API Revision.", "alias": "revision" }, "type": "string", "is_foreign_key": false, "model": "OrgApiRevisionVersion", "is_secondary_key": true},
-        "version": { "resource": { "description": "API version.", "alias": "version" }, "type": "string", "is_foreign_key": false, "model": "OrgApiRevisionVersion", "is_secondary_key": true},
+        "id": { "description": "API Revision Version id.", "alias": "api_revision_version_id", "type": "string", "is_primary_key": true },
+        "org_name" : { "description": "Org Name.", "type": "string", "model": "Org" },
+        "api_name": { "description": "API Name.", "type": "string", "model": "OrgApi" },
+        "revision": { "description": "API Revision.", "alias":"revision_id", "type": "string", "model": "OrgApiRevision" },
+        "version": { "description": "API version.", "alias": "version_id", "type": "string", "is_secondary_key": true},
         "created_date": {},
         "last_modified_date": {},
         "created_by": {},
@@ -129,9 +173,9 @@
       "table": "v_mt_org_api_revision_version",
       "associations": [
         {
-          "rel": "orgapi",
-          "foreignKey": "org_api_id",
-          "modelName": "OrgApi",
+          "rel": "orgapirevision",
+          "foreignKey": "org_api_revision_id",
+          "modelName": "OrgApiRevision",
           "type": "belongsTo"
         },
         {
@@ -159,27 +203,29 @@
     },
     {
       "model": "OrgApiRevisionVersionPolicy",
-      "isPublic": true,
+      "isPublic": false,
       "name": "OrgApiRevisionVersionPolicy",
       "path": "/policies",
       "includeAlias": "POLICIES",
       "resources": {
         "collection": {
-          "description": "TODO A collection of Apigee Organizations. An organization is the base container for all objects in an API provider's account on Apigee Edge.",
+          "description": "TODO Policies.",
+          "parameters": { "$ref": "./refs/parameters.json#/common/collection" },
           "responses": { "$ref": "./refs/responses.json#/policies/collection" }
         },
         "entity": {
           "description": "TODO A single entity of an Apigee Organization.",
+          "parameters": { "$ref": "./refs/parameters.json#/common/entity" },
           "responses": { "$ref": "./refs/responses.json#/policies/entity" }
         }
       },
       "listAttributes": {
-        "id": { "resource": { "description": "The policy id.", "alias": "policy_id" }, "type": "string", "is_primary_key": true },
-        "org_name": { "resource": { "description": "Org name.", "alias": "org_name" }, "type": "string", "is_foreign_key": true, "model": "Org", "is_secondary_key": true},
-        "api_name": { "resource": { "description": "API name.", "alias": "api_name" }, "type": "string", "is_foreign_key": true, "model": "OrgApi", "is_secondary_key": true},
-        "revision": { "resource": { "description": "Revision.", "alias": "revision" }, "type": "string", "is_foreign_key": true, "model": "OrgApiRevision", "is_secondary_key": true},
-        "version": { "resource": { "description": "Version.", "alias": "version" }, "type": "string", "is_foreign_key": true, "model": "OrgApiRevisionVersion", "is_secondary_key": true},
-        "policy": { "resource": { "description": "Policy name.", "alias": "policy" }, "type": "string", "is_foreign_key": false, "is_secondary_key": true},
+        "id": { "description": "The policy id.", "alias": "policy_id", "type": "string", "is_primary_key": true },
+        "org_name": { "description": "Org name.", "type": "string", "model": "Org" },
+        "api_name": { "description": "API name.", "type": "string", "model": "OrgApi" },
+        "revision": { "description": "Revision.", "alias": "revision_id","type": "string", "model": "OrgApiRevision" },
+        "version": { "description": "Version.", "alias": "version_id", "type": "string", "model": "OrgApiRevisionVersion" },
+        "policy": { "description": "Policy name.", "alias":"policy_name","type": "string", "is_secondary_key": true},
         "created_date": {},
         "last_modified_date": {},
         "created_by": {},
@@ -198,18 +244,20 @@
     },
     {
       "model": "OrgApiRevisionVersionProxy",
-      "isPublic": true,
+      "isPublic": false,
       "name": "OrgApiRevisionVersionProxy",
       "path": "/proxies",
       "includeAlias": "PROXIES",
       "resources": {
         "collection": {
           "description": "TODO A collection of Apigee Organizations. An organization is the base container for all objects in an API provider's account on Apigee Edge.",
+          "parameters": { "$ref": "./refs/parameters.json#/common/collection" },
           "responses": { "$ref": "./refs/responses.json#/proxies/collection" }
         },
         "entity": {
           "description": "TODO A single entity of an Apigee Organization.",
-          "responses": { "$ref": "./refs/responses.json#/proxies/entity" }
+          "parameters": { "$ref": "./refs/parameters.json#/common/collection" },
+          "responses": { "$ref": "./refs/responses.json#/proxies/collection" }
         }
       },
       "listAttributes": {
@@ -219,11 +267,11 @@
           },
           "type": "string", "is_primary_key": true
         },
-        "org_name": { "resource": { "description": "Org name.", "alias": "org_name" }, "type": "string", "is_foreign_key": true, "model": "Org", "is_secondary_key": true},
-        "api_name": { "resource": { "description": "API name.", "alias": "api_name" }, "type": "string", "is_foreign_key": true, "model": "OrgApi", "is_secondary_key": true},
-        "revision": { "resource": { "description": "Revision.", "alias": "revision" }, "type": "string", "is_foreign_key": true, "model": "OrgApiRevision", "is_secondary_key": true},
-        "version": { "resource": { "description": "Version.", "alias": "version" }, "type": "string", "is_foreign_key": true, "model": "OrgApiRevisionVersion", "is_secondary_key": true},
-        "proxy": { "resource": { "description": "Proxy.", "alias": "proxy" }, "type": "string", "is_foreign_key": false, "is_secondary_key": true},
+        "org_name": { "description": "Org name.", "type": "string", "model": "Org" },
+        "api_name": { "description": "API name.", "type": "string", "model": "OrgApi" },
+        "revision": { "description": "Revision.", "type": "string", "model": "OrgApiRevision" },
+        "version": { "description": "Version.", "alias": "version", "type": "string", "model": "OrgApiRevisionVersion" },
+        "proxy": { "description": "Proxy.", "type": "string", "is_secondary_key": true},
         "created_date": {},
         "last_modified_date": {},
         "created_by": {},
@@ -242,7 +290,7 @@
     },
     {
       "model": "OrgApiRevisionVersionResourceFile",
-      "isPublic": true,
+      "isPublic": false,
       "name": "OrgApiRevisionVersionResourceFile",
       "path": "/resources",
       "includeAlias": "RESOURCES",
@@ -257,18 +305,12 @@
         }
       },
       "listAttributes": {
-        "id": {
-          "resource": {
-            "description": "The resource file id.", "alias": "resource_file_id"
-          },
-          "type": "string", "is_primary_key": true
-        },
-        "org_name": { "resource": { "description": "Org name.", "alias": "org_name" }, "type": "string", "is_foreign_key": true, "model": "Org", "is_secondary_key": true},
-        "org_name": { "resource": { "description": "Org name.", "alias": "org_name" }, "type": "string", "is_foreign_key": true, "model": "Org", "is_secondary_key": true},
-        "api_name": { "resource": { "description": "API name.", "alias": "api_name" }, "type": "string", "is_foreign_key": true, "model": "OrgApi", "is_secondary_key": true},
-        "revision": { "resource": { "description": "Revision.", "alias": "revision" }, "type": "string", "is_foreign_key": true, "model": "OrgApiRevision", "is_secondary_key": true},
-        "version": { "resource": { "description": "Version.", "alias": "version" }, "type": "string", "is_foreign_key": true, "model": "OrgApiRevisionVersion", "is_secondary_key": true},
-        "resourcefile": { "resource": { "description": "Resourcefile.", "alias": "resourcefile" }, "type": "string", "is_foreign_key": false, "is_secondary_key": true},
+        "id": { "description": "The resource file id.", "alias": "resource_file_id", "type": "string", "is_primary_key": true },
+        "org_name": { "description": "Org name.", "type": "string", "model": "Org" },
+        "api_name": { "description": "API name.", "type": "string", "model": "OrgApi" },
+        "revision": { "description": "Revision.", "type": "string", "model": "OrgApiRevision" },
+        "version": { "description": "Version.", "type": "string", "model": "OrgApiRevisionVersion" },
+        "resourcefile": { "description": "Resourcefile.", "type": "string", "is_secondary_key": true},
         "created_date": {},
         "last_modified_date": {},
         "created_by": {},
