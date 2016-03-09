@@ -487,7 +487,7 @@
         }
       }
     },
-    "/orgs/{org_name}/apis/{api_name}/revisions/{revision_id}/revisionversions": {
+    "/orgs/{org_name}/apis/{api_name}/revisions/{revision_id}/versions": {
       "get": {
         "x-swagger-router-controller": "GenericRoute",
         "operationId": "getResource",
@@ -510,7 +510,7 @@
           ]
         },
         "tags": [
-          "/revisionversions"
+          "/versions"
         ],
         "description": "TODO A collection of Apigee Organizations. An organization is the base container for all objects in an API provider's account on Apigee Edge.",
         "parameters": [
@@ -609,7 +609,7 @@
         }
       }
     },
-    "/orgs/{org_name}/apis/{api_name}/revisions/{revision_id}/revisionversions/{version_id}": {
+    "/orgs/{org_name}/apis/{api_name}/revisions/{revision_id}/versions/{version_id}": {
       "get": {
         "x-swagger-router-controller": "GenericRoute",
         "operationId": "getResource",
@@ -636,7 +636,7 @@
           ]
         },
         "tags": [
-          "/revisionversions"
+          "/versions"
         ],
         "description": "TODO A single entity of an Apigee Organization.",
         "parameters": [
@@ -734,7 +734,7 @@
         }
       }
     },
-    "/orgs/{org_name}/apis/{api_name}/revisions/{revision_id}/revisionversions/{version_id}/policies": {
+    "/orgs/{org_name}/apis/{api_name}/revisions/{revision_id}/versions/{version_id}/policies": {
       "get": {
         "x-swagger-router-controller": "GenericRoute",
         "operationId": "getResource",
@@ -867,7 +867,7 @@
         }
       }
     },
-    "/orgs/{org_name}/apis/{api_name}/revisions/{revision_id}/revisionversions/{version_id}/policies/{policy_name}": {
+    "/orgs/{org_name}/apis/{api_name}/revisions/{revision_id}/versions/{version_id}/policies/{policy_name}": {
       "get": {
         "x-swagger-router-controller": "GenericRoute",
         "operationId": "getResource",
@@ -1003,7 +1003,7 @@
         }
       }
     },
-    "/orgs/{org_name}/apis/{api_name}/revisions/{revision}/revisionversions/{version}/proxies": {
+    "/orgs/{org_name}/apis/{api_name}/revisions/{revision_id}/versions/{version_id}/proxies": {
       "get": {
         "x-swagger-router-controller": "GenericRoute",
         "operationId": "getResource",
@@ -1021,11 +1021,11 @@
             },
             {
               "attributeName": "revision",
-              "paramName": "revision"
+              "paramName": "revision_id"
             },
             {
               "attributeName": "version",
-              "paramName": "version"
+              "paramName": "version_id"
             }
           ]
         },
@@ -1050,14 +1050,14 @@
           },
           {
             "in": "path",
-            "name": "revision",
+            "name": "revision_id",
             "required": true,
             "description": "Revision.",
             "type": "string"
           },
           {
             "in": "path",
-            "name": "version",
+            "name": "version_id",
             "required": true,
             "description": "Version.",
             "type": "string"
@@ -1136,7 +1136,7 @@
         }
       }
     },
-    "/orgs/{org_name}/apis/{api_name}/revisions/{revision}/revisionversions/{version}/proxies/{proxy}": {
+    "/orgs/{org_name}/apis/{api_name}/revisions/{revision_id}/versions/{version_id}/proxies/{proxy_id}": {
       "get": {
         "x-swagger-router-controller": "GenericRoute",
         "operationId": "getResource",
@@ -1154,15 +1154,15 @@
             },
             {
               "attributeName": "revision",
-              "paramName": "revision"
+              "paramName": "revision_id"
             },
             {
               "attributeName": "version",
-              "paramName": "version"
+              "paramName": "version_id"
             },
             {
               "attributeName": "proxy",
-              "paramName": "proxy"
+              "paramName": "proxy_id"
             }
           ]
         },
@@ -1187,21 +1187,21 @@
           },
           {
             "in": "path",
-            "name": "revision",
+            "name": "revision_id",
             "required": true,
             "description": "Revision.",
             "type": "string"
           },
           {
             "in": "path",
-            "name": "version",
+            "name": "version_id",
             "required": true,
             "description": "Version.",
             "type": "string"
           },
           {
             "in": "path",
-            "name": "proxy",
+            "name": "proxy_id",
             "required": true,
             "description": "Proxy.",
             "type": "string"
@@ -1280,7 +1280,7 @@
         }
       }
     },
-    "/orgs/{org_name}/apis/{api_name}/revisions/{revision}/revisionversions/{version}/resources": {
+    "/orgs/{org_name}/apis/{api_name}/revisions/{revision_id}/versions/{version_id}/resources": {
       "get": {
         "x-swagger-router-controller": "GenericRoute",
         "operationId": "getResource",
@@ -1298,11 +1298,11 @@
             },
             {
               "attributeName": "revision",
-              "paramName": "revision"
+              "paramName": "revision_id"
             },
             {
               "attributeName": "version",
-              "paramName": "version"
+              "paramName": "version_id"
             }
           ]
         },
@@ -1327,14 +1327,14 @@
           },
           {
             "in": "path",
-            "name": "revision",
+            "name": "revision_id",
             "required": true,
             "description": "Revision.",
             "type": "string"
           },
           {
             "in": "path",
-            "name": "version",
+            "name": "version_id",
             "required": true,
             "description": "Version.",
             "type": "string"
@@ -1358,7 +1358,7 @@
         }
       }
     },
-    "/orgs/{org_name}/apis/{api_name}/revisions/{revision}/revisionversions/{version}/resources/{resourcefile}": {
+    "/orgs/{org_name}/apis/{api_name}/revisions/{revision_id}/versions/{version_id}/resources/{resource_id}": {
       "get": {
         "x-swagger-router-controller": "GenericRoute",
         "operationId": "getResource",
@@ -1376,15 +1376,15 @@
             },
             {
               "attributeName": "revision",
-              "paramName": "revision"
+              "paramName": "revision_id"
             },
             {
               "attributeName": "version",
-              "paramName": "version"
+              "paramName": "version_id"
             },
             {
               "attributeName": "resourcefile",
-              "paramName": "resourcefile"
+              "paramName": "resource_id"
             }
           ]
         },
@@ -1409,21 +1409,21 @@
           },
           {
             "in": "path",
-            "name": "revision",
+            "name": "revision_id",
             "required": true,
             "description": "Revision.",
             "type": "string"
           },
           {
             "in": "path",
-            "name": "version",
+            "name": "version_id",
             "required": true,
             "description": "Version.",
             "type": "string"
           },
           {
             "in": "path",
-            "name": "resourcefile",
+            "name": "resource_id",
             "required": true,
             "description": "Resourcefile.",
             "type": "string"
@@ -1698,7 +1698,20 @@
           }
         ],
         "responses": {
-          "$ref": "./refs/responses.json#/revisions/collection"
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "TODO~200~revisions~collection.json": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "TODO"
+              ]
+            }
+          }
         }
       }
     },
@@ -1777,11 +1790,24 @@
           }
         ],
         "responses": {
-          "$ref": "./refs/responses.json#/revisions/entity"
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "TODO 200~revisions~entity.json": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "TODO"
+              ]
+            }
+          }
         }
       }
     },
-    "/revisionversions": {
+    "/versions": {
       "get": {
         "x-swagger-router-controller": "GenericRoute",
         "operationId": "getResource",
@@ -1791,7 +1817,7 @@
           "whereAttributes": []
         },
         "tags": [
-          "/revisionversions"
+          "/versions"
         ],
         "description": "TODO A collection of Apigee Organizations. An organization is the base container for all objects in an API provider's account on Apigee Edge.",
         "parameters": [
@@ -1869,7 +1895,7 @@
         }
       }
     },
-    "/revisionversions/{api_revision_version_id}": {
+    "/versions/{api_revision_version_id}": {
       "get": {
         "x-swagger-router-controller": "GenericRoute",
         "operationId": "getResource",
@@ -1884,7 +1910,7 @@
           ]
         },
         "tags": [
-          "/revisionversions"
+          "/versions"
         ],
         "description": "TODO A single entity of an Apigee Organization.",
         "parameters": [
@@ -1950,6 +1976,271 @@
               "type": "object",
               "properties": {
                 "TODO 200~revisionversions~entity.json": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "TODO"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/proxies": {
+      "get": {
+        "x-swagger-router-controller": "GenericRoute",
+        "operationId": "getResource",
+        "x-data-model": {
+          "model": "OrgApiRevisionVersionProxy",
+          "cardinality": "findAll",
+          "whereAttributes": []
+        },
+        "tags": [
+          "/proxies"
+        ],
+        "description": "TODO A collection of Apigee Organizations. An organization is the base container for all objects in an API provider's account on Apigee Edge.",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Header Param Description. Obtain a valid access token here. https://apigeesc.atlassian.net/wiki/display/NUCLEUS/API+Security",
+            "required": true,
+            "type": "string",
+            "default": "Bearer ya29.aALvVMURujKEcsaMJMht7pdUVsJ3CAEh9uzSbyyjI6QncPZUBUbZOSns0wDHIK_HTcTeojc"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "description": "Number of items to be returned. Default 100 and Max 100.",
+            "required": false,
+            "type": "number",
+            "default": 10
+          },
+          {
+            "in": "query",
+            "name": "where",
+            "description": "Filter items by more specific criteria. Check <a href='http://docs.sequelizejs.com/en/latest/docs/querying/'>Sequelize.js Querying</a> syntax along with describe parameter in Base64 encoding. Return all orgs containing the word 'net' in it would be represented as '{\"org_name\": {\"$like\":\"%net%\"}}' and in base64 as %7B%22org_name%22%3A%20%7B%22%24like%22%3A%22%25net%25%22%7D%7D.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "stacktrace",
+            "description": "Useful for development purposes. Returns more information about the error.",
+            "required": false,
+            "type": "boolean",
+            "allowEmptyValue": true
+          },
+          {
+            "in": "query",
+            "name": "attributes",
+            "description": "Include only attributes from this list. See describe parameter to retrieve a list of valid attributes. e.g. [\"org_name\",\"account_id\",\"paid\"]",
+            "required": false,
+            "type": "string",
+            "allowEmptyValue": true
+          },
+          {
+            "in": "query",
+            "name": "include",
+            "description": "Include subresources. e.g. [{\"name\": \"APIS\"}]",
+            "required": false,
+            "type": "string",
+            "allowEmptyValue": true
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "description": "Used for paginating records of a collection.",
+            "required": false,
+            "type": "integer",
+            "default": 100
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "TODO~200~proxies~collection.json": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "TODO"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/proxies/{org_api_revision_version_proxy_id}": {
+      "get": {
+        "x-swagger-router-controller": "GenericRoute",
+        "operationId": "getResource",
+        "x-data-model": {
+          "model": "OrgApiRevisionVersionProxy",
+          "cardinality": "findOne",
+          "whereAttributes": [
+            {
+              "attributeName": "id",
+              "paramName": "org_api_revision_version_proxy_id"
+            }
+          ]
+        },
+        "tags": [
+          "/proxies"
+        ],
+        "description": "TODO A single entity of an Apigee Organization.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "org_api_revision_version_proxy_id",
+            "required": true,
+            "description": "The proxy id.",
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Header Param Description. Obtain a valid access token here. https://apigeesc.atlassian.net/wiki/display/NUCLEUS/API+Security",
+            "required": true,
+            "type": "string",
+            "default": "Bearer ya29.aALvVMURujKEcsaMJMht7pdUVsJ3CAEh9uzSbyyjI6QncPZUBUbZOSns0wDHIK_HTcTeojc"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "description": "Number of items to be returned. Default 100 and Max 100.",
+            "required": false,
+            "type": "number",
+            "default": 10
+          },
+          {
+            "in": "query",
+            "name": "where",
+            "description": "Filter items by more specific criteria. Check <a href='http://docs.sequelizejs.com/en/latest/docs/querying/'>Sequelize.js Querying</a> syntax along with describe parameter in Base64 encoding. Return all orgs containing the word 'net' in it would be represented as '{\"org_name\": {\"$like\":\"%net%\"}}' and in base64 as %7B%22org_name%22%3A%20%7B%22%24like%22%3A%22%25net%25%22%7D%7D.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "stacktrace",
+            "description": "Useful for development purposes. Returns more information about the error.",
+            "required": false,
+            "type": "boolean",
+            "allowEmptyValue": true
+          },
+          {
+            "in": "query",
+            "name": "attributes",
+            "description": "Include only attributes from this list. See describe parameter to retrieve a list of valid attributes. e.g. [\"org_name\",\"account_id\",\"paid\"]",
+            "required": false,
+            "type": "string",
+            "allowEmptyValue": true
+          },
+          {
+            "in": "query",
+            "name": "include",
+            "description": "Include subresources. e.g. [{\"name\": \"APIS\"}]",
+            "required": false,
+            "type": "string",
+            "allowEmptyValue": true
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "description": "Used for paginating records of a collection.",
+            "required": false,
+            "type": "integer",
+            "default": 100
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "TODO~200~proxies~collection.json": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "TODO"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/resources": {
+      "get": {
+        "x-swagger-router-controller": "GenericRoute",
+        "operationId": "getResource",
+        "x-data-model": {
+          "model": "OrgApiRevisionVersionResourceFile",
+          "cardinality": "findAll",
+          "whereAttributes": []
+        },
+        "tags": [
+          "/resources"
+        ],
+        "description": "TODO A collection of Apigee Organizations. An organization is the base container for all objects in an API provider's account on Apigee Edge.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "TODO~200~resources~collection.json": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "TODO"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/resources/{org_api_revision_version_resource_id}": {
+      "get": {
+        "x-swagger-router-controller": "GenericRoute",
+        "operationId": "getResource",
+        "x-data-model": {
+          "model": "OrgApiRevisionVersionResourceFile",
+          "cardinality": "findOne",
+          "whereAttributes": [
+            {
+              "attributeName": "id",
+              "paramName": "org_api_revision_version_resource_id"
+            }
+          ]
+        },
+        "tags": [
+          "/resources"
+        ],
+        "description": "TODO A single entity of an Apigee Organization.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "org_api_revision_version_resource_id",
+            "required": true,
+            "description": "The resource file id.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "TODO 200~resources~entity.json": {
                   "type": "string"
                 }
               },

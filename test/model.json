@@ -142,7 +142,7 @@
       "model": "OrgApiRevisionVersion",
       "isPublic": true,
       "name": "OrgApiRevisionVersion",
-      "path": "/revisionversions",
+      "path": "/versions",
       "includeAlias": "REVISIONVERSIONS",
       "resources": {
         "collection": {
@@ -244,7 +244,7 @@
     },
     {
       "model": "OrgApiRevisionVersionProxy",
-      "isPublic": false,
+      "isPublic": true,
       "name": "OrgApiRevisionVersionProxy",
       "path": "/proxies",
       "includeAlias": "PROXIES",
@@ -261,17 +261,12 @@
         }
       },
       "listAttributes": {
-        "id": {
-          "resource": {
-            "description": "The proxy id.", "alias": "proxy_id"
-          },
-          "type": "string", "is_primary_key": true
-        },
+        "id": {"description": "The proxy id.", "alias": "org_api_revision_version_proxy_id", "type": "string", "is_primary_key": true },
         "org_name": { "description": "Org name.", "type": "string", "model": "Org" },
         "api_name": { "description": "API name.", "type": "string", "model": "OrgApi" },
-        "revision": { "description": "Revision.", "type": "string", "model": "OrgApiRevision" },
-        "version": { "description": "Version.", "alias": "version", "type": "string", "model": "OrgApiRevisionVersion" },
-        "proxy": { "description": "Proxy.", "type": "string", "is_secondary_key": true},
+        "revision": { "description": "Revision.", "alias": "revision_id","type": "string", "model": "OrgApiRevision" },
+        "version": { "description": "Version.", "alias": "version_id", "type": "string", "model": "OrgApiRevisionVersion" },
+        "proxy": { "description": "Proxy.", "alias":"proxy_id","type": "string", "is_secondary_key": true},
         "created_date": {},
         "last_modified_date": {},
         "created_by": {},
@@ -290,7 +285,7 @@
     },
     {
       "model": "OrgApiRevisionVersionResourceFile",
-      "isPublic": false,
+      "isPublic": true,
       "name": "OrgApiRevisionVersionResourceFile",
       "path": "/resources",
       "includeAlias": "RESOURCES",
@@ -305,12 +300,12 @@
         }
       },
       "listAttributes": {
-        "id": { "description": "The resource file id.", "alias": "resource_file_id", "type": "string", "is_primary_key": true },
+        "id": { "description": "The resource file id.", "alias": "org_api_revision_version_resource_id", "type": "string", "is_primary_key": true },
         "org_name": { "description": "Org name.", "type": "string", "model": "Org" },
         "api_name": { "description": "API name.", "type": "string", "model": "OrgApi" },
-        "revision": { "description": "Revision.", "type": "string", "model": "OrgApiRevision" },
-        "version": { "description": "Version.", "type": "string", "model": "OrgApiRevisionVersion" },
-        "resourcefile": { "description": "Resourcefile.", "type": "string", "is_secondary_key": true},
+        "revision": { "description": "Revision.", "alias":"revision_id", "type": "string", "model": "OrgApiRevision" },
+        "version": { "description": "Version.", "alias":"version_id", "type": "string", "model": "OrgApiRevisionVersion" },
+        "resourcefile": { "description": "Resourcefile.", "alias": "resource_id", "type": "string", "is_secondary_key": true},
         "created_date": {},
         "last_modified_date": {},
         "created_by": {},

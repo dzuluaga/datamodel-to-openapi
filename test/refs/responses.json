@@ -47,6 +47,30 @@
         }
       }
     },
+  "revisions": {
+    "collection": {
+      "200": {
+        "description": "Successful request.",
+        "schema": {
+          "$ref": "./200~revisions~collection.json"
+        }
+      }
+    },
+    "entity": {
+      "200": {
+        "description": "Successful request.",
+        "schema": {
+          "$ref": "./200~revisions~entity.json"
+        }
+      }
+    },
+    "default": {
+      "description": "Invalid request.",
+      "schema": {
+        "$ref": "./common.json#/Common/Error"
+      }
+    }
+  },
   "revisionversions": {
     "collection": {
       "200": {
