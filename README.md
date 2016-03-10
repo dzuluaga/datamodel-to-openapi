@@ -1,5 +1,5 @@
-# db-model-2-swagger-transformer
-DB Model to Swagger Tranformer is an NPM module that converts database JSON Model Specs into Swagger Specs
+# datamodel-to-swagger
+Data model to Swagger generator is an NPM module that generates Swagger from a data model in JSON format.
 
 ### Installation
 
@@ -10,6 +10,8 @@ npm install datamodel-to-swagger -g
 ### Using the CLI
 Using the CLI is easy:
 ```bash
+ $ git clone git@github.com:dzuluaga/datamodel-to-swagger.git
+ $ cd datamodel-to-swagger
  $ cd test
  $ datamodel-to-swagger generate sample-data-model.json
 ```
