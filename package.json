@@ -1,7 +1,7 @@
 {
-  "name": "db-model-2-swagger-transformer",
+  "name": "datamodel-to-swagger",
   "version": "1.0.0",
-  "description": "DB Model to Swagger Tranformer is an NPM module that converts database JSON Model Specs into Swagger Specs",
+  "description": "DataModel to Swagger Generator is an NPM module that generates Swagger Documentation based on a data model specidied by a JSON file.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -14,13 +14,16 @@
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/dzuluaga/db-model-2-swagger-transformer/issues"
+    "url": "https://github.com/dzuluaga/datamodel-to-swagger-transformer/issues"
   },
-  "homepage": "https://github.com/dzuluaga/db-model-2-swagger-transformer#readme",
+  "homepage": "https://github.com/dzuluaga/datamodel-to-swagger-transformer#readme",
   "dependencies": {
+    "commander": "^2.9.0",
     "debug": "^2.2.0",
     "json-refs": "^2.1.5",
-    "synchronize": "^0.9.15",
     "url-join": "0.0.1"
+  },
+  "bin": {
+    "datamodel-to-swagger": "./bin/index.js"
   }
 }
