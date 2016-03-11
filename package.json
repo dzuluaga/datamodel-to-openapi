@@ -1,6 +1,6 @@
 {
   "name": "datamodel-to-swagger",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "DataModel to Swagger Generator is an NPM module that generates Swagger Documentation based on a data model specidied by a JSON file.",
   "main": "index.js",
   "scripts": {
