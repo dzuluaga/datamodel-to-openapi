@@ -8,12 +8,12 @@ var datamodelToSwagger = require('../index'),
 var program = require('commander');
 
 program
-    .version('0.0.1')
+    .version('1.0.1')
     .command('generate [location]')
     .description('Generates swagger spec based on data model JSON document')
     .action( function( location ) {
       var that = this;
-      datamodelToSwagger( require( path.join( process.cwd(), location ) ) )
+      datamodelToSwagger.generateSwaggerAt( path.join( process.cwd(), location ) )
           .then( function( swaggerDoc ) {
             console.log( JSON.stringify( swaggerDoc, null, 2 ) );
           })
@@ -22,8 +22,6 @@ program
           });
     })
     .parse(process.argv);
-
-
 
 // Default command (handles all unregistered commands)
 program

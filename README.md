@@ -20,9 +20,9 @@ That's it. You should be able to pipe the output of the generated swagger file t
 ### Using the API
 The following example can be found under test/app.js:  
 ```javascript
-var datamodelToSwagger = require('datamodel-to-swagger'),
-    dataModelJson = require('./sample-data-model.json');
-datamodelToSwagger( dataModelJson )
+var datamodelToSwagger = require('../index');
+
+datamodelToSwagger.generateSwagger( require('./sample-data-model.json') )
     .then( function( swaggerDoc ) {
       console.log( JSON.stringify( swaggerDoc, null, 2 ) );
     })
