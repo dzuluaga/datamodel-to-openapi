@@ -12,7 +12,8 @@ module.exports = {
 }
 
 function generateSwaggerAt( dataModelJsonPath ){
-  return getSpec( require(dataModelJsonPath), path.parse( dataModelJsonPath).dir );
+  var fullPath = path.join( process.cwd(), dataModelJsonPath );
+  return getSpec( require( fullPath ), path.parse( fullPath ).dir );
 }
 
 function generateSwagger( dataModelJson ) {

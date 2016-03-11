@@ -1,7 +1,7 @@
 var datamodelToSwagger = require('../index'),
     //dataModelJsonPath = require('./sample-data-model.json'),
     path = require('path'),
-    dataModelJsonPath = path.join( process.cwd(), './sample-data-model.json' ),
+    dataModelJsonPath = './sample-data-model.json',
     fs = require('fs');
 
 datamodelToSwagger.generateSwaggerAt( dataModelJsonPath )
