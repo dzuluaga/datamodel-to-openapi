@@ -1,22 +1,22 @@
 {
-  "name": "datamodel-to-swagger",
+  "name": "datamodel-to-oas",
   "version": "1.0.3",
-  "description": "DataModel to Swagger Generator is an NPM module that generates Swagger Documentation based on a data model specidied by a JSON file.",
+  "description": "DataModel to OAS (Open API Specification) Generator is an NPM module that generates OAS Specifications based on a data model specidied by a JSON file.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dzuluaga/db-model-2-swagger-transformer.git"
+    "url": "git+https://github.com/dzuluaga/db-model-2-oas.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/dzuluaga/datamodel-to-swagger-transformer/issues"
+    "url": "https://github.com/dzuluaga/datamodel-to-oas/issues"
   },
-  "homepage": "https://github.com/dzuluaga/datamodel-to-swagger-transformer#readme",
+  "homepage": "https://github.com/dzuluaga/datamodel-to-oas#readme",
   "dependencies": {
     "commander": "^2.9.0",
     "debug": "^2.2.0",
@@ -25,6 +25,6 @@
     "url-join": "0.0.1"
   },
   "bin": {
-    "datamodel-to-swagger": "./bin/index.js"
+    "datamodel-to-oas": "./bin/index.js"
   }
 }

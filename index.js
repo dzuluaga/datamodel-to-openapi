@@ -2,7 +2,7 @@
 
 var SwaggerModel = require('./lib/swagger-api'),
     jsonRefs = require('json-refs'),
-    debug = require('debug')('model2swagger'),
+    debug = require('debug')('model2oas'),
     path = require('path'),
     merge = require('merge');
 
