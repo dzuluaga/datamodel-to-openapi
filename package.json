@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/dzuluaga/db-model-2-oas.git"
   },
-  "keywords": [],
+  "keywords": ["swagger", "api", "apigee", "oas", "data"],
   "author": "",
   "license": "ISC",
   "bugs": {
