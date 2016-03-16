@@ -3,7 +3,7 @@ Data model to Open API Specification (FKA - Swagger) generator is an NPM module 
 
 ### Motivation
 
-![Data-Driven APIs](./images/data-driven-apis-oas.png "Data-Driven APIs")
+![Data-Driven APIs](https://raw.githubusercontent.com/dzuluaga/datamodel-to-oas/master/images/data-driven-apis-oas.png "Data-Driven APIs")
 
 ### Installation
 
