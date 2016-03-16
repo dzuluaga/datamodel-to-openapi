@@ -15,26 +15,26 @@ npm install datamodel-to-oas -g
 Using the CLI is easy:
 ```bash
  $ git clone git@github.com:dzuluaga/datamodel-to-oas.git
- $ cd datamodel-to-swagger
+ $ cd datamodel-to-oas
  $ cd test
- $ datamodel-to-swagger generate sample-data-model.json
+ $ datamodel-to-oas generate sample-data-model.json
 ```
-That's it. You should be able to pipe the output of the generated swagger file to either a file or the clipboard with pbcopy.
+That's it. You should be able to pipe the output of the generated oas file to either a file or the clipboard with pbcopy.
 
 ### Using the API
 The following example can be found under test/app.js:  
 ```javascript
 var datamodelToSwagger = require('../index');
 
-datamodelToSwagger.generateSwagger( require('./sample-data-model.json') )
-    .then( function( swaggerDoc ) {
-      console.log( JSON.stringify( swaggerDoc, null, 2 ) );
+datamodelToOas.generateOas( require('./sample-data-model.json') )
+    .then( function( oasDoc ) {
+      console.log( JSON.stringify( oasDoc, null, 2 ) );
     })
     .catch( function( err ) {
       console.log( err.stack );
     });
 ```
-The Node.js module returns a promise with a Swagger file resolving sample-data-model.json.
+The Node.js module returns a promise with an Open API Specification resolving sample-data-model.json.
 
 ### Feedback and pull requests
 

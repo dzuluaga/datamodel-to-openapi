@@ -4,7 +4,7 @@ var datamodelToSwagger = require('../index'),
     dataModelJsonPath = './sample-data-model.json',
     fs = require('fs');
 
-datamodelToSwagger.generateSwaggerAt( dataModelJsonPath )
+datamodelToSwagger.generateOasAt( dataModelJsonPath )
     .then( function( swaggerDoc ) {
       //console.log( JSON.stringify( swaggerDoc, null, 2 ) );
       fs.writeFile("./swaggerSample.json", JSON.stringify( swaggerDoc, null, 2 ), function(err) {

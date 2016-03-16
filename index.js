@@ -7,16 +7,16 @@ var SwaggerModel = require('./lib/swagger-api'),
     merge = require('merge');
 
 module.exports = {
-  generateSwaggerAt: generateSwaggerAt,
-  generateSwagger: generateSwagger
+  generateOasAt: generateOasAt,
+  generateOas: generateOas
 }
 
-function generateSwaggerAt( dataModelJsonPath ){
+function generateOasAt(dataModelJsonPath ){
   var fullPath = path.join( process.cwd(), dataModelJsonPath );
   return getSpec( require( fullPath ), path.parse( fullPath ).dir );
 }
 
-function generateSwagger( dataModelJson ) {
+function generateOas(dataModelJson ) {
   // required to support object as a parameter
   if( typeof dataModelJson != 'object') {
     throw new Error('Invalid datamodel type. Object type expected.');

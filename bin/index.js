@@ -13,7 +13,7 @@ program
     .description('Generates swagger spec based on data model JSON document')
     .action( function( location ) {
       var that = this;
-      datamodelToSwagger.generateSwaggerAt( location )
+      datamodelToSwagger.generateOasAt( location )
           .then( function( swaggerDoc ) {
             console.log( JSON.stringify( swaggerDoc, null, 2 ) );
           })
