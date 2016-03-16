@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../datamodel-to-swagger/.idea/db-model-2-swagger-transformer.iml" filepath="$PROJECT_DIR$/../datamodel-to-swagger/.idea/db-model-2-swagger-transformer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../datamodel-to-oas/.idea/datamodel-to-oas.iml" filepath="$PROJECT_DIR$/../datamodel-to-oas/.idea/datamodel-to-oas.iml" />
     </modules>
   </component>
 </project>
