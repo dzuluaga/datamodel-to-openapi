@@ -4,7 +4,8 @@ var SwaggerModel = require('./lib/swagger-api'),
     jsonRefs = require('json-refs'),
     debug = require('debug')('model2oas'),
     path = require('path'),
-    merge = require('merge');
+    merge = require('merge'),
+    pathParse = require('path-parse');
 
 module.exports = {
   generateOasAt: generateOasAt,
@@ -13,7 +14,7 @@ module.exports = {
 
 function generateOasAt(dataModelJsonPath ){
   var fullPath = path.join( process.cwd(), dataModelJsonPath );
-  return getSpec( require( fullPath ), path.parse( fullPath ).dir );
+  return getSpec( require( fullPath ), pathParse( fullPath ).dir );
 }
 
 function generateOas(dataModelJson ) {
