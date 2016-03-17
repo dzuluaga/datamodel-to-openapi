@@ -1,4 +1,5 @@
-var datamodelToOas = require('../index');
+var datamodelToOas = require('../index'),
+    dataModelJsonPath = './sample-data-model.json';
 
 datamodelToOas.generateOas( require('./sample-data-model.json') )
     .then( function( swaggerDoc ) {
@@ -6,4 +7,5 @@ datamodelToOas.generateOas( require('./sample-data-model.json') )
     })
     .catch( function( err ) {
       console.log( err.stack );
+      throw err;
     });

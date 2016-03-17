@@ -22,11 +22,11 @@ function generateOas(dataModelJson ) {
   if( typeof dataModelJson != 'object') {
     throw new Error('Invalid datamodel type. Object type expected.');
   }
-  return getSpec( dataModelJson, undefined );
+  return getSpec( dataModelJson, '.' );
 }
 
-function getSpec( dataModelJsonPath, path ) {
-  return jsonRefs.resolveRefs( dataModelJsonPath, {
+function getSpec( dataModelJson, path ) {
+  return jsonRefs.resolveRefs( dataModelJson, {
         filter: ['relative', 'remote', 'local'],
         relativeBase: path
       } )
@@ -43,5 +43,9 @@ function getSpec( dataModelJsonPath, path ) {
               console.log( err.stack );
               throw err;
             });
+      })
+      .catch( function( err ) {
+        console.log( err.stack );
+        throw err; //console.log( err.stack );
       })
 }
