@@ -115,6 +115,92 @@ dataModel2Oas.generateOasAt( dataModelPath )
     })
 ```
 
+#### The Router/Controller
+
+The router/controller is referenced by each path generated within the OAS by datamodel-to-oas. Then based on x-data-model annotation, it will know how to execute query based on all parameters and whereAttributes annotation.
+
+```javascript
+module.exports.getResource = function getResource (req, res, next) {
+  var datamodel = req.swagger.operation[ 'x-data-model' ];
+  debug( datamodel );
+  middlewareBuilder( req, res, next, datamodel );
+};
+
+function middlewareBuilder( req, res, next, datamodel ) {
+  var utils = req.app.get('utils');
+  debug('use spec', datamodel);
+  var where = mergeAndExtractParams(datamodel, req);
+  debug('WHERE', JSON.stringify(where));
+  debug('use model', datamodel);
+  var model = req.app.get('edge_models')[datamodel.model];
+  if (!model) {
+    next("Model name not found : " + datamodel.model);
+  }
+  else {
+    if (req.query.describe && req.query.describe === 'true') { // returns table description
+      res.json({"message": "not implemented yet"});
+      /*options.model.describe()
+       .then( function( describe ){
+       res.json( describe );
+       } )*/
+    } else {
+      model[datamodel.cardinality]({
+        where: where,
+        attributes: utils.tryToParseJSON(req.query.attributes, utils.messages.PARSE_ERROR_ATTRIBUTE_PARAM, model.listAttributes),
+        offset: req.query.offset || 0,
+        limit: utils.getLimit(req.query.limit),
+        order: req.query.order || [],
+        include: utils.getIncludes(utils.models, req.query.include)
+      })
+          .then(function (items) {
+            if (!items || items.length == 0) res.status(404).json({code: "404", message: "Resource not found."});
+            else res.json({entities: items});
+          })
+          .catch(function (error) {
+            utils.sendError("500", error, req, res);
+          });
+    }
+  }
+};
+
+/*
+ * Dynamically generates where object with attributes from the request object
+ */
+function mergeAndExtractParams(routeSpec, req ){
+  var _where = { };
+  var utils = req.app.get('utils');
+  debug('mergeAndExtractParams', routeSpec.whereAttributes);
+  ( routeSpec.whereAttributes || [] ).forEach( function( attr ) {
+    var operator = attr.operator || "$eq";
+    _where[ attr.attributeName ] = { };
+    var value = req.swagger.params[ attr.paramName].value;
+    // if operator is like concatenate % before and after
+    if( operator === '$like' ){
+      value = '%'.concat( value.concat('%'));
+    }
+    _where[ attr.attributeName ][operator] = value;//req.params[ attr.paramName ];
+  } );
+  debug("req.query", req.query);
+  var where = utils.db_connections.sequelize.Utils._.merge( _where, utils.tryToParseJSON( req.query.where, utils.messages.PARSE_ERROR_WHERE_PARAM, null ) );
+  debug('extractParams_before_merged', where);
+  //where = utils.db_connections.sequelize.Utils._.merge( where, applySecurity(  routeSpec, req.security.account_list, where ) );
+  debug('extractParams_merged', where);
+  return where;
+}
+
+function applySecurity( options, account_list, where ) {
+  debug('applySecurity', options.securityAttributeName);
+  debug('applySecurity', account_list);
+  var _where = {}
+  if( account_list && account_list.length > 0 && account_list[0] !== '*' ){
+    _where[ options.securityAttributeName || 'account_id' ] = { $in: account_list };
+  } else if( !account_list ){
+    throw new Error("User Credentials require user account mapping.");
+  }
+  return _where;
+}
+```
+
 ### Feedback and pull requests
 
 Feel free to open an issue to submit feedback or a pull request to incorporate features into the main branch.
