@@ -44,6 +44,77 @@ datamodelToOas.generateOas( require('./sample-data-model.json') )
 ```
 The Node.js module returns a promise with an Open API Specification resolving sample-data-model.json.
 
+### How to tie everything together
+
+#### The Database Adapter
+
+- For an example of a Sequelize.js adapter check [this example](https://github.com/dzuluaga/nucleus-model-factory).
+
+#### The Node.js API Example
+
+An example of a Node.js app leveraging the datamodel to generate the OAS spec and Postgres models (Sequelize.js ORM):
+```javascript
+'use strict';
+
+var app = require('express')(),
+    path = require('path'),
+    all_config = require('./config.json'),
+    utils = require('nucleus-utils')( { config: all_config }),
+    config = utils.getConfig(),
+    modelFactory = require('nucleus-model-factory'),
+    dataModelPath = './api/models/edge-data-model.json',
+    edgeModelSpecs = require( dataModelPath),
+    http = require('http'),
+    swaggerTools = require('swagger-tools'),
+    dataModel2Oas = require('datamodel-to-oas'),
+
+var serverPort = 3000;
+
+// swaggerRouter configuration
+var options = {
+  controllers: './api/routers',
+  useStubs: process.env.NODE_ENV === 'development' ? true : false // Conditionally turn on stubs (mock mode)
+};
+
+dataModel2Oas.generateOasAt( dataModelPath )
+    .then( function( oasDoc ) {
+      swaggerTools.initializeMiddleware( oasDoc , function (middleware) {
+        var models = modelFactory.generateModelMap( edgeModelSpecs, utils );
+        if( !models ){ throw new Error('No models were found. Check models.json') }
+        utils.models = models;
+
+        if( !oasDoc['x-db-models-var-name'] ) { throw new Error('Undefined x-db-model-var-name attribute in swagger spec at root level'); }
+        app.set( oasDoc['x-db-models-var-name'], models );
+
+        // Interpret Swagger resources and attach metadata to request - must be first in swagger-tools middleware chain
+        app.use(middleware.swaggerMetadata());
+
+        // Validate Swagger requests
+        app.use(middleware.swaggerValidator());
+
+        // Route validated requests to appropriate controller
+        app.use( middleware.swaggerRouter(options) );
+
+        // catch 404 and forward to error handler
+        app.use(function(req, res, next) {
+          var err = new Error('Not Found');
+          err.status = 404;
+          next(err);
+        });
+
+      });
+    })
+    .then( function() {
+      // Start the server
+      http.createServer(app).listen(serverPort, function () {
+        console.log('Your server is listening on port %d (http://localhost:%d)', serverPort, serverPort);
+      });
+    })
+    .catch( function( err ) {
+      console.log( err.stacktrace );
+    })
+```
+
 ### Feedback and pull requests
 
 Feel free to open an issue to submit feedback or a pull request to incorporate features into the main branch.
