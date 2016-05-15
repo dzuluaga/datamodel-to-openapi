@@ -115,7 +115,19 @@ Your OAS Spec should now include a `/foobar` resource at the end
 
 ![First-Resource-with-datamodel-to-oas](/images/data-model-driven-api-hello-world.png "First-Resource-with-datamodel-to-oas")
 
-**Try visualizing your resource by paste the output in [Swagger Editor](http://editor.swagger.io/#/).**
+#### How can I visualize my OAS?
+
+You can use Swagger-Editor and Swagger-UI to do so. Here's how:
+
+**Try visualizing your resource by pasting the output in [Swagger Editor](http://editor.swagger.io/#/).**
+
+You can also reference a remote Open API Spec by using the URL: [http://editor.swagger.io/#/?import=https://raw.githubusercontent.com/dzuluaga/datamodel-to-oas/master/test/swagger-sample-datamodel-to-oas-generated.json](http://editor.swagger.io/#/?import=https://raw.githubusercontent.com/dzuluaga/datamodel-to-oas/master/test/swagger-sample-datamodel-to-oas-generated.json)
+
+Scroll all the way down to see the API. Ignore these errors in Swagger Editor `code:  "DUPLICATE_OPERATIONID"
+message:  "Cannot have multiple operations with the same operationId: getResource"`. In our case, we do want multiple resources to leverage the same middleware function.
+
+Another option to test your Open API Specification is by leveraging saving the output as a gist in Github and Swagger-UI to display it. Here's mine:
+http://petstore.swagger.io/?url=https://gist.githubusercontent.com/dzuluaga/b5e87ba7829f3305ad8d5bbbd7d71255/raw/f1a2cd51c09d0ca6eb6ed65d99900b2bf6273737/oas-datamodel-to-oas-generated.json
 
 #### Using the API
 The following example can be found under test/app.js:
