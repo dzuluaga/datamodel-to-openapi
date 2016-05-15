@@ -117,7 +117,7 @@ Your OAS Spec should now include a `/foobar` resource at the end
 
 #### How can I visualize my OAS?
 
-You can use Swagger-Editor and Swagger-UI to do so. Here's how:
+You can use Swagger-Editor and Swagger-UI. Here's how:
 
 **Try visualizing your resource by pasting the output in [Swagger Editor](http://editor.swagger.io/#/).**
 
