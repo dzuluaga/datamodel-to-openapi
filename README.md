@@ -1,7 +1,7 @@
 # datamodel-to-oas
 Data model to Open API Specification (FKA - Swagger) generator is an NPM module that generates OAS from a data model in JSON format.
 
-## Why should I automate the generation of APIs?
+## Why automating generation of APIs?
 
 Before getting into the how to use the framework, let's provide some context about it.
 
