@@ -1,11 +1,11 @@
 {
   "type": "object",
   "properties": {
-    "TODO 200~revisions~entity.json": {
+    "TODO~200~revisions~entity.json": {
       "type": "string"
     }
   },
   "required": [
-    "TODO"
+    "TODO~200~revisions~entity.json"
   ]
 }

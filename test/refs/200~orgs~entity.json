@@ -6,6 +6,6 @@
     }
   },
   "required": [
-    "TODO"
+    "200~orgs~entity.json"
   ]
 }

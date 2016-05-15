@@ -1,11 +1,11 @@
 {
   "type": "object",
   "properties": {
-    "TODO 200~proxies~entity.json": {
+    "TODO~200~proxies~entity.json": {
       "type": "string"
     }
   },
   "required": [
-    "TODO"
+    "TODO~200~proxies~entity.json"
   ]
 }

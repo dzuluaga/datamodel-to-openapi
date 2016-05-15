@@ -277,7 +277,7 @@
                 }
               },
               "required": [
-                "TODO"
+                "200~orgs~entity.json"
               ]
             }
           }
@@ -377,7 +377,7 @@
                 }
               },
               "required": [
-                "TODO"
+                "TODO~200~apis~collection.json"
               ]
             }
           }
@@ -475,12 +475,12 @@
             "schema": {
               "type": "object",
               "properties": {
-                "TODO 200~apis~entity.json": {
+                "200~apis~entity.json": {
                   "type": "string"
                 }
               },
               "required": [
-                "TODO"
+                "200~apis~entity.json"
               ]
             }
           }
@@ -602,7 +602,7 @@
                 }
               },
               "required": [
-                "TODO"
+                "TODO~200~revisionversions~collection.json"
               ]
             }
           }
@@ -722,12 +722,12 @@
             "schema": {
               "type": "object",
               "properties": {
-                "TODO 200~revisionversions~entity.json": {
+                "TODO~200~revisionversions~entity.json": {
                   "type": "string"
                 }
               },
               "required": [
-                "TODO"
+                "TODO~200~revisionversions~entity.json"
               ]
             }
           }
@@ -860,7 +860,7 @@
                 }
               },
               "required": [
-                "TODO"
+                "TODO~200~policies~collection.json"
               ]
             }
           }
@@ -991,12 +991,12 @@
             "schema": {
               "type": "object",
               "properties": {
-                "TODO 200~policies~entity.json": {
+                "200~policies~entity.json": {
                   "type": "string"
                 }
               },
               "required": [
-                "TODO"
+                "200~policies~entity.json"
               ]
             }
           }
@@ -1129,7 +1129,7 @@
                 }
               },
               "required": [
-                "TODO"
+                "TODO~200~proxies~collection.json"
               ]
             }
           }
@@ -1273,7 +1273,7 @@
                 }
               },
               "required": [
-                "TODO"
+                "TODO~200~proxies~collection.json"
               ]
             }
           }
@@ -1351,7 +1351,7 @@
                 }
               },
               "required": [
-                "TODO"
+                "TODO~200~resources~collection.json"
               ]
             }
           }
@@ -1435,12 +1435,12 @@
             "schema": {
               "type": "object",
               "properties": {
-                "TODO 200~resources~entity.json": {
+                "TODO~200~resources~entity.json": {
                   "type": "string"
                 }
               },
               "required": [
-                "TODO"
+                "TODO~200~resources~entity.json"
               ]
             }
           }
@@ -1528,7 +1528,7 @@
                 }
               },
               "required": [
-                "TODO"
+                "TODO~200~apis~collection.json"
               ]
             }
           }
@@ -1615,12 +1615,12 @@
             "schema": {
               "type": "object",
               "properties": {
-                "TODO 200~apis~entity.json": {
+                "200~apis~entity.json": {
                   "type": "string"
                 }
               },
               "required": [
-                "TODO"
+                "200~apis~entity.json"
               ]
             }
           }
@@ -1708,7 +1708,7 @@
                 }
               },
               "required": [
-                "TODO"
+                "TODO~200~revisions~collection.json"
               ]
             }
           }
@@ -1795,12 +1795,12 @@
             "schema": {
               "type": "object",
               "properties": {
-                "TODO 200~revisions~entity.json": {
+                "TODO~200~revisions~entity.json": {
                   "type": "string"
                 }
               },
               "required": [
-                "TODO"
+                "TODO~200~revisions~entity.json"
               ]
             }
           }
@@ -1888,7 +1888,7 @@
                 }
               },
               "required": [
-                "TODO"
+                "TODO~200~revisionversions~collection.json"
               ]
             }
           }
@@ -1975,12 +1975,12 @@
             "schema": {
               "type": "object",
               "properties": {
-                "TODO 200~revisionversions~entity.json": {
+                "TODO~200~revisionversions~entity.json": {
                   "type": "string"
                 }
               },
               "required": [
-                "TODO"
+                "TODO~200~revisionversions~entity.json"
               ]
             }
           }
@@ -2068,7 +2068,7 @@
                 }
               },
               "required": [
-                "TODO"
+                "TODO~200~proxies~collection.json"
               ]
             }
           }
@@ -2168,7 +2168,7 @@
                 }
               },
               "required": [
-                "TODO"
+                "TODO~200~proxies~collection.json"
               ]
             }
           }
@@ -2200,7 +2200,7 @@
                 }
               },
               "required": [
-                "TODO"
+                "TODO~200~resources~collection.json"
               ]
             }
           }
@@ -2240,12 +2240,12 @@
             "schema": {
               "type": "object",
               "properties": {
-                "TODO 200~resources~entity.json": {
+                "TODO~200~resources~entity.json": {
                   "type": "string"
                 }
               },
               "required": [
-                "TODO"
+                "TODO~200~resources~entity.json"
               ]
             }
           }
