@@ -110,8 +110,7 @@ If you want to include `/foobar` resource as a subresource of `/org/{org_id}`, u
       ]
 ```
 
-**Voila!**
-Your OAS Spec should now include a `/foobar` resource at the end
+**Voila!** Your OAS Spec should now include resources `GET /foobarresource`, `GET /foobarresource/{foobar_resource_id}` and subresources `GET /orgs/{org_name}/foobarresource` and `GET /orgs/{org_name}/foobarresource/{foobar_name}`.
 
 ![First-Resource-with-datamodel-to-oas](/images/data-model-driven-api-hello-world.png "First-Resource-with-datamodel-to-oas")
 
