@@ -307,7 +307,7 @@ By following above steps, we've just achieved automation of building of our API 
 
 
 #### TODO
-[ ] datamodel-to-oas currently lacks the support of verbs that modify resource state. Although, it could be extended to meet those needs. Stay tuned for this functionality.
+- [ ] datamodel-to-oas currently lacks the support of verbs that modify resource state. Although, it could be extended to meet those needs. Stay tuned for this functionality.
 
 #### Feedback and pull requests
 
