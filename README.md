@@ -305,7 +305,7 @@ function applySecurity( options, account_list, where ) {
 ```
 
 #### Are there any examples of APIs using this paradigm?
-Yes. This framework is the product of drinking-our-kool-aid in my team. [Nucleus API](http://petstore.swagger.io/?url=https://nucleus-api-test.apigee.com/nucleus/edge/api-docs#/) uses it.
+Yes. This framework is the product of drinking-our-kool-aid in my team. So, we're continuously adding new features and improving it.
 
 ### Summary
 
