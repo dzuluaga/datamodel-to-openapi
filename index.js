@@ -14,8 +14,8 @@ module.exports = {
 }
 
 function generateOasAt(dataModelJsonPath){
-  var fullPath = path.join( process.cwd(), dataModelJsonPath);
-  return getSpec(require(fullPath));
+  var fullPath = path.join(process.cwd(), dataModelJsonPath);
+  return getSpec(path.join(pathParse(fullPath).dir,'/'), require(fullPath));
 }
 
 function generateOas(dataModelJson) {
@@ -23,11 +23,11 @@ function generateOas(dataModelJson) {
   if(typeof dataModelJson != 'object') {
     throw new Error('Invalid datamodel type. Object type expected.');
   }
-  return getSpec(dataModelJson);
+  return getSpec('.', dataModelJson);
 }
 
-function getSpec(dataModelJson) {
-  return $RefParser.dereference('./api/models/', dataModelJson, {})
+function getSpec(basePath, dataModelJson) {
+  return $RefParser.dereference(basePath, dataModelJson, {})
       .then(function(dmResolved) {
         debug('data model resolved', dmResolved);
         return dmResolved;

@@ -49,8 +49,7 @@ Using the CLI is easy:
 ```bash
  $ git clone git@github.com:dzuluaga/datamodel-to-openapi.git
  $ cd datamodel-to-openapi
- $ cd test
- $ datamodel-to-openapi generate sample-data-model.json
+ $ datamodel-to-openapi generate ./test/sample-data-model.json
 ```
 That's it. You should be able to pipe the output of the generated oas file to either a file or the clipboard with pbcopy.
 
