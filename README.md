@@ -1,13 +1,13 @@
-# datamodel-to-oas
+# datamodel-to-openapi specification
 Data model to Open API Specification (FKA - Swagger) generator is an NPM module that generates OAS from a data model in JSON format.
 
 ## Why automating generation of APIs?
 
 Before getting into the how to use the framework, let's provide some context about it.
 
-datamodel-to-oas framework intends to solve DRY (don't repeat yourself) principle that many teams face when designing and building [*data-oriented APIs](#references). In my experience, every time API teams decide to expose a new resource, and it needs to debate over and over again the same design process. Through hundreds or even thousands of resources. You have a major bottleneck here, if you want to scale you API team(s), you need to find a better way automate this.
+datamodel-to-openapi framework intends to solve DRY (don't repeat yourself) principle that many teams face when designing and building [*data-oriented APIs](#references). In my experience, every time API teams decide to expose a new resource, and it needs to debate over and over again the same design process. Through hundreds or even thousands of resources. You have a major bottleneck here, if you want to scale you API team(s), you need to find a better way automate this.
 
-**What if you could instead automate this process into something that could produce fast, more reliable and consistent results? Enter datamodel-to-oas framework.**
+**What if you could instead automate this process into something that could produce fast, more reliable and consistent results? Enter datamodel-to-openapi framework.**
 
 **so, why the urgency of Data-Driven APIs?**
 
@@ -17,11 +17,11 @@ The intent of Data-driven APIs is to address the following concerns:
 - **Pluggability:** As more data becomes available from underlying data sources, APIs expose these resources with minimal effort and in a controlled manner.
 - **Maintainability:** your APIs evolve and require changes over time. Modifying hundreds of resources should not take more time than changing a single one.
 - **Affordance:** By leveraging a data model as the foundation of your API, you provide access to your APIs from a data standpoint, similar to how we are used to accessing databases with SQL statements. Accessing your API resources should be similar. For instance, being able to filter, include or exclude attributes and nested entities, establish relationships and include hypermedia/HATEOAS automatically.
-- **Abstraction:** APIs are becoming more mature by specification and standards produced by the industry. There is no need to invent a new standard. datamodel-to-oas uses standard JSON as input to define a model along with its relationships. Then, it converts entities within the model into an OAS specification with paths, parameters, and annotation/vendor extensions with models. The OAS can be used as the input to integrate backend systems with abstraction layers. e.g. ORMs with Sequelize.js for relational databases, Mongoose for MongoDB for document oriented databases, SOAP stubs generated from WSDL files or other Web APIs via their SDKs.
+- **Abstraction:** APIs are becoming more mature by specification and standards produced by the industry. There is no need to invent a new standard. datamodel-to-openapi uses standard JSON as input to define a model along with its relationships. Then, it converts entities within the model into an OAS specification with paths, parameters, and annotation/vendor extensions with models. The OAS can be used as the input to integrate backend systems with abstraction layers. e.g. ORMs with Sequelize.js for relational databases, Mongoose for MongoDB for document oriented databases, SOAP stubs generated from WSDL files or other Web APIs via their SDKs.
 
-![Data-Driven APIs](https://raw.githubusercontent.com/dzuluaga/datamodel-to-oas/master/images/data-driven-apis-oas.png "Data-Driven APIs")
+![Data-Driven APIs](https://raw.githubusercontent.com/dzuluaga/datamodel-to-openapi/master/images/data-driven-apis-oas.png "Data-Driven APIs")
 
-### so what is datamodel-to-oas?
+### so what is datamodel-to-openapi?
 - It consists of a JSON file (data model JSON file, [sample-data-model.json](/test/sample-data-model.json)) with the definition of the data model that represents an API. For instance:
   - **For an API management company**, an API might consist of resources such as accounts, organizations, api proxies, etc.
   - **For a retail company**, it might look like a collection of resources such as products, orders, order items, vendors, etc.
@@ -41,21 +41,21 @@ Check out [test/swagger-sample-datamodel-to-oas-generated.json](/test/swagger-sa
 #### Installation
 
 ```
-npm install datamodel-to-oas -g
+npm install datamodel-to-openapi -g
 ```
 
 #### Using the CLI
 Using the CLI is easy:
 ```bash
- $ git clone git@github.com:dzuluaga/datamodel-to-oas.git
- $ cd datamodel-to-oas
+ $ git clone git@github.com:dzuluaga/datamodel-to-openapi.git
+ $ cd datamodel-to-openapi
  $ cd test
- $ datamodel-to-oas generate sample-data-model.json
+ $ datamodel-to-openapi generate sample-data-model.json
 ```
 That's it. You should be able to pipe the output of the generated oas file to either a file or the clipboard with pbcopy.
 
 #### Add a new resource
-Let's add a new resource at the end of the JSON collection in sample-data-model.json and run again `datamodel-to-oas generate sample-data-model.json`.
+Let's add a new resource at the end of the JSON collection in sample-data-model.json and run again `datamodel-to-openapi generate sample-data-model.json`.
 
 ```javascript
     {
@@ -112,7 +112,7 @@ If you want to include `/foobar` resource as a subresource of `/org/{org_id}`, u
 
 **Voila!** Your OAS Spec should now include resources `GET /foobarresource`, `GET /foobarresource/{foobar_resource_id}` and subresources `GET /orgs/{org_name}/foobarresource` and `GET /orgs/{org_name}/foobarresource/{foobar_name}`.
 
-![First-Resource-with-datamodel-to-oas](/images/data-model-driven-api-hello-world.png "First-Resource-with-datamodel-to-oas")
+![First-Resource-with-datamodel-to-openapi](/images/data-model-driven-api-hello-world.png "First-Resource-with-datamodel-to-openapi")
 
 #### How can I visualize my OAS?
 
@@ -120,7 +120,7 @@ You can use Swagger-Editor and Swagger-UI. Here's how:
 
 **Try visualizing your resource by pasting the output in [Swagger Editor](http://editor.swagger.io/#/).**
 
-You can also reference a remote Open API Spec by using the URL: [http://editor.swagger.io/#/?import=https://raw.githubusercontent.com/dzuluaga/datamodel-to-oas/master/test/swagger-sample-datamodel-to-oas-generated.json](http://editor.swagger.io/#/?import=https://raw.githubusercontent.com/dzuluaga/datamodel-to-oas/master/test/swagger-sample-datamodel-to-oas-generated.json)
+You can also reference a remote Open API Spec by using the URL: [http://editor.swagger.io/#/?import=https://raw.githubusercontent.com/dzuluaga/datamodel-to-openapi/master/test/swagger-sample-datamodel-to-oas-generated.json](http://editor.swagger.io/#/?import=https://raw.githubusercontent.com/dzuluaga/datamodel-to-openapi/master/test/swagger-sample-datamodel-to-oas-generated.json)
 
 Scroll all the way down to see the API. Ignore these errors in Swagger Editor `code:  "DUPLICATE_OPERATIONID"
 message:  "Cannot have multiple operations with the same operationId: getResource"`. In our case, we do want multiple resources to leverage the same middleware function.
@@ -169,7 +169,7 @@ var app = require('express')(),
     edgeModelSpecs = require( dataModelPath),
     http = require('http'),
     swaggerTools = require('swagger-tools'),
-    dataModel2Oas = require('datamodel-to-oas'),
+    dataModel2Oas = require('datamodel-to-openapi'),
 
 var serverPort = 3000;
 
@@ -220,7 +220,7 @@ dataModel2Oas.generateOasAt( dataModelPath )
 
 ##### The Router/Controller
 
-The router/controller is referenced by each path generated within the OAS by datamodel-to-oas. Then based on x-data-model annotation, it will know how to execute query based on all parameters and whereAttributes annotation.
+The router/controller is referenced by each path generated within the OAS by datamodel-to-openapi. Then based on x-data-model annotation, it will know how to execute query based on all parameters and whereAttributes annotation.
 
 ```javascript
 module.exports.getResource = function getResource (req, res, next) {
@@ -312,13 +312,13 @@ Yes. This framework is the product of drinking-our-kool-aid in my team. So, we'r
 By following above steps, we've just achieved automation of building of our API based while adhering to the principles of data-driven APIs. Trying to do this by hand would be untenable.
 
 #### References
-- The sample code introduces a few steps that aren't necessarily documented in this readme file. It is recommended to check out their documentation. For (Swagger-Tools)[https://github.com/apigee-127/swagger-tools] and (Nucleus-Model-Factory)[https://www.npmjs.com/package/nucleus-model-factory] take either the datamodel.json file or the output of datamodel-to-oas.
+- The sample code introduces a few steps that aren't necessarily documented in this readme file. It is recommended to check out their documentation. For (Swagger-Tools)[https://github.com/apigee-127/swagger-tools] and (Nucleus-Model-Factory)[https://www.npmjs.com/package/nucleus-model-factory] take either the datamodel.json file or the output of datamodel-to-openapi.
 
 - *This framework is based on (data-oriented API principles)[http://apigee.com/about/blog/developer/data-oriented-designs-common-api-problems] introduced by Martin Nally and Marsh Gardiner. Also check this (webcast)[http://apigee.com/about/resources/webcasts/pragmatic-rest-next-generation].
 
 
 #### TODO
-- [ ] datamodel-to-oas currently lacks the support of verbs that modify resource state. Although, it could be extended to meet those needs. Stay tuned for this functionality.
+- [ ] datamodel-to-openapi currently lacks the support of verbs that modify resource state. Although, it could be extended to meet those needs. Stay tuned for this functionality.
 
 #### Feedback and pull requests
 

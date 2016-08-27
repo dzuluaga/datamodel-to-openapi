@@ -1,6 +1,6 @@
 {
-  "name": "datamodel-to-oas",
-  "version": "1.0.11",
+  "name": "datamodel-to-openapi",
+  "version": "1.0.12",
   "description": "Data model to Open API Specification (FKA - Swagger) generator is an NPM module that generates OAS from a data model in JSON format.",
   "main": "index.js",
   "scripts": {
@@ -26,12 +26,12 @@
   "dependencies": {
     "commander": "^2.9.0",
     "debug": "^2.2.0",
-    "json-refs": "^2.1.5",
+    "json-schema-ref-parser": "^3.1.2",
     "merge": "^1.2.0",
     "path-parse": "^1.0.5",
     "url-join": "0.0.1"
   },
   "bin": {
-    "datamodel-to-oas": "./bin/index.js"
+    "datamodel-to-openapi": "./bin/index.js"
   }
 }
