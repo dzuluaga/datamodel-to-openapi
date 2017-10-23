@@ -5,7 +5,7 @@ Data model to Open API Specification (FKA - Swagger) generator is an NPM module 
 
 Before getting into the how to use the framework, let's provide some context about it.
 
-datamodel-to-openapi framework intends to solve DRY (don't repeat yourself) principle that many teams face when designing and building [*data-oriented APIs](#references). In my experience, every time API teams decide to expose a new resource, and it needs to debate over and over again the same design process. Through hundreds or even thousands of resources. You have a major bottleneck here, if you want to scale you API team(s), you need to find a better way automate this.
+datamodel-to-openapi framework intends to solve DRY (don't repeat yourself) principle that many teams face when designing and building [\*data-oriented APIs](#references). In my experience, every time API teams decide to expose a new resource, and it needs to debate over and over again the same design process. Through hundreds or even thousands of resources. You have a major bottleneck here, if you want to scale you API team(s), you need to find a better way automate this.
 
 **What if you could instead automate this process into something that could produce fast, more reliable and consistent results? Enter datamodel-to-openapi framework.**
 
@@ -311,9 +311,9 @@ Yes. This framework is the product of drinking-our-kool-aid in my team. So, we'r
 By following above steps, we've just achieved automation of building of our API based while adhering to the principles of data-driven APIs. Trying to do this by hand would be untenable.
 
 #### References
-- The sample code introduces a few steps that aren't necessarily documented in this readme file. It is recommended to check out their documentation. For (Swagger-Tools)[https://github.com/apigee-127/swagger-tools] and (Nucleus-Model-Factory)[https://www.npmjs.com/package/nucleus-model-factory] take either the datamodel.json file or the output of datamodel-to-openapi.
+- The sample code introduces a few steps that aren't necessarily documented in this readme file. It is recommended to check out their documentation. For [Swagger-Tools](https://github.com/apigee-127/swagger-tools) and [Nucleus-Model-Factory](https://www.npmjs.com/package/nucleus-model-factory) take either the datamodel.json file or the output of datamodel-to-openapi.
 
-- *This framework is based on (data-oriented API principles)[http://apigee.com/about/blog/developer/data-oriented-designs-common-api-problems] introduced by Martin Nally and Marsh Gardiner. Also check this (webcast)[http://apigee.com/about/resources/webcasts/pragmatic-rest-next-generation].
+- This framework is based on [data-oriented API principles](http://apigee.com/about/blog/developer/data-oriented-designs-common-api-problems) introduced by Martin Nally and Marsh Gardiner. Also check this [webcast](http://apigee.com/about/resources/webcasts/pragmatic-rest-next-generation).
 
 
 #### TODO
